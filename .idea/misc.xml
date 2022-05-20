@@ -3,7 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.26400655110677085" />
+        <entry key="app/src/main/res/font/roboto_slab_bold.xml" value="0.18541666666666667" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.5840698242187501" />
       </map>
     </option>
   </component>
@@ -12,5 +13,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.2624755859375" />
+      </ProjectState>
+    </option>
   </component>
 </project>
