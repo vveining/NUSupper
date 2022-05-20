@@ -3,8 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+
         <entry key="app/src/main/res/font/roboto_slab_bold.xml" value="0.18541666666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.5840698242187501" />
+        <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/font/roboto_slab.xml" value="0.15208333333333332" />
+        <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/font/roboto_slab_bold.xml" value="0.153125" />
+        <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/layout/activity_main.xml" value="0.12552083333333333" />
+        <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/layout/profile.xml" value="0.1" />
+        <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/layout/topbar.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.182518115942029" />
+
       </map>
     </option>
   </component>
@@ -17,7 +25,9 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
+
         <option name="scale" value="0.2624755859375" />
+
       </ProjectState>
     </option>
   </component>
