@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:context="Profile Page">
+    tools:context="Profile">
 
     <include
         layout="@layout/topbar"
@@ -14,12 +14,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="start"
         android:orientation="vertical"
-        android:gravity="left"
-        android:paddingTop="180dp"
-        android:paddingLeft="80dp">
+        android:paddingLeft="80dp"
+        android:paddingTop="180dp">
 
-<!--        turns square picture into a circle-->
+        <!--        turns square picture into a circle-->
         <com.mikhaellopez.circularimageview.CircularImageView
             android:layout_width="225dp"
             android:layout_height="240dp"
