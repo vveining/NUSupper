@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible"
-    tools:showIn="@layout/profile">
+    tools:showIn="@layout/activity_profile">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,13 +18,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="54dp"
-            android:layout_height="36dp"
-            android:src="@drawable/ic_baseline_menu_24" />
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#00FFFFFF"
+            app:srcCompat="@drawable/ic_baseline_menu_24" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="195dp"
             android:layout_height="70dp"
             android:fontFamily="@font/roboto_slab"
             android:gravity="center"
