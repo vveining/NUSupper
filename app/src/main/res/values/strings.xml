@@ -4,4 +4,7 @@
     <string name="login">login</string>
     <string name="register">register</string>
     <string name="reg_heading">registration</string>
+    <string name="reg_name">name</string>
+    <string name="reg_username">username</string>
+    <string name="reg_email">email</string>
 </resources>

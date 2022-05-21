@@ -5,16 +5,44 @@
     android:id="@+id/registerPage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/yellow"
     tools:context=".Register">
 
     <TextView
         android:id="@+id/regTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_slab"
         android:text="@string/reg_heading"
+        android:textColor="@color/brown"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.223"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.132" />
+
+    <!-- android studio code suggested that text blanks prompt for autofill -->
+    <EditText
+        android:id="@+id/registerName"
+        android:layout_width="312dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="12dp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:ems="10"
+        android:fontFamily="@font/roboto"
+        android:inputType="textPersonName"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="@string/reg_name"
+        android:textAlignment="viewStart"
+        android:textColor="@color/brown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regTitle"
+        tools:ignore="TextContrastCheck"
+        android:autofillHints="name" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
