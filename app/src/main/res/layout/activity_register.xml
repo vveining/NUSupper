@@ -6,29 +6,117 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/yellow"
+    android:foregroundTintMode="screen"
+    android:scrollbarAlwaysDrawHorizontalTrack="false"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
     tools:context=".Register">
 
     <!-- android studio code suggested that text blanks prompt for autofill -->
 
     <TextView
         android:id="@+id/regTitle"
-        android:layout_width="303dp"
+        android:layout_width="340dp"
         android:layout_height="68dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="100dp"
         android:fontFamily="@font/roboto_slab"
         android:text="@string/reg_heading"
         android:textColor="@color/brown"
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/registerName"
-        android:layout_width="312dp"
-        android:layout_height="57dp"
+        android:id="@+id/registerEmail"
+        android:layout_width="340dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="12dp"
+        android:autofillHints="emailAddress"
+        android:background="@android:drawable/editbox_background_normal"
+        android:ems="10"
+        android:hint="@string/reg_email"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerUsername"
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/registerUsername"
+        android:layout_width="340dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="20dp"
+        android:autofillHints="username"
+        android:background="@android:drawable/editbox_background_normal"
+        android:ems="10"
+        android:fontFamily="@font/roboto"
+        android:hint="@string/reg_username"
+        android:inputType="textPersonName"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerName"
+        tools:ignore="TextContrastCheck" />
+
+    <Spinner
+        android:id="@+id/residence_spinner"
+        android:layout_width="340dp"
+        android:layout_height="55dp"
         android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:entries="@array/residences_array"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerPassword" />
+
+    <Button
+        android:id="@+id/registerWithData"
+        android:layout_width="340dp"
+        android:layout_height="55dp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:fontFamily="@font/roboto"
+        android:text="@string/register"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/residence_spinner"
+        app:layout_constraintVertical_bias="0.077" />
+
+    <EditText
+        android:id="@+id/registerPassword"
+        android:layout_width="340dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="24dp"
+        android:autofillHints="password"
+        android:background="@android:drawable/editbox_background_normal"
+        android:ems="10"
+        android:hint="@string/reg_pw"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerEmail"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/registerName"
+        android:layout_width="340dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="12dp"
         android:autofillHints="name"
         android:background="@android:drawable/editbox_background_normal"
         android:ems="10"
@@ -40,61 +128,9 @@
         android:textAlignment="viewStart"
         android:textColor="@color/brown"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/regTitle"
-        tools:ignore="TextContrastCheck" />
-
-    <EditText
-        android:id="@+id/registerUsername"
-        android:layout_width="312dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="16dp"
-        android:autofillHints="username"
-        android:background="@android:drawable/editbox_background_normal"
-        android:ems="10"
-        android:fontFamily="@font/roboto"
-        android:hint="@string/reg_username"
-        android:inputType="textPersonName"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerName"
-        tools:ignore="TextContrastCheck" />
-
-    <EditText
-        android:id="@+id/registerEmail"
-        android:layout_width="312dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="16dp"
-        android:autofillHints="emailAddress"
-        android:background="@android:drawable/editbox_background_normal"
-        android:ems="10"
-        android:hint="@string/reg_email"
-        android:inputType="textEmailAddress"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerUsername"
-        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
-
-    <EditText
-        android:id="@+id/registerPassword"
-        android:layout_width="312dp"
-        android:layout_height="57dp"
-        android:autofillHints="password"
-        android:background="@android:drawable/editbox_background_normal"
-        android:ems="10"
-        android:hint="@string/reg_pw"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerEmail"
-        app:layout_constraintVertical_bias="0.033"
         tools:ignore="TextContrastCheck" />
 
 

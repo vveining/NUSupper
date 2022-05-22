@@ -11,4 +11,21 @@
     <string name="login_title">login</string>
     <string name="login_password">password</string>
     <string name="login_email">email</string>
+
+    <string-array name="residences_array">
+        <item>CAPT</item>
+        <item>RC4</item>
+        <item>Tembusu</item>
+        <item>RVRC</item>
+        <item>Cinnamon</item>
+        <item>Kent Ridge Hall</item>
+        <item>Sheares Hall</item>
+        <item>Eusoff Hall</item>
+        <item>Temasek Hall</item>
+        <item>Raffles Hall</item>
+        <item>King Edward VII Hall</item>
+        <item>LightHouse</item>
+        <item>Pioneer House</item>
+        <item>PGPR</item>
+    </string-array>
 </resources>
