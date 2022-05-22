@@ -2,12 +2,13 @@
     <string name="app_name">NUSupper</string>
     <string name="logo">logo</string>
     <string name="login">login</string>
-    <string name="login_title">Log in</string>
     <string name="register">register</string>
     <string name="reg_heading">registration</string>
     <string name="reg_name">name</string>
     <string name="reg_username">username</string>
     <string name="reg_email">email</string>
-    <string name="login_email">email</string>
+    <string name="reg_pw">password</string>
+    <string name="login_title">login</string>
     <string name="login_password">password</string>
+    <string name="login_email">email</string>
 </resources>
