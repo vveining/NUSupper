@@ -11,6 +11,9 @@
     <string name="login_title">login</string>
     <string name="login_password">password</string>
     <string name="login_email">email</string>
+    <string name="logout">Logout</string>
+    <string name="name_stub">name stub</string>
+    <string name="username_stub">username stub</string>
 
     <string-array name="residences_array">
         <item>CAPT</item>
