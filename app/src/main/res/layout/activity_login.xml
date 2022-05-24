@@ -17,14 +17,14 @@
         android:text="@string/login_title"
         android:textSize="50sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/EmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/EmailAddress"
         android:layout_width="340dp"
         android:layout_height="55dp"
         android:layout_marginStart="35dp"
@@ -38,14 +38,16 @@
         android:hint="@string/login_email"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword"
+        android:paddingTop="15dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginTitle"
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/Password"
         android:layout_width="340dp"
         android:layout_height="55dp"
         android:layout_marginStart="35dp"
@@ -58,17 +60,19 @@
         android:hint="@string/login_password"
         android:inputType="textPassword"
         android:textAlignment="center"
+        android:paddingTop="15dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintTop_toBottomOf="@+id/EmailAddress"
         app:passwordToggleEnabled="true"
         tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="340dp"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         android:layout_marginStart="35dp"
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="367dp"
@@ -78,10 +82,11 @@
         android:fontFamily="@font/roboto"
         android:text="@string/login"
         android:textAllCaps="false"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
+        app:layout_constraintTop_toBottomOf="@+id/Password"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
 

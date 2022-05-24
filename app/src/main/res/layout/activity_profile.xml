@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,6 +27,30 @@
             android:layout_width="122dp"
             android:layout_height="124dp"
             android:src="@drawable/photo_1544717305_2782549b5136" />
+
+        <TextView
+            android:id = "@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "@string/name_stub"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_slab"/>
+
+        <TextView
+            android:id = "@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "@string/username_stub"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_slab"/>
+
+        <Button
+            android:id="@+id/logout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/logout" />
 
     </LinearLayout>
 
