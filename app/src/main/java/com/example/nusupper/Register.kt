@@ -30,7 +30,8 @@ class Register : AppCompatActivity() {
                 val user = hashMapOf(
                     "name" to name,
                     "username" to username,
-                    "email" to email
+                    "email" to email,
+                    "password" to password
                 )
                 val users = firebaseDb.collection("USERS")
                 users.whereEqualTo("email", email).get().addOnSuccessListener {

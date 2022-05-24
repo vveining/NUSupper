@@ -26,6 +26,7 @@ class Login : AppCompatActivity() {
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             val intent = Intent(this, Profile::class.java)
+                            intent.putExtra("email", email)
                             startActivity(intent)
                             finish()
                         } else {
