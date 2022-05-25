@@ -27,11 +27,13 @@ class Register : AppCompatActivity() {
                 val username = binding.registerUsername.text.toString()
                 val email = binding.registerEmail.text.toString()
                 val password = binding.registerPassword.text.toString()
+                val mobilenumber = binding.registerPhone.text.toString()
                 val user = hashMapOf(
                     "name" to name,
                     "username" to username,
                     "email" to email,
-                    "password" to password
+                    "password" to password,
+                    "mobile number" to mobilenumber
                 )
                 val users = firebaseDb.collection("USERS")
                 users.whereEqualTo("email", email).get().addOnSuccessListener {
