@@ -18,4 +18,11 @@
     <style name="Button.Brown" parent="ThemeOverlay.AppCompat">
         <item name="colorAccent">@color/brown</item>
     </style>
+
+
+    <style name="Smaller_Drawable">
+        <item name="android:textSize">20sp</item>
+        <item name="android:scaleX">0.2</item>
+        <item name="android:scaleY">0.2</item>
+    </style>
 </resources>

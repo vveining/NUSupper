@@ -14,6 +14,8 @@
     <string name="logout">Logout</string>
     <string name="name_stub">name stub</string>
     <string name="username_stub">username stub</string>
+    <string name="mobilenumber_stub">mobile number stub</string>
+    <string name="hpnumber">mobile number</string>
 
     <string-array name="residences_array">
         <item>CAPT</item>
