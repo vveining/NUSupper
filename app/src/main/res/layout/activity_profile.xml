@@ -33,7 +33,7 @@
             android:layout_width="335dp"
             android:layout_height="27dp"
             android:layout_margin="16dp"
-            app:drawableLeftCompat="@drawable/smaller_user_icon"
+            app:drawableLeftCompat="@drawable/user_icon_24"
             android:drawablePadding="16dp"
             android:fontFamily="@font/roboto_slab"
             android:text="@string/username_stub"
