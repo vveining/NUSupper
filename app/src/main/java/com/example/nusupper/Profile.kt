@@ -54,7 +54,8 @@ class Profile : AppCompatActivity() {
                 .addOnSuccessListener {
                     binding.name.text = it.get("name").toString()
                     binding.username.text = it.get("username").toString()
-                    binding.mobilenumber.text = it.get("mobile number").toString()
+                    binding.mobileNumber.text = it.get("mobile number").toString()
+                    binding.residenceName.text = it.get("residence").toString()
                 }
         }
     }

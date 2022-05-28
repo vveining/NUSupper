@@ -33,17 +33,17 @@
             android:layout_width="335dp"
             android:layout_height="27dp"
             android:layout_margin="16dp"
-            app:drawableLeftCompat="@drawable/user_icon_24"
             android:drawablePadding="16dp"
             android:fontFamily="@font/roboto_slab"
             android:text="@string/username_stub"
             android:textSize="20sp"
+            app:drawableLeftCompat="@drawable/user_icon_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name" />
 
         <TextView
-            android:id="@+id/mobilenumber"
+            android:id="@+id/mobileNumber"
             android:layout_width="335dp"
             android:layout_height="27dp"
             android:layout_margin="16dp"
@@ -56,6 +56,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/username" />
 
+
+        <TextView
+            android:id="@+id/residenceName"
+            android:layout_width="335dp"
+            android:layout_height="27dp"
+            android:layout_margin="16dp"
+            android:drawablePadding="16dp"
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/residence_stub"
+            android:textSize="20sp"
+            app:drawableLeftCompat="@drawable/home_icon_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mobileNumber" />
+
         <Button
             android:id="@+id/logout_button"
             android:layout_width="335dp"
@@ -64,8 +79,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mobilenumber"
-            app:layout_constraintVertical_bias="0.914" />
+            app:layout_constraintTop_toBottomOf="@+id/residenceName"
+            app:layout_constraintVertical_bias="0.914"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
