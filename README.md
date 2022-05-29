@@ -71,3 +71,5 @@ by Milestone 3:
 [Project video](https://youtu.be/5t0IynLmr_I)
 
 [Milestone 1 video](https://drive.google.com/file/d/1sbqtvSDCBuNqJkCjLKLtFcF7kuhPE46S/view?usp=sharing)
+
+[milestone1 apk.zip](https://github.com/vveining/NUSupper/files/8792671/milestone1.apk.zip)
