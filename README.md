@@ -50,7 +50,7 @@ Students residing in NUS hostels who is interested in ordering supper would be a
 ### Future Designs & Plans
 
 by Milestone 2:
-- Navigation Bar
+- Navigation Drawer
 - Create & Edit Jio Page
 
 by Milestone 3:
@@ -69,3 +69,7 @@ by Milestone 3:
 [Project poster](https://nusskylab-dev.comp.nus.edu.sg/posters/2022/5183.jpg)
 
 [Project video](https://youtu.be/5t0IynLmr_I)
+
+[Milestone 1 video](https://drive.google.com/file/d/1sbqtvSDCBuNqJkCjLKLtFcF7kuhPE46S/view?usp=sharing)
+
+[milestone1 apk.zip](https://github.com/vveining/NUSupper/files/8792671/milestone1.apk.zip)
