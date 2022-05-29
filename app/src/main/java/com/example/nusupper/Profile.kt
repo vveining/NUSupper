@@ -54,6 +54,8 @@ class Profile : AppCompatActivity() {
                 }
                 R.id.findjio -> {
                     Toast.makeText(this, "find a Jio", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, FindJio::class.java)
+                    startActivity(intent)
                 }
                 R.id.orderhistory -> {
                     Toast.makeText(this, "order history", Toast.LENGTH_SHORT).show()
