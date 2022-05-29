@@ -19,10 +19,19 @@
         <item name="colorAccent">@color/brown</item>
     </style>
 
+    <!-- create a jio/join a jio page? -->
+    <style name="heading2_text">
+        <item name="fontFamily">@font/roboto_slab</item>
+        <item name="android:textColor">@color/brown</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
 
-    <style name="Smaller_Drawable">
-        <item name="android:textSize">20sp</item>
-        <item name="android:scaleX">0.2</item>
-        <item name="android:scaleY">0.2</item>
+    <style name="heading3_text">
+        <item name="android:fontFamily">@font/roboto_slab</item>
+        <item name="android:text">@string/name_stub</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textColor">@color/brown</item>
     </style>
 </resources>

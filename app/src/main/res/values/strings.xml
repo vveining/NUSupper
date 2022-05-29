@@ -17,6 +17,11 @@
     <string name="mobilenumber_stub">mobile number stub</string>
     <string name="hpnumber">mobile number</string>
     <string name="residence_stub">residence stub</string>
+    <string name="create_jio">create a Jio</string>
+    <string name="delivery_location">delivery location:</string>
+    <string name="restaurant">restaurant:</string>
+    <string name="order_close_time">order close time:</string>
+    <string name="type_here">type here</string>
 
     <string-array name="residences_array">
         <item>CAPT</item>
