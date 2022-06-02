@@ -27,6 +27,7 @@
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="350dp"
         android:layout_height="118dp"
         android:layout_marginTop="52dp"
@@ -54,17 +55,63 @@
             android:layout_width="326dp"
             android:layout_height="37dp"
             android:background="@android:drawable/editbox_background_normal"
+            android:dropDownWidth="310dp"
+            android:dropDownHorizontalOffset="8dp"
             android:ems="10"
             android:hint="@string/type_here"
             android:inputType="textPhonetic"
             android:textAlignment="center"
             android:textColor="@color/brown"
-            android:dropDownWidth="310dp"
-            android:dropDownHorizontalOffset="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/deliveryLocation"
+            app:layout_constraintVertical_bias="0.434"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck,DuplicateSpeakableTextCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="350dp"
+        android:layout_height="118dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/light_grey_rectangle_750_300"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <TextView
+            android:id="@+id/restaurant"
+            style="@style/heading3_text"
+            android:layout_width="346dp"
+            android:layout_height="35dp"
+            android:paddingStart="15dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="0dp"
+            android:text="@string/restaurant"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <AutoCompleteTextView
+            android:id="@+id/restaurantAutocomplete"
+            android:layout_width="326dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:dropDownWidth="310dp"
+            android:dropDownHorizontalOffset="8dp"
+            android:ems="10"
+            android:hint="@string/type_here"
+            android:inputType="textPhonetic"
+            android:textAlignment="center"
+            android:textColor="@color/brown"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/restaurant"
+            app:layout_constraintVertical_bias="0.133"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

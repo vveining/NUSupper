@@ -39,4 +39,12 @@
         <item>Pioneer House</item>
         <item>PGPR</item>
     </string-array>
+
+    <string-array name="restaurants_array">
+        <item>Super Snacks</item>
+        <item>Starbucks</item>
+        <item>McDonalds</item>
+        <item>Al-Amaan Restaurant</item>
+        <item>Fong Seng Nasi Lemak</item>
+    </string-array>
 </resources>
