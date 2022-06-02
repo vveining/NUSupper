@@ -1,8 +1,10 @@
 package com.example.nusupper
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -64,6 +66,31 @@ class FindJio : AppCompatActivity() {
             // For example, swap UI fragments here
 
             true
+        }
+
+        // clicking on individual jio buttons
+        binding.jio1.setOnClickListener {
+            Toast.makeText(this, "jio 1", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.jio2.setOnClickListener {
+            Toast.makeText(this, "jio 2", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.addjioBox.setOnClickListener {
+            Toast.makeText(this, "add jio", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.communityJio1.setOnClickListener {
+            Toast.makeText(this, "community jio 1", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.communityJio2.setOnClickListener {
+            Toast.makeText(this, "community jio 2", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.communityJio3.setOnClickListener {
+            Toast.makeText(this, "community jio 3", Toast.LENGTH_SHORT).show()
         }
     }
 
