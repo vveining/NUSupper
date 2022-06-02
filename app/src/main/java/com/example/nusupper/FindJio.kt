@@ -47,10 +47,14 @@ class FindJio : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.createjio -> {
-                    Toast.makeText(this, "create a Jioooo", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "create a Jio", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, CreateJio::class.java)
+                    startActivity(intent)
                 }
                 R.id.findjio -> {
                     Toast.makeText(this, "find a Jio", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, FindJio::class.java)
+                    startActivity(intent)
                 }
                 R.id.orderhistory -> {
                     Toast.makeText(this, "order history", Toast.LENGTH_SHORT).show()

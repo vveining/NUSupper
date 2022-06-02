@@ -36,12 +36,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 </FrameLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
 <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
 <com.google.android.material.navigation.NavigationView
     android:id="@+id/findjio_nav_view"

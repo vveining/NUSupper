@@ -45,7 +45,7 @@ class Template : AppCompatActivity() {
                     Toast.makeText(this, "profile", Toast.LENGTH_SHORT).show()
                 }
                 R.id.createjio -> {
-                    Toast.makeText(this, "create a Jioooo", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "create a Jio", Toast.LENGTH_SHORT).show()
                 }
                 R.id.findjio -> {
                     Toast.makeText(this, "find a Jio", Toast.LENGTH_SHORT).show()

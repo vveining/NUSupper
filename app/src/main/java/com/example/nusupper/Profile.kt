@@ -48,9 +48,13 @@ class Profile : AppCompatActivity() {
 
                 R.id.profile -> {
                     Toast.makeText(this, "profile", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, Profile::class.java)
+                    startActivity(intent)
                 }
                 R.id.createjio -> {
                     Toast.makeText(this, "create a Jio", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, CreateJio::class.java)
+                    startActivity(intent)
                 }
                 R.id.findjio -> {
                     Toast.makeText(this, "find a Jio", Toast.LENGTH_SHORT).show()
