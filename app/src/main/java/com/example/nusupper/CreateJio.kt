@@ -19,5 +19,6 @@ class CreateJio : AppCompatActivity() {
         val restaurants = resources.getStringArray(R.array.restaurants_array)
         val adapter2 = ArrayAdapter(this, android.R.layout.simple_list_item_1, restaurants)
         autoTextViewRestaurant.setAdapter(adapter2)
+
     }
 }
