@@ -14,7 +14,7 @@
         android:id="@+id/createjio_content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-      
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -30,115 +30,30 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-    <TextView
-        android:id="@+id/createJioTitle"
-        style="@style/heading2_text"
-        android:layout_width="290dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/create_jio"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="347dp"
-        android:layout_height="97dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/light_grey_rectangle_750_300"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createJioTitle">
 
             <TextView
                 android:id="@+id/createJioTitle"
                 style="@style/heading2_text"
                 android:layout_width="290dp"
                 android:layout_height="56dp"
-                android:layout_marginTop="44dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/create_jio"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/createjio_toolbar" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
                 android:layout_width="350dp"
-                android:layout_height="118dp"
-                android:layout_marginTop="52dp"
+                android:layout_height="97dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/light_grey_rectangle_750_300"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.491"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/createJioTitle">
-        <AutoCompleteTextView
-            android:id="@+id/locationAutocomplete"
-            android:layout_width="326dp"
-            android:layout_height="45dp"
-            android:background="@android:drawable/editbox_background_normal"
-            android:dropDownWidth="310dp"
-            android:dropDownHorizontalOffset="8dp"
-            android:ems="10"
-            android:hint="@string/type_here"
-            android:inputType="textPhonetic"
-            android:textAlignment="center"
-            android:textColor="@color/brown"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/deliveryLocation"
-            app:layout_constraintVertical_bias="0.434"
-            tools:ignore="TouchTargetSizeCheck,TextContrastCheck,DuplicateSpeakableTextCheck" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="350dp"
-        android:layout_height="97dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/light_grey_rectangle_750_300"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
-
-        <TextView
-            android:id="@+id/restaurant"
-            style="@style/heading3_text"
-            android:layout_width="346dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="4dp"
-            android:paddingStart="15dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="15dp"
-            android:paddingBottom="0dp"
-            android:text="@string/restaurant"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <AutoCompleteTextView
-            android:id="@+id/restaurantAutocomplete"
-            android:layout_width="326dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="4dp"
-            android:background="@android:drawable/editbox_background_normal"
-            android:dropDownWidth="310dp"
-            android:dropDownHorizontalOffset="8dp"
-            android:ems="10"
-            android:hint="@string/type_here"
-            android:inputType="textPhonetic"
-            android:textAlignment="center"
-            android:textColor="@color/brown"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/restaurant"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
                 <TextView
                     android:id="@+id/deliveryLocation"
@@ -157,15 +72,15 @@
                 <AutoCompleteTextView
                     android:id="@+id/locationAutocomplete"
                     android:layout_width="326dp"
-                    android:layout_height="37dp"
+                    android:layout_height="45dp"
                     android:background="@android:drawable/editbox_background_normal"
+                    android:dropDownWidth="310dp"
+                    android:dropDownHorizontalOffset="8dp"
                     android:ems="10"
                     android:hint="@string/type_here"
                     android:inputType="textPhonetic"
                     android:textAlignment="center"
                     android:textColor="@color/brown"
-                    android:dropDownWidth="310dp"
-                    android:dropDownHorizontalOffset="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -173,6 +88,123 @@
                     tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout2"
+                android:layout_width="350dp"
+                android:layout_height="97dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/light_grey_rectangle_750_300"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.491"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+                <TextView
+                    android:id="@+id/restaurant"
+                    style="@style/heading3_text"
+                    android:layout_width="346dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="4dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="0dp"
+                    android:text="@string/restaurant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/restaurantAutocomplete"
+                    android:layout_width="326dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@android:drawable/editbox_background_normal"
+                    android:dropDownWidth="310dp"
+                    android:dropDownHorizontalOffset="8dp"
+                    android:ems="10"
+                    android:hint="@string/type_here"
+                    android:inputType="textPhonetic"
+                    android:textAlignment="center"
+                    android:textColor="@color/brown"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/restaurant"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout3"
+                android:layout_width="355dp"
+                android:layout_height="338dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/light_grey_rectangle_750_300"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+                <TextView
+                    android:id="@+id/order_close_time"
+                    style="@style/heading3_text"
+                    android:layout_width="346dp"
+                    android:layout_height="37dp"
+                    android:layout_marginTop="4dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="0dp"
+                    android:text="@string/order_close_time"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TextContrastCheck" />
+
+                <DatePicker
+                    android:id="@+id/datePicker"
+                    android:layout_width="228dp"
+                    android:layout_height="145dp"
+                    android:layout_margin="0dp"
+                    android:layout_marginTop="8dp"
+                    android:calendarViewShown="false"
+                    android:datePickerMode="spinner"
+                    android:padding="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.496"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/order_close_time" />
+
+                <TimePicker
+                    android:id="@+id/timePicker1"
+                    android:layout_width="224dp"
+                    android:layout_height="130dp"
+                    android:layout_centerHorizontal="true"
+                    android:timePickerMode="spinner"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.496"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/datePicker"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/createJioButton"
+                android:layout_width="350dp"
+                android:layout_height="53dp"
+                android:text="@string/lesjio"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.475"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+                app:layout_constraintVertical_bias="0.017" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -189,72 +221,3 @@
         app:menu="@menu/drawer_view" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
-        android:layout_width="355dp"
-        android:layout_height="338dp"
-        android:background="@drawable/light_grey_rectangle_750_300"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
-
-        <TextView
-            android:id="@+id/order_close_time"
-            style="@style/heading3_text"
-            android:layout_width="346dp"
-            android:layout_height="37dp"
-            android:layout_marginTop="4dp"
-            android:paddingStart="15dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="15dp"
-            android:paddingBottom="0dp"
-            android:text="@string/order_close_time"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="TextContrastCheck" />
-
-        <DatePicker
-            android:id="@+id/datePicker"
-            android:layout_width="228dp"
-            android:layout_height="145dp"
-            android:layout_margin="0dp"
-            android:layout_marginTop="8dp"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner"
-            android:padding="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.43"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/order_close_time" />
-
-        <TimePicker
-            android:id="@+id/timePicker1"
-            android:layout_width="224dp"
-            android:layout_height="130dp"
-            android:layout_centerHorizontal="true"
-            android:timePickerMode="spinner"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.451"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/datePicker"
-            app:layout_constraintVertical_bias="0.0" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/createJioButton"
-        android:layout_width="350dp"
-        android:layout_height="53dp"
-        android:text="@string/lesjio"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
-        app:layout_constraintVertical_bias="0.017" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
