@@ -22,6 +22,9 @@
     <string name="restaurant">restaurant:</string>
     <string name="order_close_time">order close time:</string>
     <string name="type_here">type here</string>
+    <string name="find_a_jio">find a Jio</string>
+    <string name="your_current_jios">your current Jios</string>
+    <string name="community_jios">community jios:</string>
     <string name="DDMMYY">DD/MM/YY</string>
     <string name="time">time</string>
     <string name="lesjio">let\'s jio!</string>

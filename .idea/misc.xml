@@ -9,7 +9,8 @@
         <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1145" />
         <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/font/roboto_slab.xml" value="0.15208333333333332" />
         <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/font/roboto_slab_bold.xml" value="0.153125" />
-        <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/layout/activity_find_jio.xml" value="0.1" />
+        <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/layout/activity_create_jio.xml" value="0.164021164021164" />
+        <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/layout/activity_find_jio.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/layout/activity_login.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/layout/activity_main.xml" value="0.11671654553227875" />
         <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/layout/activity_profile.xml" value="0.14749893116716545" />
@@ -20,7 +21,7 @@
         <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/layout/bug_activity_login.xml" value="0.2624755859375" />
         <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/layout/drawer_header.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/layout/profile.xml" value="0.11671654553227875" />
-        <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/layout/topbar.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/layout/topbar.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/menu/drawer_view.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/phone_icon.xml" value="0.1805" />
