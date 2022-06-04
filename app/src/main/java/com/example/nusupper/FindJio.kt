@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -13,11 +12,13 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.nusupper.databinding.ActivityFindJioBinding
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.firestore.FirebaseFirestore
 
 class FindJio : AppCompatActivity() {
 
     private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var binding: ActivityFindJioBinding
+    private lateinit var firebaseDb: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +41,7 @@ class FindJio : AppCompatActivity() {
             // close drawer when item is tapped
             mDrawerLayout.closeDrawers()
 
-            // Handle navigation view item clicks here.
+            // handle navigation view item clicks here
             when (menuItem.itemId) {
 
                 R.id.profile -> {
@@ -62,9 +63,6 @@ class FindJio : AppCompatActivity() {
                     Toast.makeText(this, "order history", Toast.LENGTH_SHORT).show()
                 }
             }
-            // Add code here to update the UI based on the item selected
-            // For example, swap UI fragments here
-
             true
         }
 
@@ -91,6 +89,17 @@ class FindJio : AppCompatActivity() {
 
         binding.communityJio3.setOnClickListener {
             Toast.makeText(this, "community jio 3", Toast.LENGTH_SHORT).show()
+        }
+
+        // get info from firebase for residence stub
+        val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
+        val isLogin = sharedPref.getString("email", "1")
+        firebaseDb = FirebaseFirestore.getInstance()
+        if (isLogin != null) {
+            firebaseDb.collection("USERS").document(isLogin).get()
+                .addOnSuccessListener {
+                    binding.residence.text = it.get("residence").toString()
+                }
         }
     }
 
