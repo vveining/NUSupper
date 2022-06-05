@@ -99,8 +99,14 @@ class CreateJio : AppCompatActivity() {
 
             val closeMin = closeTimePicker.minute
 
+            //new JioDetail
+            val newJioDetail = JioDetails("title stub",deliveryLocation,restaurant,
+                closeDay,closeMonth,closeYear,closeHour,closeMin, "username stub")
+
+
             //intent to view created jio
             val intentStartViewJio = Intent(this,ViewJio::class.java)
+            intentStartViewJio.putExtra("new Jio", newJioDetail)
             startActivity(intentStartViewJio)
         }
 
