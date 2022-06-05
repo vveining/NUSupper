@@ -34,4 +34,13 @@
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textColor">@color/brown</item>
     </style>
+
+    <style name="Theme.NUSupper.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.NUSupper.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.NUSupper.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

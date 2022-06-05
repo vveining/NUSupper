@@ -165,7 +165,7 @@
                     tools:ignore="TextContrastCheck" />
 
                 <DatePicker
-                    android:id="@+id/datePicker"
+                    android:id="@+id/jioDatePicker"
                     android:layout_width="228dp"
                     android:layout_height="145dp"
                     android:layout_margin="0dp"
@@ -179,7 +179,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/order_close_time" />
 
                 <TimePicker
-                    android:id="@+id/timePicker1"
+                    android:id="@+id/jioTimePicker"
                     android:layout_width="224dp"
                     android:layout_height="130dp"
                     android:layout_centerHorizontal="true"
@@ -188,7 +188,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.496"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/datePicker"
+                    app:layout_constraintTop_toBottomOf="@+id/jioDatePicker"
                     app:layout_constraintVertical_bias="0.0" />
 
 
