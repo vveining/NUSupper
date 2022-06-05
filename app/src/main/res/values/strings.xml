@@ -29,6 +29,10 @@
     <string name="time">time</string>
     <string name="lesjio">let\'s jio!</string>
 
+    <!-- ely add your strings below -->
+
+    <!-- wn add strings below -->
+
     <string-array name="residences_array">
         <item>CAPT</item>
         <item>RC4</item>

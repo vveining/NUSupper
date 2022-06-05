@@ -195,7 +195,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
-                android:id="@+id/createJioButton"
+                android:id="@+id/letsJioBtn"
                 android:layout_width="350dp"
                 android:layout_height="53dp"
                 android:text="@string/lesjio"
