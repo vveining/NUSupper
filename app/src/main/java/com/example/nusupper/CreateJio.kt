@@ -1,12 +1,12 @@
 package com.example.nusupper
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Toast
+import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -19,6 +19,7 @@ class CreateJio : AppCompatActivity() {
     private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var binding: ActivityCreateJioBinding
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
 
         //navigation drawer things
@@ -71,8 +72,7 @@ class CreateJio : AppCompatActivity() {
             true
         }
 
-        //create jio things
-
+        //create jio autocomplete dropdown
         val autoTextViewLocation = findViewById<AutoCompleteTextView>(R.id.locationAutocomplete)
         val locations = resources.getStringArray(R.array.residences_array)
         val adapter1 = ArrayAdapter(this,
@@ -80,9 +80,29 @@ class CreateJio : AppCompatActivity() {
         autoTextViewLocation.setAdapter(adapter1)
 
         val autoTextViewRestaurant = findViewById<AutoCompleteTextView>(R.id.restaurantAutocomplete)
-        val restaurants = resources.getStringArray(R.array.restaurants_array)
-        val adapter2 = ArrayAdapter(this, android.R.layout.simple_list_item_1, restaurants)
+        val restaurantsArray = resources.getStringArray(R.array.restaurants_array)
+        val adapter2 = ArrayAdapter(this, android.R.layout.simple_list_item_1, restaurantsArray)
         autoTextViewRestaurant.setAdapter(adapter2)
+
+        //retrieve text values of all fields when "let's jio is clicked"
+        findViewById<Button>(R.id.letsJioBtn).setOnClickListener {
+            val deliveryLocation = autoTextViewLocation.text.toString()
+            val restaurant = autoTextViewRestaurant.text.toString()
+            val closeDatePicker = findViewById<DatePicker>(R.id.jioDatePicker)
+            val closeTimePicker = findViewById<TimePicker>(R.id.jioTimePicker)
+            val closeDay = closeDatePicker.dayOfMonth // return type int
+            val closeMonth = closeDatePicker.month
+            val closeYear = closeDatePicker.year
+
+            val closeHour = closeTimePicker.hour
+            // !!!!!!! requires API 23 but minimum API for NUSUPPER is set at 21
+
+            val closeMin = closeTimePicker.minute
+
+            //intent to view created jio
+            val intentStartViewJio = Intent(this,ViewJio::class.java)
+            startActivity(intentStartViewJio)
+        }
 
     }
 
@@ -93,8 +113,8 @@ class CreateJio : AppCompatActivity() {
                 mDrawerLayout.openDrawer(GravityCompat.START)
                 true
             }
-
             else -> super.onOptionsItemSelected(item)
         }
     }
+
 }
