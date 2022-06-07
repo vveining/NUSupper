@@ -38,7 +38,7 @@ class Template : AppCompatActivity() {
             // close drawer when item is tapped
             mDrawerLayout.closeDrawers()
 
-            // Handle navigation view item clicks here.
+            // handle navigation view item clicks here
             when (menuItem.itemId) {
 
                 R.id.profile -> {
@@ -54,9 +54,6 @@ class Template : AppCompatActivity() {
                     Toast.makeText(this, "order history", Toast.LENGTH_SHORT).show()
                 }
             }
-            // Add code here to update the UI based on the item selected
-            // For example, swap UI fragments here
-
             true
         }
     }
