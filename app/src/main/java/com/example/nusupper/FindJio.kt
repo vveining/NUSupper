@@ -3,6 +3,7 @@ package com.example.nusupper
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -10,15 +11,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SnapHelper
 import com.example.nusupper.databinding.ActivityFindJioBinding
+import com.example.nusupper.models.Jio
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_find_jio.*
+
+private const val TAG = "FindJioActivity"
 
 class FindJio : AppCompatActivity() {
 
     private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var binding: ActivityFindJioBinding
     private lateinit var firebaseDb: FirebaseFirestore
+    private lateinit var jios: MutableList<Jio>
+    private lateinit var adapter: JiosAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,17 +78,6 @@ class FindJio : AppCompatActivity() {
         }
 
         // clicking on individual jio buttons
-        binding.jio1.setOnClickListener {
-            Toast.makeText(this, "jio 1", Toast.LENGTH_SHORT).show()
-        }
-
-        binding.jio2.setOnClickListener {
-            Toast.makeText(this, "jio 2", Toast.LENGTH_SHORT).show()
-        }
-
-        binding.addjioBox.setOnClickListener {
-            Toast.makeText(this, "add jio", Toast.LENGTH_SHORT).show()
-        }
 
         binding.communityJio1.setOnClickListener {
             Toast.makeText(this, "community jio 1", Toast.LENGTH_SHORT).show()
@@ -100,6 +100,36 @@ class FindJio : AppCompatActivity() {
                 .addOnSuccessListener {
                     binding.residence.text = it.get("residence").toString()
                 }
+        }
+
+        // data source always updates
+        jios = mutableListOf()
+
+        // create adapter for jios
+        adapter = JiosAdapter(this, jios)
+
+        // bind the adapter and layout manager to the recyclerView
+        findJiorecyclerviewJios.adapter = adapter
+        findJiorecyclerviewJios.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        val snapHelper : SnapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(findJiorecyclerviewJios)
+
+        // get jio information from firebase
+        firebaseDb = FirebaseFirestore.getInstance()
+        val jiosReference = firebaseDb.collection("JIOS").limit(20)
+
+        jiosReference.addSnapshotListener { snapshot, exception ->
+            if (exception != null || snapshot == null) {
+                Log.e(TAG, "exception when querying posts", exception)
+                return@addSnapshotListener
+            }
+            val jioList = snapshot.toObjects(Jio::class.java)
+            jios.clear()
+            jios.addAll(jioList)
+            adapter.notifyDataSetChanged()
+            for (jio in jioList) {
+                Log.i(TAG, "Jio $jio")
+            }
         }
     }
 
