@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nusupper.models.Jio
 import kotlinx.android.synthetic.main.item_jio.view.*
 
-class JiosAdapter (val context: Context, val jios: List<Jio>) :
+class JiosAdapter (val context: Context, var jios: List<Jio>) :
 
     RecyclerView.Adapter<JiosAdapter.ViewHolder>() {
 
@@ -39,11 +39,14 @@ class JiosAdapter (val context: Context, val jios: List<Jio>) :
 
             itemView.textView.text = jio.restaurant
             itemView.textView2.text = jio.location
-            itemView.textView3.text = jio.closeTime.toString()
+            itemView.textView3.text = "closes " + jio.closeTime
             itemView.textView4.text = jio.creator?.username
+            itemView.restaurant_logo_stub.setImageResource(getLogo(jio.restaurant))
+
             //add image for restaurant here
         }
 
+        //onclick listener for recycler view
         init {
             itemView.setOnClickListener{
                 listener.onItemClick(adapterPosition)
@@ -51,6 +54,16 @@ class JiosAdapter (val context: Context, val jios: List<Jio>) :
         }
     }
 
-    //onclick listener for recycler view
+    fun getLogo(name: String) : Int {
+        when (name) {
+            "Super Snacks" -> return R.drawable.supersnacks
+            "Starbucks" -> return R.drawable.starbucks
+            "Fong Seng" -> return R.drawable.fongseng
+            "McDonalds" -> return R.drawable.macs
+            "Al-Amaan" -> return R.drawable.alamaan
+        }
+        return R.drawable.food_icon
+    }
+
 
 }

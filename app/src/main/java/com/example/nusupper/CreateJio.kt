@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.DatePicker
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
@@ -137,8 +138,13 @@ class CreateJio : AppCompatActivity() {
 
         binding.createJioButton.isEnabled = false //to make asynchronous calls & enable it later
 
-        val jio = Jio(
-            "1230", // not sure how to get user input for close time T_T
+        //datePicker for when Jio object is fixed
+        //can add timepicker as well
+        val datePicker = findViewById<DatePicker>(R.id.datePicker)
+        val dateString = datePicker.dayOfMonth.toString() + "." + datePicker.month.toString() +
+                "." + datePicker.year.toString()
+
+        val jio = Jio("2300", // not sure how to get user input for close time T_T
             signedInUser,
             binding.locationAutocomplete.text.toString(),
             true,
