@@ -1,45 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="140dp"
     android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="10dp"
-    app:cardElevation="8dp">
+    app:cardElevation="8dp"
+    android:clickable="true">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="121dp"
+        android:layout_height="176dp"
         android:layout_margin="10dp"
         android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="restaurant stub"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        <ImageView
+            android:id="@+id/restaurant_logo_stub"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:contentDescription="@string/restaurant" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="location stub"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:text="restaurant stub"
+            android:textAppearance="@style/jio_card_title" />
+
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="7dp"
             android:text="close time stub"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/jio_card_sub" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="name stub"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:padding="7dp"
+            android:text="location stub"
+            android:drawablePadding="5dp"
+            android:textAppearance="@style/jio_card_sub"
+            app:drawableLeftCompat="@drawable/home_icon_16" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:background="@drawable/grey_rectangle_750_300"
+            android:padding="7dp"
+            android:text="name stub"
+            android:textColor="@color/brown"
+            android:textAppearance="@style/jio_card_sub"
+            app:drawableLeftCompat="@drawable/ic_baseline_person_24" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

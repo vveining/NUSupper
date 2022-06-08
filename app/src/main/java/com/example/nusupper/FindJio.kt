@@ -110,6 +110,16 @@ class FindJio : AppCompatActivity() {
 
         // bind the adapter and layout manager to the recyclerView
         findJiorecyclerviewJios.adapter = adapter
+
+        //onclick stuff
+        adapter.setItemClickListener(object: JiosAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+                Toast.makeText(this@FindJio,"you clicked on item $position",Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
+        //bind adapter
         findJiorecyclerviewJios.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         val snapHelper : SnapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(findJiorecyclerviewJios)

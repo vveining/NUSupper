@@ -53,7 +53,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.958"
-        app:srcCompat="@drawable/logocircle" />
+        app:srcCompat="@drawable/nusupper_logo_no_text" />
 
     <TextView
         android:id="@+id/textview_title"
