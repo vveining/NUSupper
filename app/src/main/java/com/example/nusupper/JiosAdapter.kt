@@ -60,7 +60,7 @@ class JiosAdapter (val context: Context, var jios: List<Jio>) :
             "Starbucks" -> return R.drawable.starbucks
             "Fong Seng" -> return R.drawable.fongseng
             "McDonalds" -> return R.drawable.macs
-            "Al-Amaan" -> return R.drawable.alamaan
+            "Al-Amaan" -> return R.drawable.al_amaan
         }
         return R.drawable.food_icon
     }
