@@ -29,9 +29,25 @@
 
     <style name="heading3_text">
         <item name="android:fontFamily">@font/roboto_slab</item>
-        <item name="android:text">@string/name_stub</item>
         <item name="android:textSize">22sp</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textColor">@color/brown</item>
     </style>
+
+    <style name="jio_card_title">
+        <item name="android:fontFamily">@font/roboto_slab</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/brown</item>
+    </style>
+
+    <style name="jio_card_sub">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+
+
 </resources>
