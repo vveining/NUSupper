@@ -9,7 +9,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/logocircle"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logocircle"
+        android:roundIcon="@drawable/nusupper_logo_no_text"
         android:supportsRtl="true"
         android:theme="@style/Theme.NUSupper"
         tools:targetApi="31">
