@@ -37,13 +37,12 @@ class JiosAdapter (val context: Context, var jios: List<Jio>) :
     inner class ViewHolder(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
         fun bind(jio: Jio) {
 
-            itemView.textView.text = jio.restaurant
-            itemView.textView2.text = jio.location
-            itemView.textView3.text = "closes " + jio.closeTime
-            itemView.textView4.text = jio.creator?.username
+            itemView.textView_restaurant.text = jio.restaurant
+            itemView.textView_location.text = jio.location
+            itemView.textView_closeTime.text = "closes " + jio.closeTime
+            itemView.textView_creator.text = jio.creator?.username
+            itemView.textView_closeDate.text = jio.closeDate
             itemView.restaurant_logo_stub.setImageResource(getLogo(jio.restaurant))
-
-            //add image for restaurant here
         }
 
         //onclick listener for recycler view
@@ -64,6 +63,4 @@ class JiosAdapter (val context: Context, var jios: List<Jio>) :
         }
         return R.drawable.food_icon
     }
-
-
 }

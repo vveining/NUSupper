@@ -12,6 +12,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.nusupper.databinding.ActivityProfileBinding
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class Profile : AppCompatActivity() {
@@ -19,13 +20,14 @@ class Profile : AppCompatActivity() {
     private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var binding: ActivityProfileBinding
     private lateinit var firebaseDb: FirebaseFirestore
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //navigation drawer things
+        // navigation drawer things <start>
 
         val toolbar: Toolbar = findViewById(R.id.profile_toolbar)
         setSupportActionBar(toolbar)
@@ -68,15 +70,19 @@ class Profile : AppCompatActivity() {
             true
         }
 
-        //profile page things
+        // navigation drawer things <end>
+
+        // Profile things <start>
 
         val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
         val isLogin = sharedPref.getString("email", "1")
 
         //handle logout
+        firebaseAuth = FirebaseAuth.getInstance()
         binding.logoutButton.setOnClickListener {
             sharedPref.edit().remove("email").apply()
             val intent = Intent(this, MainActivity::class.java)
+            firebaseAuth.signOut()
             startActivity(intent)
             finish()
         }
@@ -97,9 +103,11 @@ class Profile : AppCompatActivity() {
         } else {
             setText(isLogin)
         }
+
+        // Profile things <end>
     }
 
-    //appbar - toolbar button click
+    // appbar - toolbar button click
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {

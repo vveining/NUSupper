@@ -23,14 +23,15 @@
             android:contentDescription="@string/restaurant" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textView_restaurant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="7dp"
             android:text="restaurant stub"
             android:textAppearance="@style/jio_card_title" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textView_closeTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="7dp"
@@ -38,7 +39,15 @@
             android:textAppearance="@style/jio_card_sub" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView_closeDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="7dp"
+            android:text="close date stub"
+            android:textAppearance="@style/jio_card_sub" />
+
+        <TextView
+            android:id="@+id/textView_location"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:padding="7dp"
@@ -48,7 +57,7 @@
             app:drawableLeftCompat="@drawable/home_icon_16" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textView_creator"
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:background="@drawable/grey_rectangle_750_300"
