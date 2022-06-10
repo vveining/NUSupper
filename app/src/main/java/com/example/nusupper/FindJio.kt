@@ -112,7 +112,7 @@ class FindJio : AppCompatActivity() {
         findJiorecyclerviewJios.adapter = adapter
 
         //onclick stuff
-        adapter.setItemClickListener(object: JiosAdapter.onItemClickListener{
+        adapter.setItemClickListener(object: JiosAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 Toast.makeText(this@FindJio,"you clicked on item $position",Toast.LENGTH_SHORT).show()
             }

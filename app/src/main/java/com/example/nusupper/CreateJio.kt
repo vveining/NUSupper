@@ -1,14 +1,14 @@
 package com.example.nusupper
 
 import android.content.Intent
+import android.icu.util.Calendar
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.DatePicker
-import android.widget.Toast
+import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -17,8 +17,13 @@ import com.example.nusupper.databinding.ActivityCreateJioBinding
 import com.example.nusupper.models.Jio
 import com.example.nusupper.models.User
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.util.*
 
 private const val TAG = "CreateJioActivity"
 private const val EXTRA_USERNAME = "extra_username"
@@ -120,6 +125,7 @@ class CreateJio : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun handleCreateJioButtonClick() {
         if (binding.locationAutocomplete.text.isBlank()) {
             Toast.makeText(this, "enter delivery location", Toast.LENGTH_SHORT).show()
@@ -141,10 +147,18 @@ class CreateJio : AppCompatActivity() {
         //datePicker for when Jio object is fixed
         //can add timepicker as well
         val datePicker = findViewById<DatePicker>(R.id.datePicker)
-        val dateString = datePicker.dayOfMonth.toString() + "." + datePicker.month.toString() +
-                "." + datePicker.year.toString()
+        val timePicker = findViewById<TimePicker>(R.id.timePicker1)
+
+        val dd = datePicker.dayOfMonth
+        val mm = datePicker.month
+        val yyyy = datePicker.year
+        val hour = timePicker.hour
+        val min = timePicker.minute
+
+        var t = LocalDateTime.of(yyyy,mm,dd,hour,min) //needs API 26
 
         val jio = Jio("2300", // not sure how to get user input for close time T_T
+            t.toString(),
             signedInUser,
             binding.locationAutocomplete.text.toString(),
             true,

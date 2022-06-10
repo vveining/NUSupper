@@ -12,14 +12,14 @@ class JiosAdapter (val context: Context, var jios: List<Jio>) :
 
     RecyclerView.Adapter<JiosAdapter.ViewHolder>() {
 
-    private lateinit var jListener : onItemClickListener
+    private lateinit var jListener : OnItemClickListener
 
-    interface onItemClickListener{
+    interface OnItemClickListener{
         fun onItemClick(position: Int)
 
     }
 
-    fun setItemClickListener(listener: onItemClickListener) {
+    fun setItemClickListener(listener: OnItemClickListener) {
         jListener = listener
     }
 
@@ -34,12 +34,12 @@ class JiosAdapter (val context: Context, var jios: List<Jio>) :
 
     override fun getItemCount() = jios.size
 
-    inner class ViewHolder(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View, listener: OnItemClickListener) : RecyclerView.ViewHolder(itemView) {
         fun bind(jio: Jio) {
 
             itemView.textView.text = jio.restaurant
             itemView.textView2.text = jio.location
-            itemView.textView3.text = "closes " + jio.closeTime
+            itemView.textView3.text = jio.closeDT
             itemView.textView4.text = jio.creator?.username
             itemView.restaurant_logo_stub.setImageResource(getLogo(jio.restaurant))
 
