@@ -149,11 +149,20 @@ class CreateJio : AppCompatActivity() {
             binding.locationAutocomplete.text.toString(),
             true,
             binding.restaurantAutocomplete.text.toString())
+
         firebaseDb.collection("JIOS").add(jio).addOnCompleteListener { creation ->
             binding.createJioButton.isEnabled = true //enable button
             if (!creation.isSuccessful) {
                 Log.e(TAG, "exception during firebase operations", creation.exception)
                 Toast.makeText(this, "failed to create Jio", Toast.LENGTH_SHORT).show()
+            } else {
+                /*
+                firebaseDb.collection("JIOS").document("uniqueuserID")
+                    .get().addOnSuccessListener { document ->
+                        val data: String = document.(field name eg restaurant etc)
+                    }
+
+                 */
             }
             binding.locationAutocomplete.text.clear()
             binding.restaurantAutocomplete.text.clear()
@@ -161,6 +170,8 @@ class CreateJio : AppCompatActivity() {
 
             // val intent = Intent(this, NEXT_PAGE::class.java)
             // startActivity(intent)
+
+
         }
     }
 
@@ -179,4 +190,5 @@ class CreateJio : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
 }
