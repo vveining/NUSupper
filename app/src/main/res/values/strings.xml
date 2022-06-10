@@ -1,4 +1,8 @@
 <resources>
+    <string name="location_view_jio">location:</string>
+    <string name="restaurant_stub">restaurant stub</string>
+    <string name="view_jio_title">(name)\'s jio</string>
+    <string name="jio_close_stub">close time stub</string>
     <string name="app_name">NUSupper</string>
     <string name="logo">logo</string>
     <string name="login">login</string>
