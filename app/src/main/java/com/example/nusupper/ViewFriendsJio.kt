@@ -10,37 +10,36 @@ import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.example.nusupper.databinding.ActivityViewJioBinding
+import com.example.nusupper.databinding.ActivityViewFriendsJioBinding
 import com.example.nusupper.models.Jio
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 
-class ViewJio : AppCompatActivity() {
+class ViewFriendsJio : AppCompatActivity() {
 
     private lateinit var mDrawerLayout: DrawerLayout
-    private lateinit var binding: ActivityViewJioBinding
+    private lateinit var binding: ActivityViewFriendsJioBinding
     private lateinit var jioID: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_template)
-        binding = ActivityViewJioBinding.inflate(layoutInflater)
+        binding = ActivityViewFriendsJioBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // [START navigation drawer things]
 
         jioID = intent.getStringExtra("EXTRA_JIOID").toString()
 
-        val toolbar: Toolbar = findViewById(R.id.viewjio_toolbar)
+        val toolbar: Toolbar = findViewById(R.id.viewfriendsjio_toolbar)
         setSupportActionBar(toolbar)
         val actionbar: ActionBar? = supportActionBar
         actionbar?.apply {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        mDrawerLayout = findViewById(R.id.viewjio_drawer_layout)
+        mDrawerLayout = findViewById(R.id.viewfriendsjio_drawer_layout)
 
-        val navigationView: NavigationView = findViewById(R.id.viewjio_nav_view)
+        val navigationView: NavigationView = findViewById(R.id.viewfriendsjio_nav_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             // set item as selected to persist highlight
             menuItem.isChecked = true
@@ -76,7 +75,6 @@ class ViewJio : AppCompatActivity() {
         // [START ViewJio things]
 
         // button tooltips
-        TooltipCompat.setTooltipText(binding.editjioButton, "edit Jio")
         TooltipCompat.setTooltipText(binding.copyjiolinkButton, "copy link")
 
         setViewJio(jioID)
@@ -108,6 +106,7 @@ class ViewJio : AppCompatActivity() {
                     val closeDate = it.get("close date").toString()
                     binding.viewJioDetailsStub.text = "$closeTime, $closeDate"
                     binding.restaurantImage.setImageResource(Jio.getLogo(restaurant))
+                    binding.jioOwnerStub.text = it.get("creatorName").toString()
                 }
         }
     }

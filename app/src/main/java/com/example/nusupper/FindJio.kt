@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nusupper.databinding.ActivityFindJioBinding
 import com.example.nusupper.models.Jio
+import com.example.nusupper.models.User
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_find_jio.*
 
@@ -23,8 +25,10 @@ class FindJio : AppCompatActivity() {
     private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var binding: ActivityFindJioBinding
     private lateinit var firebaseDb: FirebaseFirestore
+    private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var jios: MutableList<Jio>
     private lateinit var adapter: JiosAdapter
+    private var signedInUser: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -32,7 +36,7 @@ class FindJio : AppCompatActivity() {
         binding = ActivityFindJioBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // navigation drawer things <start>
+        // [START navigation drawer things]
 
         val toolbar: Toolbar = findViewById(R.id.findjio_toolbar)
         setSupportActionBar(toolbar)
@@ -75,9 +79,9 @@ class FindJio : AppCompatActivity() {
             true
         }
 
-        // navigation drawer things <end>
+        // [END navigation drawer things]
 
-        // FindJio things start <start>
+        // [START FindJio things start]
 
         // clicking on individual jio buttons
         binding.communityJio1.setOnClickListener {
@@ -90,16 +94,20 @@ class FindJio : AppCompatActivity() {
             Toast.makeText(this, "community jio 3", Toast.LENGTH_SHORT).show()
         }
 
-        // get info from firebase for residence stub
-        val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
-        val isLogin = sharedPref.getString("email", "1")
+        // get signed in user as a User object
         firebaseDb = FirebaseFirestore.getInstance()
-        if (isLogin != null) {
-            firebaseDb.collection("USERS").document(isLogin).get()
-                .addOnSuccessListener {
-                    binding.residence.text = it.get("residence").toString()
+        firebaseAuth = FirebaseAuth.getInstance()
+        firebaseAuth.currentUser?.email?.let {
+            firebaseDb.collection("USERS")
+                .document(it)
+                .get()
+                .addOnSuccessListener { userSnapshot ->
+                    signedInUser = userSnapshot.toObject(User::class.java)
                 }
         }
+
+        // get residence stub
+        binding.residence.text = signedInUser?.residence.toString()
 
         // data source always updates
         jios = mutableListOf()
@@ -114,12 +122,22 @@ class FindJio : AppCompatActivity() {
         adapter.setItemClickListener(object: JiosAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
                 val jioID = jios[position].jioID
+                val creatorName = jios[position].creatorName
                 Toast.makeText(this@FindJio,"you clicked on item $jioID",Toast.LENGTH_SHORT).show()
-                Intent(this@FindJio,ViewJio::class.java).also {
-                    //send JIO ID info to viewJio activity to source for data
-                    it.putExtra("EXTRA_JIOID",jioID)
-                    startActivity(it)
-                    finish()
+                if (signedInUser?.name == creatorName) { // if user clicks on his own Jio
+                    Intent(this@FindJio, ViewJio::class.java).also {
+                        //send JIO ID info to viewJio activity to source for data
+                        it.putExtra("EXTRA_JIOID", jioID)
+                        startActivity(it)
+                        finish()
+                    }
+                } else { // if user clicks on other's Jio
+                    Intent(this@FindJio, ViewFriendsJio::class.java).also {
+                        //send JIO ID info to viewJio activity to source for data
+                        it.putExtra("EXTRA_JIOID", jioID)
+                        startActivity(it)
+                        finish()
+                    }
                 }
             }
         })
@@ -142,7 +160,7 @@ class FindJio : AppCompatActivity() {
             adapter.notifyDataSetChanged()
         }
 
-        // FindJio things <end>
+        // [END FindJio things]
     }
 
     // appbar - toolbar button click

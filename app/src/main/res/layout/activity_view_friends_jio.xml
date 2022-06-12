@@ -3,15 +3,15 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/viewjio_drawer_layout"
+    android:id="@+id/viewfriendsjio_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ViewJio">
+    tools:context=".ViewFriendsJio">
 
     <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
     <FrameLayout
-        android:id="@+id/findjio_content_frame"
+        android:id="@+id/viewfriendsjio_content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -20,7 +20,7 @@
             android:layout_height="match_parent">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/viewjio_toolbar"
+                android:id="@+id/viewfriendsjio_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/yellow"
@@ -31,26 +31,38 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout5"
-            android:layout_width="358dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewjio_toolbar">
-
-            <TextView
-                android:id="@+id/jioOwnerStub"
-                style="@style/heading2_text"
-                android:layout_width="wrap_content"
-                android:layout_height="56dp"
-                android:text="Your Jio"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout5"
+                android:layout_width="358dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/viewfriendsjio_toolbar">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/jioOwnerStub"
+                    style="@style/heading2_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="56dp"
+                    android:text="@string/name_stub"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.126"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/jioOwnerStub2"
+                    style="@style/heading2_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="56dp"
+                    android:text="'s Jio"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@id/jioOwnerStub"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout4"
@@ -99,16 +111,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/restaurant_image"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/editjioButton"
-                    android:layout_width="48dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/ic_baseline_edit_note_24"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -183,65 +185,65 @@
                     app:layout_constraintVertical_bias="0.461" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/jiolinkConst"
-            android:layout_width="353dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/dark_grey_rectangle_small"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/restaurantConst">
-
-            <TextView
-                android:id="@+id/jiolink"
-                style="@style/view_jio_subtitle"
-                android:layout_width="111dp"
-                android:layout_height="28dp"
-                android:layout_marginStart="16dp"
-                android:text="Jio link:"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/jiolinkConst"
+                android:layout_width="353dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/dark_grey_rectangle_small"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.222" />
+                app:layout_constraintTop_toBottomOf="@+id/restaurantConst">
 
-            <TextView
-                android:id="@+id/jiolinksubtitle"
-                style="@style/jio_link_subtitle"
-                android:layout_width="223dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="112dp"
-                android:text="invite your friends to this Jio!"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/jiolink"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.507" />
+                <TextView
+                    android:id="@+id/jiolink"
+                    style="@style/view_jio_subtitle"
+                    android:layout_width="111dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="16dp"
+                    android:text="Jio link:"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.222" />
 
-            <TextView
-                android:id="@+id/link_stub"
-                style="@style/view_jio_subtitle2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="https://jio_link_stub.com"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@id/jiolinksubtitle"
-                app:layout_constraintTop_toBottomOf="@id/jiolinksubtitle"
-                app:layout_constraintVertical_bias="0.0" />
+                <TextView
+                    android:id="@+id/jiolinksubtitle"
+                    style="@style/jio_link_subtitle"
+                    android:layout_width="223dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="112dp"
+                    android:text="invite your friends to this Jio!"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/jiolink"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.507" />
 
-            <ImageButton
-                android:id="@+id/copyjiolinkButton"
-                android:layout_width="38dp"
-                android:layout_height="37dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/ic_baseline_content_copy_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/link_stub"
+                    style="@style/view_jio_subtitle2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="https://jio_link_stub.com"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@id/jiolinksubtitle"
+                    app:layout_constraintTop_toBottomOf="@id/jiolinksubtitle"
+                    app:layout_constraintVertical_bias="0.0" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageButton
+                    android:id="@+id/copyjiolinkButton"
+                    android:layout_width="38dp"
+                    android:layout_height="37dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/ic_baseline_content_copy_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
                 android:id="@+id/viewcurrentordersButton"
@@ -267,25 +269,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/viewcurrentordersButton"
                 app:layout_constraintVertical_bias="0.017" />
 
-            <Button
-                android:id="@+id/closeorderButton"
-                android:layout_width="350dp"
-                android:layout_height="53dp"
-                android:text="close order"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.475"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addorderButton"
-                app:layout_constraintVertical_bias="0.017" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
 
     <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/viewjio_nav_view"
+        android:id="@+id/viewfriendsjio_nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
