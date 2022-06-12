@@ -160,7 +160,7 @@ class CreateJio : AppCompatActivity() {
             uniqueID)
 
         // add the Jio object into firebase database
-        firebaseDb.collection("JIOS").add(jio).addOnCompleteListener { creation ->
+        firebaseDb.collection("JIOS").document(uniqueID).set(jio).addOnCompleteListener { creation ->
             binding.createJioButton.isEnabled = true //enable button
             if (!creation.isSuccessful) {
                 Toast.makeText(this, "failed to create Jio", Toast.LENGTH_SHORT).show()
@@ -169,8 +169,11 @@ class CreateJio : AppCompatActivity() {
             binding.restaurantAutocomplete.text.clear()
             Toast.makeText(this, "created a Jio!", Toast.LENGTH_SHORT).show()
 
-            // val intent = Intent(this, NEXT_PAGE::class.java)
-            // startActivity(intent)
+            Intent(this,ViewJio::class.java).also {
+                //send JIO ID info to viewJio activity to source for data
+                it.putExtra("EXTRA_JIOID",uniqueID)
+                startActivity(it)
+            }
         }
     }
 
