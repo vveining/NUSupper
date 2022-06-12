@@ -8,4 +8,5 @@ data class Jio(
     var creator: User? = null,
     var location: String = "",
     var open: Boolean = true,
-    var restaurant: String = "")
+    var restaurant: String = "",
+    var jioID: String = "")

@@ -16,7 +16,6 @@ class JiosAdapter (val context: Context, var jios: List<Jio>) :
 
     interface onItemClickListener{
         fun onItemClick(position: Int)
-
     }
 
     fun setItemClickListener(listener: onItemClickListener) {

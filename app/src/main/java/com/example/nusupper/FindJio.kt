@@ -43,7 +43,7 @@ class FindJio : AppCompatActivity() {
 
         mDrawerLayout = findViewById(R.id.findjio_drawer_layout)
 
-        val navigationView: NavigationView = findViewById(R.id.findjio_nav_view)
+        val navigationView: NavigationView = findViewById(R.id.viewjio_nav_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             // set item as selected to persist highlight
             menuItem.isChecked = true
@@ -113,7 +113,9 @@ class FindJio : AppCompatActivity() {
         // onclick stuff
         adapter.setItemClickListener(object: JiosAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
-                Toast.makeText(this@FindJio,"you clicked on item $position",Toast.LENGTH_SHORT).show()
+                val selectedJio: Jio = jios[position]
+                val jioID = selectedJio.jioID
+                Toast.makeText(this@FindJio,"you clicked on item $jioID",Toast.LENGTH_SHORT).show()
             }
         })
 

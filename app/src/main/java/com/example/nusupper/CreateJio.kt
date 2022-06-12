@@ -18,6 +18,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.time.LocalTime
+import java.util.*
 
 private const val EXTRA_USERNAME = "extra_username"
 
@@ -117,7 +118,6 @@ class CreateJio : AppCompatActivity() {
     }
 
     // handles create jio button; returns a Jio object
-    @RequiresApi(Build.VERSION_CODES.O) // for timePicker to work without errors
     private fun handleCreateJioButtonClick() {
 
         // checks
@@ -147,13 +147,17 @@ class CreateJio : AppCompatActivity() {
         val min = timePicker.minute
         val timeString = LocalTime.of(hour,min).toString()
 
+        //generate unique jio id
+        val uniqueID = UUID.randomUUID().toString()
+
         // create a Jio object
         val jio = Jio(dateString,
             timeString,
             signedInUser,
             binding.locationAutocomplete.text.toString(),
             true,
-            binding.restaurantAutocomplete.text.toString())
+            binding.restaurantAutocomplete.text.toString(),
+            uniqueID)
 
         // add the Jio object into firebase database
         firebaseDb.collection("JIOS").add(jio).addOnCompleteListener { creation ->
