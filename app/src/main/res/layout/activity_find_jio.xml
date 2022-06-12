@@ -31,7 +31,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/findJioTitle"
+                android:id="@+id/jioOwnerStub"
                 style="@style/heading2_text"
                 android:layout_width="290dp"
                 android:layout_height="56dp"
@@ -53,7 +53,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/findJioTitle"/>
+                app:layout_constraintTop_toBottomOf="@id/jioOwnerStub"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint1"

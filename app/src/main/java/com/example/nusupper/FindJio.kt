@@ -113,9 +113,14 @@ class FindJio : AppCompatActivity() {
         // onclick stuff
         adapter.setItemClickListener(object: JiosAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
-                val selectedJio: Jio = jios[position]
-                val jioID = selectedJio.jioID
+                val jioID = jios[position].jioID
                 Toast.makeText(this@FindJio,"you clicked on item $jioID",Toast.LENGTH_SHORT).show()
+                Intent(this@FindJio,ViewJio::class.java).also {
+                    //send JIO ID info to viewJio activity to source for data
+                    it.putExtra("EXTRA_JIOID",jioID)
+                    startActivity(it)
+                    finish()
+                }
             }
         })
 
