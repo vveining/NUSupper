@@ -1,14 +1,12 @@
 package com.example.nusupper
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.DatePicker
-import android.widget.Toast
+import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -19,8 +17,8 @@ import com.example.nusupper.models.User
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.time.LocalTime
 
-private const val TAG = "CreateJioActivity"
 private const val EXTRA_USERNAME = "extra_username"
 
 class CreateJio : AppCompatActivity() {
@@ -28,15 +26,17 @@ class CreateJio : AppCompatActivity() {
     private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var binding: ActivityCreateJioBinding
     private lateinit var firebaseDb: FirebaseFirestore
+    private lateinit var firebaseAuth: FirebaseAuth
     private var signedInUser: User? = null
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        //navigation drawer things
 
         super.onCreate(savedInstanceState)
         binding = ActivityCreateJioBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // navigation drawer things <start>
 
         val toolbar: Toolbar = findViewById(R.id.createjio_toolbar)
         setSupportActionBar(toolbar)
@@ -79,8 +79,11 @@ class CreateJio : AppCompatActivity() {
             true
         }
 
-        //create jio things
+        // navigation drawer things <end>
 
+        // CreateJio things <start>
+
+        // autocomplete for location and restaurant AutoCompleteTextView
         val autoTextViewLocation = findViewById<AutoCompleteTextView>(R.id.locationAutocomplete)
         val locations = resources.getStringArray(R.array.residences_array)
         val adapter1 = ArrayAdapter(
@@ -88,39 +91,36 @@ class CreateJio : AppCompatActivity() {
             android.R.layout.simple_list_item_1, locations
         )
         autoTextViewLocation.setAdapter(adapter1)
-
         val autoTextViewRestaurant = findViewById<AutoCompleteTextView>(R.id.restaurantAutocomplete)
         val restaurants = resources.getStringArray(R.array.restaurants_array)
         val adapter2 = ArrayAdapter(this, android.R.layout.simple_list_item_1, restaurants)
         autoTextViewRestaurant.setAdapter(adapter2)
 
-        // handle signed in user information
-        // not rlly working tho
+        // get signed in user as a User object
         firebaseDb = FirebaseFirestore.getInstance()
-        var jiosReference = firebaseDb.collection("JIOS").limit(20)
-        val username = intent.getStringExtra(EXTRA_USERNAME)
-        if (username != null) {
-            jiosReference = jiosReference.whereEqualTo("USERS.username", username)
+        firebaseAuth = FirebaseAuth.getInstance()
+        firebaseAuth.currentUser?.email?.let {
+            firebaseDb.collection("USERS")
+                .document(it)
+                .get()
+                .addOnSuccessListener { userSnapshot ->
+                    signedInUser = userSnapshot.toObject(User::class.java)
+                }
         }
 
-        firebaseDb.collection("USERS")
-            .document(FirebaseAuth.getInstance().currentUser?.uid as String)
-            .get()
-            .addOnSuccessListener { userSnapshot ->
-                signedInUser = userSnapshot.toObject(User::class.java)
-                Log.i(TAG, "signed in user: $signedInUser")
-            }
-            .addOnFailureListener { exception ->
-                Log.i(TAG, "failure fetching signed in user", exception)
-            }
-
-        // create jio button
+        // create jio button; clicking it creates a Jio object
         binding.createJioButton.setOnClickListener {
             handleCreateJioButtonClick()
         }
+
+        // CreateJio things <end>
     }
 
+    // handles create jio button; returns a Jio object
+    @RequiresApi(Build.VERSION_CODES.O) // for timePicker to work without errors
     private fun handleCreateJioButtonClick() {
+
+        // checks
         if (binding.locationAutocomplete.text.isBlank()) {
             Toast.makeText(this, "enter delivery location", Toast.LENGTH_SHORT).show()
             return
@@ -129,40 +129,37 @@ class CreateJio : AppCompatActivity() {
             Toast.makeText(this, "enter restaurant", Toast.LENGTH_SHORT).show()
             return
         }
-//        if (signedInUser == null) {
-//            Toast.makeText(this, "please sign in first", Toast.LENGTH_SHORT).show()
-//            return
-//        }
+        if (signedInUser == null) {
+            Toast.makeText(this, "please sign in first", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-        // !PROBLEM : the app cant detect that user has signed in..................
+        binding.createJioButton.isEnabled = false // to make asynchronous calls & enable it later
 
-        binding.createJioButton.isEnabled = false //to make asynchronous calls & enable it later
-
-        //datePicker for when Jio object is fixed
-        //can add timepicker as well
+        // to get closeDate from spinner
         val datePicker = findViewById<DatePicker>(R.id.datePicker)
         val dateString = datePicker.dayOfMonth.toString() + "." + datePicker.month.toString() +
                 "." + datePicker.year.toString()
 
-        val jio = Jio("2300", // not sure how to get user input for close time T_T
+        // to get closeTime from spinner
+        val timePicker = findViewById<TimePicker>(R.id.timePicker1)
+        val hour = timePicker.hour
+        val min = timePicker.minute
+        val timeString = LocalTime.of(hour,min).toString()
+
+        // create a Jio object
+        val jio = Jio(dateString,
+            timeString,
             signedInUser,
             binding.locationAutocomplete.text.toString(),
             true,
             binding.restaurantAutocomplete.text.toString())
 
+        // add the Jio object into firebase database
         firebaseDb.collection("JIOS").add(jio).addOnCompleteListener { creation ->
             binding.createJioButton.isEnabled = true //enable button
             if (!creation.isSuccessful) {
-                Log.e(TAG, "exception during firebase operations", creation.exception)
                 Toast.makeText(this, "failed to create Jio", Toast.LENGTH_SHORT).show()
-            } else {
-                /*
-                firebaseDb.collection("JIOS").document("uniqueuserID")
-                    .get().addOnSuccessListener { document ->
-                        val data: String = document.(field name eg restaurant etc)
-                    }
-
-                 */
             }
             binding.locationAutocomplete.text.clear()
             binding.restaurantAutocomplete.text.clear()
@@ -170,25 +167,17 @@ class CreateJio : AppCompatActivity() {
 
             // val intent = Intent(this, NEXT_PAGE::class.java)
             // startActivity(intent)
-
-
         }
     }
 
-    //appbar - toolbar button click
+    // appbar - toolbar button click
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        if (item.itemId == R.id.createJioButton) {
-//            val intent = Intent(this, FindJio::class.java)
-//            intent.putExtra(EXTRA_USERNAME, signedInUser?.username)
-//        }
         return when (item.itemId) {
             android.R.id.home -> {
                 mDrawerLayout.openDrawer(GravityCompat.START)
                 true
             }
-
             else -> super.onOptionsItemSelected(item)
         }
     }
-
 }

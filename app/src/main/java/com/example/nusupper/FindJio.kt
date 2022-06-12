@@ -3,7 +3,6 @@ package com.example.nusupper
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -12,16 +11,12 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SnapHelper
 import com.example.nusupper.databinding.ActivityFindJioBinding
 import com.example.nusupper.models.Jio
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_find_jio.*
-
-private const val TAG = "FindJioActivity"
 
 class FindJio : AppCompatActivity() {
 
@@ -32,9 +27,12 @@ class FindJio : AppCompatActivity() {
     private lateinit var adapter: JiosAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityFindJioBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // navigation drawer things <start>
 
         val toolbar: Toolbar = findViewById(R.id.findjio_toolbar)
         setSupportActionBar(toolbar)
@@ -77,16 +75,17 @@ class FindJio : AppCompatActivity() {
             true
         }
 
-        // clicking on individual jio buttons
+        // navigation drawer things <end>
 
+        // FindJio things start <start>
+
+        // clicking on individual jio buttons
         binding.communityJio1.setOnClickListener {
             Toast.makeText(this, "community jio 1", Toast.LENGTH_SHORT).show()
         }
-
         binding.communityJio2.setOnClickListener {
             Toast.makeText(this, "community jio 2", Toast.LENGTH_SHORT).show()
         }
-
         binding.communityJio3.setOnClickListener {
             Toast.makeText(this, "community jio 3", Toast.LENGTH_SHORT).show()
         }
@@ -111,39 +110,35 @@ class FindJio : AppCompatActivity() {
         // bind the adapter and layout manager to the recyclerView
         findJiorecyclerviewJios.adapter = adapter
 
-        //onclick stuff
-        adapter.setItemClickListener(object: JiosAdapter.onItemClickListener{
+        // onclick stuff
+        adapter.setItemClickListener(object: JiosAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
                 Toast.makeText(this@FindJio,"you clicked on item $position",Toast.LENGTH_SHORT).show()
             }
-
         })
 
-        //bind adapter
+        // bind adapter
         findJiorecyclerviewJios.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        val snapHelper : SnapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(findJiorecyclerviewJios)
 
         // get jio information from firebase
         firebaseDb = FirebaseFirestore.getInstance()
         val jiosReference = firebaseDb.collection("JIOS").limit(20)
-
         jiosReference.addSnapshotListener { snapshot, exception ->
             if (exception != null || snapshot == null) {
-                Log.e(TAG, "exception when querying posts", exception)
-                return@addSnapshotListener
+                Toast.makeText(this, "no current jios", Toast.LENGTH_SHORT).show()
             }
-            val jioList = snapshot.toObjects(Jio::class.java)
+            val jioList = snapshot?.toObjects(Jio::class.java)
             jios.clear()
-            jios.addAll(jioList)
-            adapter.notifyDataSetChanged()
-            for (jio in jioList) {
-                Log.i(TAG, "Jio $jio")
+            if (jioList != null) {
+                jios.addAll(jioList)
             }
+            adapter.notifyDataSetChanged()
         }
+
+        // FindJio things <end>
     }
 
-    //appbar - toolbar button click
+    // appbar - toolbar button click
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
