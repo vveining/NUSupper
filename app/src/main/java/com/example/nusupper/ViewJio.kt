@@ -8,30 +8,31 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.example.nusupper.databinding.ActivityTemplateBinding
+import com.example.nusupper.databinding.ActivityViewJioBinding
 import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.activity_view_jio.*
 
 class ViewJio : AppCompatActivity() {
 
     private lateinit var mDrawerLayout: DrawerLayout
-    private lateinit var binding: ActivityTemplateBinding
+    private lateinit var binding: ActivityViewJioBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_template)
-        binding = ActivityTemplateBinding.inflate(layoutInflater)
+        binding = ActivityViewJioBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val toolbar: Toolbar = findViewById(R.id.template_toolbar)
+        val toolbar: Toolbar = findViewById(R.id.viewjio_toolbar)
         setSupportActionBar(toolbar)
         val actionbar: ActionBar? = supportActionBar
         actionbar?.apply {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        mDrawerLayout = findViewById(R.id.template_drawer_layout)
+        mDrawerLayout = findViewById(R.id.viewjio_drawer_layout)
 
-        val navigationView: NavigationView = findViewById(R.id.template_nav_view)
+        val navigationView: NavigationView = findViewById(R.id.viewjio_nav_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             // set item as selected to persist highlight
             menuItem.isChecked = true
