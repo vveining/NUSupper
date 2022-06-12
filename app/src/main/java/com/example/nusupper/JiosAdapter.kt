@@ -41,7 +41,7 @@ class JiosAdapter (val context: Context, var jios: List<Jio>) :
             itemView.textView_closeTime.text = "closes " + jio.closeTime
             itemView.textView_creator.text = jio.creator?.username
             itemView.textView_closeDate.text = jio.closeDate
-            itemView.restaurant_logo_stub.setImageResource(getLogo(jio.restaurant))
+            itemView.restaurant_logo_stub.setImageResource(Jio.getLogo(jio.restaurant))
         }
 
         //onclick listener for recycler view
@@ -50,16 +50,5 @@ class JiosAdapter (val context: Context, var jios: List<Jio>) :
                 listener.onItemClick(adapterPosition)
             }
         }
-    }
-
-    fun getLogo(name: String) : Int {
-        when (name) {
-            "Super Snacks" -> return R.drawable.supersnacks
-            "Starbucks" -> return R.drawable.starbucks
-            "Fong Seng" -> return R.drawable.fongseng
-            "McDonalds" -> return R.drawable.macs
-            "Al-Amaan" -> return R.drawable.al_amaan
-        }
-        return R.drawable.food_icon
     }
 }
