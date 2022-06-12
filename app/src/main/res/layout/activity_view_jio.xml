@@ -3,7 +3,7 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/findjio_drawer_layout"
+    android:id="@+id/viewjio_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -20,7 +20,7 @@
             android:layout_height="match_parent">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/findjio_toolbar"
+                android:id="@+id/viewjio_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/yellow"
@@ -32,7 +32,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/findJioTitle"
+                android:id="@+id/jioOwnerStub"
                 style="@style/heading2_text"
                 android:layout_width="290dp"
                 android:layout_height="56dp"
@@ -41,46 +41,67 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/findjio_toolbar" />
+                app:layout_constraintTop_toBottomOf="@+id/viewjio_toolbar" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout4"
-                android:layout_width="362dp"
-                android:layout_height="105dp"
+                android:layout_width="358dp"
+                android:layout_height="127dp"
                 android:layout_marginTop="19dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/findJioTitle">
+                app:layout_constraintTop_toBottomOf="@+id/jioOwnerStub">
 
                 <ImageButton
                     android:id="@+id/imageButton2"
-                    android:layout_width="131dp"
-                    android:layout_height="85dp"
+                    android:layout_width="119dp"
+                    android:layout_height="90dp"
                     android:background="@drawable/al_amaan"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/viewJioDetails"
+                    app:layout_constraintEnd_toStartOf="@+id/viewJioDetailsStub"
+                    app:layout_constraintHorizontal_bias="0.151"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.512"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
-                    android:id="@+id/viewJioDetails"
+                    android:id="@+id/viewJioDetailsStub"
                     style="@style/heading3_text"
-                    android:layout_width="215dp"
-                    android:layout_height="88dp"
-                    android:layout_padding="20dp"
-                    android:background="@drawable/grey_rectangle_750_300"
+                    android:layout_width="232dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/dark_grey_rectangle_small"
+                    android:padding="10dp"
                     android:text="@string/jio_close_stub"
                     android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    style="@style/view_jio_subtitle2"
+                    android:layout_width="199dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/view_jio_closes"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/imageButton2"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/locationConst"
                 android:layout_width="353dp"
                 android:layout_height="43dp"
+                android:layout_marginTop="40dp"
                 android:background="@drawable/dark_grey_rectangle_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +131,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="353dp"
                 android:layout_height="43dp"
@@ -121,20 +141,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/locationConst">
 
                 <TextView
-                    android:id="@+id/viewJioRestaurantTitle"
+                    android:id="@+id/viewJioRestaurant"
                     style="@style/view_jio_subtitle"
                     android:layout_width="111dp"
                     android:layout_height="28dp"
                     android:text="@string/restaurant"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/viewJioRestaurant"
+                    app:layout_constraintEnd_toStartOf="@+id/viewJioRestaurantStub"
                     app:layout_constraintHorizontal_bias="0.727"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.4" />
 
                 <TextView
-                    android:id="@+id/viewJioRestaurant"
+                    android:id="@+id/viewJioRestaurantStub"
                     style="@style/view_jio_subtitle2"
                     android:layout_width="204dp"
                     android:layout_height="30dp"
@@ -166,7 +186,7 @@
 
     <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/findjio_nav_view"
+        android:id="@+id/viewjio_nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

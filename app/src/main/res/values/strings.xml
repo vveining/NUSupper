@@ -1,4 +1,5 @@
 <resources>
+    <string name="view_jio_closes">closes at:</string>
     <string name="location_view_jio">location:</string>
     <string name="restaurant_stub">restaurant stub</string>
     <string name="view_jio_title">(name)\'s jio</string>

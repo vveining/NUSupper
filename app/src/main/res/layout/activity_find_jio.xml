@@ -31,7 +31,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/findJioTitle"
+                android:id="@+id/jioOwnerStub"
                 style="@style/heading2_text"
                 android:layout_width="290dp"
                 android:layout_height="56dp"
@@ -53,7 +53,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/findJioTitle"/>
+                app:layout_constraintTop_toBottomOf="@id/jioOwnerStub"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint1"
@@ -229,7 +229,7 @@
 
     <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/findjio_nav_view"
+        android:id="@+id/viewjio_nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
