@@ -34,6 +34,7 @@
     <string name="time">time</string>
     <string name="lesjio">let\'s jio!</string>
     <string name="large_text">stub</string>
+    <string name="edit">edit</string>
 
     <string-array name="residences_array">
         <item>CAPT</item>

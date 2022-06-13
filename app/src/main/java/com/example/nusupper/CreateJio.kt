@@ -1,12 +1,10 @@
 package com.example.nusupper
 
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.*
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -19,8 +17,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.time.LocalTime
 import java.util.*
-
-private const val EXTRA_USERNAME = "extra_username"
 
 class CreateJio : AppCompatActivity() {
 

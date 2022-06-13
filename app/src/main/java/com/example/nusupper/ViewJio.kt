@@ -81,6 +81,15 @@ class ViewJio : AppCompatActivity() {
 
         setViewJio(jioID)
 
+        // edit jio
+        binding.editjioButton.setOnClickListener {
+            Intent(this,EditJio::class.java).also {
+                //send JIO ID info to viewJio activity to source for data
+                it.putExtra("EXTRA_JIOID",jioID)
+                startActivity(it)
+            }
+        }
+
         // [END ViewJio things]
     }
 
