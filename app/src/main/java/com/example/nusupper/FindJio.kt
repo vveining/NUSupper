@@ -121,7 +121,7 @@ class FindJio : AppCompatActivity() {
         adapter.setItemClickListener(object: JiosAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
                 val jioID = jios[position].jioID
-                val creatorName = jios[position].creatorName
+                val creatorName = getCreatorUsername(jioID)
                 Toast.makeText(this@FindJio,"you clicked on item $jioID",Toast.LENGTH_SHORT).show()
                 if (signedInUser?.name == creatorName) { // if user clicks on his own Jio
                     Intent(this@FindJio, ViewJio::class.java).also {
@@ -172,5 +172,18 @@ class FindJio : AppCompatActivity() {
 
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun getCreatorUsername(jioID: String?): String {
+        val firebaseDb = FirebaseFirestore.getInstance()
+        var username = ""
+        if (jioID != null) {
+            firebaseDb.collection("JIOS").document(jioID).get()
+                .addOnSuccessListener {
+                    val userData = it.get("creator") as Map<*, *>
+                    username = userData["username"].toString()
+                }
+        }
+        return username
     }
 }

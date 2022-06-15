@@ -106,7 +106,8 @@ class ViewFriendsJio : AppCompatActivity() {
                     val closeDate = it.get("close date").toString()
                     binding.viewJioDetailsStub.text = "$closeTime, $closeDate"
                     binding.restaurantImage.setImageResource(Jio.getLogo(restaurant))
-                    binding.jioOwnerStub.text = it.get("creatorName").toString()
+                    val userData = it.get("creator") as Map<*, *>
+                    binding.jioOwnerStub.text = userData["username"].toString()
                 }
         }
     }
