@@ -149,7 +149,7 @@ class CreateJio : AppCompatActivity() {
         val jio = Jio(dateString,
             timeString,
             signedInUser,
-            signedInUser!!.username,
+            signedInUser!!.email,
             binding.locationAutocomplete.text.toString(),
             true,
             binding.restaurantAutocomplete.text.toString(),
