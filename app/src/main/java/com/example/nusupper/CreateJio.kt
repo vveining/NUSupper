@@ -1,12 +1,10 @@
 package com.example.nusupper
 
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.*
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -20,8 +18,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.time.LocalTime
 import java.util.*
 
-private const val EXTRA_USERNAME = "extra_username"
-
 class CreateJio : AppCompatActivity() {
 
     private lateinit var mDrawerLayout: DrawerLayout
@@ -30,14 +26,13 @@ class CreateJio : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private var signedInUser: User? = null
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         binding = ActivityCreateJioBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // navigation drawer things <start>
+        // [START navigation drawer things]
 
         val toolbar: Toolbar = findViewById(R.id.createjio_toolbar)
         setSupportActionBar(toolbar)
@@ -80,9 +75,9 @@ class CreateJio : AppCompatActivity() {
             true
         }
 
-        // navigation drawer things <end>
+        // [END navigation drawer things]
 
-        // CreateJio things <start>
+        // [START CreateJio things]
 
         // autocomplete for location and restaurant AutoCompleteTextView
         val autoTextViewLocation = findViewById<AutoCompleteTextView>(R.id.locationAutocomplete)
@@ -114,7 +109,7 @@ class CreateJio : AppCompatActivity() {
             handleCreateJioButtonClick()
         }
 
-        // CreateJio things <end>
+        // [END CreateJio things]
     }
 
     // handles create jio button; returns a Jio object
@@ -154,6 +149,7 @@ class CreateJio : AppCompatActivity() {
         val jio = Jio(dateString,
             timeString,
             signedInUser,
+            signedInUser!!.username,
             binding.locationAutocomplete.text.toString(),
             true,
             binding.restaurantAutocomplete.text.toString(),

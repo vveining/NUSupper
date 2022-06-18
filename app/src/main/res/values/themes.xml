@@ -64,5 +64,12 @@
         <item name="android:textColor">@color/brown</item>
     </style>
 
+    <style name="jio_link_subtitle">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+
 
 </resources>
