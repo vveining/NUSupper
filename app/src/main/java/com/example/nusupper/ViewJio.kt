@@ -1,7 +1,9 @@
 package com.example.nusupper
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -13,13 +15,21 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.nusupper.databinding.ActivityViewJioBinding
 import com.example.nusupper.models.Jio
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+
 
 class ViewJio : AppCompatActivity() {
 
     private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var binding: ActivityViewJioBinding
     private lateinit var jioID: String
+    private var firebaseInst = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +37,10 @@ class ViewJio : AppCompatActivity() {
         binding = ActivityViewJioBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // [START navigation drawer things]
-
+        //INTENT
         jioID = intent.getStringExtra("EXTRA_JIOID").toString()
 
+        // [START navigation drawer things]
         val toolbar: Toolbar = findViewById(R.id.viewjio_toolbar)
         setSupportActionBar(toolbar)
         val actionbar: ActionBar? = supportActionBar
@@ -70,7 +80,6 @@ class ViewJio : AppCompatActivity() {
             }
             true
         }
-
         // [END navigation drawer things]
 
         // [START ViewJio things]
@@ -80,6 +89,16 @@ class ViewJio : AppCompatActivity() {
         TooltipCompat.setTooltipText(binding.copyjiolinkButton, "copy link")
 
         setViewJio(jioID)
+
+        // onclick for view current orders
+        binding.viewcurrentordersButton.setOnClickListener {
+            Intent(this,JioOrders::class.java).also {
+                //send JIO ID info to viewJio activity to source for data
+                it.putExtra("EXTRA_JIOID",jioID)
+                startActivity(it)
+            }
+        }
+
 
         // edit jio
         binding.editjioButton.setOnClickListener {
@@ -106,9 +125,8 @@ class ViewJio : AppCompatActivity() {
     }
 
     private fun setViewJio(jioID: String?) {
-        val firebaseDb = FirebaseFirestore.getInstance()
         if (jioID != null) {
-            firebaseDb.collection("JIOS").document(jioID).get()
+            firebaseInst.collection("JIOS").document(jioID).get()
                 .addOnSuccessListener {
                     binding.viewJioDelStub.text = it.get("location").toString()
                     val restaurant: String = it.get("restaurant").toString()

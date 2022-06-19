@@ -1,7 +1,9 @@
 package com.example.nusupper
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -12,14 +14,24 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.nusupper.databinding.ActivityViewFriendsJioBinding
 import com.example.nusupper.models.Jio
+import com.example.nusupper.models.User
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
 
 class ViewFriendsJio : AppCompatActivity() {
 
     private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var binding: ActivityViewFriendsJioBinding
     private lateinit var jioID: String
+    private var mobileNum = "0"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,9 +89,37 @@ class ViewFriendsJio : AppCompatActivity() {
         // button tooltips
         TooltipCompat.setTooltipText(binding.copyjiolinkButton, "copy link")
 
-        setViewJio(jioID)
+        // onclick for view current orders
+        binding.viewcurrentordersButton.setOnClickListener {
+            Intent(this,JioOrders::class.java).also {
+                //send JIO ID info to viewJio activity to source for data
+                it.putExtra("EXTRA_JIOID",jioID)
+                startActivity(it)
+            }
+        }
+
 
         // [END ViewJio things]
+
+        //DB TEST START ---------------------------------------------------
+            //example of how to get nested values (Jio --> creator --> mobile number)
+        val db = FirebaseFirestore.getInstance()
+        db.collection("JIOS").document(jioID).get()
+            .addOnSuccessListener {
+                val getJio = it.toObject<Jio>()       //convert jio to object
+                if (getJio != null) {                // once done, treat jio object normally, use kotlin functions
+                    Toast.makeText(this@ViewFriendsJio, "ran", Toast.LENGTH_SHORT).show()
+                    mobileNum = getJio.creator?.mobileNumber.toString()
+                    Toast.makeText(this,mobileNum,Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        Toast.makeText(this,mobileNum,Toast.LENGTH_SHORT).show()
+
+        //DB TEST END ------------------------------------
+
+
+
     }
 
     //appbar - toolbar button click
@@ -111,4 +151,6 @@ class ViewFriendsJio : AppCompatActivity() {
                 }
         }
     }
+
+
 }
