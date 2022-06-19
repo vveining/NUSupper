@@ -12,46 +12,45 @@ import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.example.nusupper.databinding.ActivityViewFriendsJioBinding
+import com.example.nusupper.databinding.ActivityJioOrdersBinding
 import com.example.nusupper.models.Jio
-import com.example.nusupper.models.User
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
-class ViewFriendsJio : AppCompatActivity() {
+
+class JioOrders : AppCompatActivity() {
 
     private lateinit var mDrawerLayout: DrawerLayout
-    private lateinit var binding: ActivityViewFriendsJioBinding
+    private lateinit var binding: ActivityJioOrdersBinding
     private lateinit var jioID: String
-    private var mobileNum = "0"
+    private var firebaseInst = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityViewFriendsJioBinding.inflate(layoutInflater)
+        //setContentView(R.layout.activity_template)
+        binding = ActivityJioOrdersBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // [START navigation drawer things]
-
         jioID = intent.getStringExtra("EXTRA_JIOID").toString()
+        // [START navigation drawer things]
+        Toast.makeText(this,jioID,Toast.LENGTH_SHORT)
 
-        val toolbar: Toolbar = findViewById(R.id.viewfriendsjio_toolbar)
+        val toolbar: Toolbar = findViewById(R.id.jioorders_toolbar)
         setSupportActionBar(toolbar)
         val actionbar: ActionBar? = supportActionBar
         actionbar?.apply {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        mDrawerLayout = findViewById(R.id.viewfriendsjio_drawer_layout)
+        mDrawerLayout = findViewById(R.id.jioorders_drawer_layout)
 
-        val navigationView: NavigationView = findViewById(R.id.viewfriendsjio_nav_view)
+        val navigationView: NavigationView = findViewById(R.id.jioorders_nav_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             // set item as selected to persist highlight
             menuItem.isChecked = true
@@ -81,45 +80,12 @@ class ViewFriendsJio : AppCompatActivity() {
             }
             true
         }
-
         // [END navigation drawer things]
 
-        // [START ViewJio things]
-
-        // button tooltips
-        TooltipCompat.setTooltipText(binding.copyjiolinkButton, "copy link")
-
-        // onclick for view current orders
-        binding.viewcurrentordersButton.setOnClickListener {
-            Intent(this,JioOrders::class.java).also {
-                //send JIO ID info to viewJio activity to source for data
-                it.putExtra("EXTRA_JIOID",jioID)
-                startActivity(it)
-            }
-        }
+        // [START JioOrders things]
 
 
-        // [END ViewJio things]
-
-        //DB TEST START ---------------------------------------------------
-            //example of how to get nested values (Jio --> creator --> mobile number)
-        val db = FirebaseFirestore.getInstance()
-        db.collection("JIOS").document(jioID).get()
-            .addOnSuccessListener {
-                val getJio = it.toObject<Jio>()       //convert jio to object
-                if (getJio != null) {                // once done, treat jio object normally, use kotlin functions
-                    Toast.makeText(this@ViewFriendsJio, "ran", Toast.LENGTH_SHORT).show()
-                    mobileNum = getJio.creator?.mobileNumber.toString()
-                    Toast.makeText(this,mobileNum,Toast.LENGTH_SHORT).show()
-                }
-            }
-
-        Toast.makeText(this,mobileNum,Toast.LENGTH_SHORT).show()
-
-        //DB TEST END ------------------------------------
-
-
-
+        // [END JioOrders things]
     }
 
     //appbar - toolbar button click
@@ -133,24 +99,5 @@ class ViewFriendsJio : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-    private fun setViewJio(jioID: String?) {
-        val firebaseDb = FirebaseFirestore.getInstance()
-        if (jioID != null) {
-            firebaseDb.collection("JIOS").document(jioID).get()
-                .addOnSuccessListener {
-                    binding.viewJioDelStub.text = it.get("location").toString()
-                    val restaurant: String = it.get("restaurant").toString()
-                    binding.viewJioRestaurantStub.text = restaurant
-                    val closeTime = it.get("close time").toString()
-                    val closeDate = it.get("close date").toString()
-                    binding.viewJioDetailsStub.text = "$closeTime, $closeDate"
-                    binding.restaurantImage.setImageResource(Jio.getLogo(restaurant))
-                    val userData = it.get("creator") as Map<*, *>
-                    binding.jioOwnerStub.text = userData["username"].toString()
-                }
-        }
-    }
-
 
 }

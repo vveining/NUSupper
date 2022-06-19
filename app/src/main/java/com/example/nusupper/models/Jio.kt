@@ -11,7 +11,8 @@ data class Jio(
     var location: String = "",
     var open: Boolean = true,
     var restaurant: String = "",
-    var jioID: String = "") {
+    var jioID: String = "",
+    var foodArr: MutableList<Food> = mutableListOf()) {
 
     companion object {
         fun getLogo(name: String): Int {
@@ -25,5 +26,28 @@ data class Jio(
             return R.drawable.food_icon
         }
     }
+
+    fun addFood(food: Food): Jio { //add new food item
+        var newArr = foodArr
+        newArr.add(food)
+        return Jio(this.closeDate, this.closeTime, this.creator,
+            this.creatorEmail,this.location,this.open,this.restaurant,
+            this.jioID, newArr)
+    }
+
+    fun removeFood(idx: Int): Jio { //remove food item by index, can utilise for recycler view
+        var newArr = foodArr
+        newArr.removeAt(idx)
+        return Jio(this.closeDate, this.closeTime, this.creator,
+            this.creatorEmail,this.location,this.open,this.restaurant,
+            this.jioID, newArr)
+    }
+
+    fun getFood(idx: Int): Food { // used to get the food object so that food obj can be modified
+        return foodArr.get(idx)
+    }
+
+    //other functions to make
+    // - counts total to be paid per person?
 
 }

@@ -97,7 +97,7 @@
                     android:layout_marginTop="24dp"
                     android:text="@string/view_jio_closes"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHorizontal_bias="0.448"
                     app:layout_constraintStart_toEndOf="@+id/restaurant_image"
                     app:layout_constraintTop_toTopOf="parent" />
 
