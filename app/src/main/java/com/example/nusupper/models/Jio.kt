@@ -28,7 +28,7 @@ data class Jio(
     }
 
     fun addFood(food: Food): Jio { //add new food item
-        var newArr = foodArr
+        val newArr = foodArr
         newArr.add(food)
         return Jio(this.closeDate, this.closeTime, this.creator,
             this.creatorEmail,this.location,this.open,this.restaurant,
@@ -36,7 +36,7 @@ data class Jio(
     }
 
     fun removeFood(idx: Int): Jio { //remove food item by index, can utilise for recycler view
-        var newArr = foodArr
+        val newArr = foodArr
         newArr.removeAt(idx)
         return Jio(this.closeDate, this.closeTime, this.creator,
             this.creatorEmail,this.location,this.open,this.restaurant,

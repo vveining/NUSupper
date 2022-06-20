@@ -9,6 +9,10 @@ data class Food(
     var remarks: String = "",
     var username: String = "") {
 
+    companion object Factory {
+        fun createList(): Food = Food()
+    }
+
     // !!!!!!!! NOTE: i made methods to change all attributes except the name of the person who created it
 
     fun chgName(newName: String): Food {

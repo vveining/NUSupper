@@ -1,4 +1,4 @@
-package com.example.nusupper
+package com.example.nusupper.authentication
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

@@ -11,6 +11,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nusupper.authentication.Profile
 import com.example.nusupper.databinding.ActivityFindJioBinding
 import com.example.nusupper.models.Jio
 import com.example.nusupper.models.User
@@ -122,7 +123,6 @@ class FindJio : AppCompatActivity() {
             override fun onItemClick(position: Int) {
                 val jioID = jios[position].jioID
                 val creatorEmail = jios[position].creatorEmail
-                Toast.makeText(this@FindJio,"you clicked on item $creatorEmail",Toast.LENGTH_SHORT).show()
                 if (signedInUser?.email == creatorEmail) { // if user clicks on his own Jio
                     Intent(this@FindJio, ViewJio::class.java).also {
                         //send JIO ID info to viewJio activity to source for data

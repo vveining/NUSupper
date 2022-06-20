@@ -9,7 +9,7 @@
     android:foregroundTintMode="screen"
     android:scrollbarAlwaysDrawHorizontalTrack="false"
     android:scrollbarAlwaysDrawVerticalTrack="true"
-    tools:context=".Register">
+    tools:context=".authentication.Register">
 
     <!-- android studio code suggested that text blanks prompt for autofill -->
 

@@ -26,34 +26,33 @@
             android:name=".ViewJio"
             android:exported="true" />
         <activity
-            android:name=".LaunchLogo"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".authentication.LaunchLogo"
+            android:exported="true"/>
         <activity
             android:name=".FindJio"
-            android:exported="false" />
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
         <activity
             android:name=".Template"
             android:exported="false" />
         <activity
             android:name=".CreateJio"
-            android:exported="false" /> <!-- maybe change this back to false later -->
-        <activity
-            android:name=".Profile"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".authentication.Profile"
             android:exported="false" />
         <activity
-            android:name=".Register"
+            android:name=".authentication.Login"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".authentication.Register"
+            android:exported="false" />
+        <activity
+            android:name=".authentication.MainActivity"
             android:exported="false" />
 
         <meta-data
