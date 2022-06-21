@@ -9,6 +9,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.nusupper.authentication.Profile
 import com.example.nusupper.databinding.ActivityCreateJioBinding
 import com.example.nusupper.models.Food
 import com.example.nusupper.models.Jio
@@ -157,8 +158,8 @@ class CreateJio : AppCompatActivity() {
             uniqueID, mutableListOf()) //food list
 
         // for testing my jio methods -------------- food array edit logic
-        jio = jio.addFood(Food("naan",2, 2.50,"nil","test"))
-        jio = jio.addFood(Food("fries",8,1.20,"yum","test"))
+        jio = jio.addFood(Food("naan",2, 2.50,5.0,"nil","test"))
+        jio = jio.addFood(Food("fries",8,1.20,9.6,"yum","test"))
         // jio = jio.removeFood(0)
 
         // add the Jio object into firebase database

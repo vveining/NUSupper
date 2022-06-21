@@ -1,9 +1,7 @@
 package com.example.nusupper
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -12,19 +10,12 @@ import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.nusupper.authentication.Profile
 import com.example.nusupper.databinding.ActivityViewFriendsJioBinding
 import com.example.nusupper.models.Jio
-import com.example.nusupper.models.User
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.ktx.Firebase
 
 class ViewFriendsJio : AppCompatActivity() {
 
@@ -86,6 +77,8 @@ class ViewFriendsJio : AppCompatActivity() {
 
         // [START ViewJio things]
 
+        setViewJio(jioID)
+
         // button tooltips
         TooltipCompat.setTooltipText(binding.copyjiolinkButton, "copy link")
 
@@ -108,13 +101,11 @@ class ViewFriendsJio : AppCompatActivity() {
             .addOnSuccessListener {
                 val getJio = it.toObject<Jio>()       //convert jio to object
                 if (getJio != null) {                // once done, treat jio object normally, use kotlin functions
-                    Toast.makeText(this@ViewFriendsJio, "ran", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this@ViewFriendsJio, "ran", Toast.LENGTH_SHORT).show()
                     mobileNum = getJio.creator?.mobileNumber.toString()
-                    Toast.makeText(this,mobileNum,Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this,mobileNum,Toast.LENGTH_SHORT).show()
                 }
             }
-
-        Toast.makeText(this,mobileNum,Toast.LENGTH_SHORT).show()
 
         //DB TEST END ------------------------------------
 

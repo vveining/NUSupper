@@ -2,6 +2,7 @@ package com.example.nusupper
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -11,6 +12,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nusupper.authentication.Profile
 import com.example.nusupper.databinding.ActivityFindJioBinding
 import com.example.nusupper.models.Jio
 import com.example.nusupper.models.User
@@ -102,11 +104,11 @@ class FindJio : AppCompatActivity() {
                 .get()
                 .addOnSuccessListener { userSnapshot ->
                     signedInUser = userSnapshot.toObject(User::class.java)
+
+                    // get residence stub
+                    binding.residence.text = signedInUser?.residence.toString()
                 }
         }
-
-        // get residence stub
-        binding.residence.text = signedInUser?.residence.toString()
 
         // data source always updates
         jios = mutableListOf()
@@ -122,7 +124,6 @@ class FindJio : AppCompatActivity() {
             override fun onItemClick(position: Int) {
                 val jioID = jios[position].jioID
                 val creatorEmail = jios[position].creatorEmail
-                Toast.makeText(this@FindJio,"you clicked on item $creatorEmail",Toast.LENGTH_SHORT).show()
                 if (signedInUser?.email == creatorEmail) { // if user clicks on his own Jio
                     Intent(this@FindJio, ViewJio::class.java).also {
                         //send JIO ID info to viewJio activity to source for data

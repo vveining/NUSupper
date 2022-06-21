@@ -1,10 +1,12 @@
-package com.example.nusupper
+package com.example.nusupper.authentication
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import com.example.nusupper.FindJio
+import com.example.nusupper.R
 import com.google.firebase.auth.FirebaseAuth
 //import com.google.firebase.auth.FirebaseUser
 
@@ -26,9 +28,9 @@ class LaunchLogo : AppCompatActivity() {
         val user = null
         Toast.makeText(this,user.toString(),LENGTH_SHORT).show()
         if (user == null) {
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
         } else {
-            startActivity(Intent(this,FindJio::class.java))
+            startActivity(Intent(this, FindJio::class.java))
         }
     }
 }

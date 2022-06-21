@@ -1,4 +1,4 @@
-package com.example.nusupper
+package com.example.nusupper.authentication
 
 import android.content.Context
 import android.content.Intent
@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.nusupper.CreateJio
+import com.example.nusupper.FindJio
+import com.example.nusupper.R
 import com.example.nusupper.databinding.ActivityProfileBinding
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth

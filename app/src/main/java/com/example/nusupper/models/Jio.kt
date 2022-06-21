@@ -28,7 +28,7 @@ data class Jio(
     }
 
     fun addFood(food: Food): Jio { //add new food item
-        var newArr = foodArr
+        val newArr = foodArr
         newArr.add(food)
         return Jio(this.closeDate, this.closeTime, this.creator,
             this.creatorEmail,this.location,this.open,this.restaurant,
@@ -36,15 +36,31 @@ data class Jio(
     }
 
     fun removeFood(idx: Int): Jio { //remove food item by index, can utilise for recycler view
-        var newArr = foodArr
+        val newArr = foodArr
         newArr.removeAt(idx)
         return Jio(this.closeDate, this.closeTime, this.creator,
             this.creatorEmail,this.location,this.open,this.restaurant,
             this.jioID, newArr)
     }
 
-    fun getFood(idx: Int): Food { // used to get the food object so that food obj can be modified
-        return foodArr.get(idx)
+    fun getFood(foodName: String): Food { // used to get the food object so that food obj can be modified
+        var idx = 0
+        for (i in foodArr.indices) {
+            if (foodArr[i].foodName == foodName) {
+                idx = i
+            }
+        }
+        return foodArr[idx]
+    }
+
+    fun updateFoodArr(food: Food): MutableList<Food> {
+        for (i in foodArr.indices) {
+            if (foodArr[i].foodName == food.foodName) {
+                foodArr[i] = food
+                break
+            }
+        }
+        return foodArr
     }
 
     //other functions to make
