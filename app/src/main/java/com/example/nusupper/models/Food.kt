@@ -6,29 +6,34 @@ data class Food(
     var foodName: String = "",
     var qty: Int = 0,
     var price: Double = 0.0,
+    var totalPrice: Double = 0.0,
     var remarks: String = "",
     var username: String = "") {
-
-    companion object Factory {
-        fun createList(): Food = Food()
-    }
 
     // !!!!!!!! NOTE: i made methods to change all attributes except the name of the person who created it
 
     fun chgName(newName: String): Food {
-        return Food(newName,this.qty,this.price,this.remarks,this.username)
+        return Food(newName,this.qty,this.price,this.totalPrice,this.remarks,this.username)
     }
 
     fun chgQty(newQty: Int): Food {
-        return Food(this.foodName,newQty,this.price,this.remarks,this.username)
+        return Food(this.foodName,newQty,this.price,this.totalPrice,this.remarks,this.username)
+    }
+
+    fun addQty(): Food {
+        val updatedQty = this.qty + 1
+        val updatedTotalPrice = this.price * updatedQty
+        this.qty = updatedQty // mutable list
+        this.totalPrice = updatedTotalPrice // mutable list
+        return this
     }
 
     fun chg(newPrice: Double): Food {
-        return Food(this.foodName,this.qty,newPrice,this.remarks,this.username)
+        return Food(this.foodName,this.qty,newPrice,this.totalPrice,this.remarks,this.username)
     }
 
     fun chgRemarks(newRem: String): Food {
-        return Food(this.foodName,this.qty,this.price,newRem,this.username)
+        return Food(this.foodName,this.qty,this.price,this.totalPrice,newRem,this.username)
     }
 
     //function ideas

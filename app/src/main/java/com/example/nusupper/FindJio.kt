@@ -2,6 +2,7 @@ package com.example.nusupper
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -103,11 +104,11 @@ class FindJio : AppCompatActivity() {
                 .get()
                 .addOnSuccessListener { userSnapshot ->
                     signedInUser = userSnapshot.toObject(User::class.java)
+
+                    // get residence stub
+                    binding.residence.text = signedInUser?.residence.toString()
                 }
         }
-
-        // get residence stub
-        binding.residence.text = signedInUser?.residence.toString()
 
         // data source always updates
         jios = mutableListOf()

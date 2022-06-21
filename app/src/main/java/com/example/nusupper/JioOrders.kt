@@ -3,11 +3,11 @@ package com.example.nusupper
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nusupper.databinding.ActivityJioOrdersBinding
+import com.example.nusupper.helpers.ModifyFood
 import com.example.nusupper.models.Food
 import com.example.nusupper.models.Jio
 import com.example.nusupper.models.User
@@ -15,12 +15,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
-import kotlinx.android.synthetic.main.activity_find_jio.*
 import kotlinx.android.synthetic.main.activity_jio_orders.*
 import kotlinx.android.synthetic.main.add_order_alertdialog.*
 import kotlinx.android.synthetic.main.add_order_alertdialog.view.*
 
-class JioOrders : AppCompatActivity() {
+class JioOrders : AppCompatActivity(), ModifyFood {
 
     private lateinit var binding: ActivityJioOrdersBinding
     private lateinit var jioID: String
@@ -105,6 +104,7 @@ class JioOrders : AppCompatActivity() {
                 val newFood = Food(
                     foodName,
                     quantity,
+                    price,
                     totalPrice,
                     remarks,
                     signedInUser!!.username)
@@ -138,11 +138,26 @@ class JioOrders : AppCompatActivity() {
                 i.foodName,
                 i.qty,
                 i.price,
+                i.totalPrice,
                 i.remarks,
                 i.username
             )
             foods.add(foodData)
         }
         adapter.notifyDataSetChanged()
+    }
+
+    override fun addFoodQty(foodName: String): Food {
+        var thisFood = thisJio.getFood(foodName)
+        thisFood = thisFood.addQty()
+        updateFirebase(thisFood)
+        return thisFood
+    }
+
+    fun updateFirebase(food: Food) {
+        val updatedFoodArr = thisJio.updateFoodArr(food)
+        firebaseDb.collection("JIOS").document(jioID).update(
+            "foodArr", updatedFoodArr
+        )
     }
 }

@@ -43,8 +43,24 @@ data class Jio(
             this.jioID, newArr)
     }
 
-    fun getFood(idx: Int): Food { // used to get the food object so that food obj can be modified
-        return foodArr.get(idx)
+    fun getFood(foodName: String): Food { // used to get the food object so that food obj can be modified
+        var idx = 0
+        for (i in foodArr.indices) {
+            if (foodArr[i].foodName == foodName) {
+                idx = i
+            }
+        }
+        return foodArr[idx]
+    }
+
+    fun updateFoodArr(food: Food): MutableList<Food> {
+        for (i in foodArr.indices) {
+            if (foodArr[i].foodName == food.foodName) {
+                foodArr[i] = food
+                break
+            }
+        }
+        return foodArr
     }
 
     //other functions to make
