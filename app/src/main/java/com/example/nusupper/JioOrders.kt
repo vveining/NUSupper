@@ -75,6 +75,9 @@ class JioOrders : AppCompatActivity(), ModifyFood {
             .addOnSuccessListener {
                 thisJio = it.toObject<Jio>()!!
 
+                // display jio owner's username
+                binding.jioOwnerStub.text = thisJio.creator?.username
+
                 foods.clear()
                 addFoodToList(it)
             }
