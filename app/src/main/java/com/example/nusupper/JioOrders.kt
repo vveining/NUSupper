@@ -157,7 +157,7 @@ class JioOrders : AppCompatActivity(), ModifyFood {
         return thisFood
     }
 
-    fun updateFirebase(food: Food) {
+    private fun updateFirebase(food: Food) {
         val updatedFoodArr = thisJio.updateFoodArr(food)
         firebaseDb.collection("JIOS").document(jioID).update(
             "foodArr", updatedFoodArr

@@ -20,6 +20,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_find_jio.*
+import java.lang.reflect.Method
 
 class FindJio : AppCompatActivity() {
 
@@ -27,8 +28,12 @@ class FindJio : AppCompatActivity() {
     private lateinit var binding: ActivityFindJioBinding
     private lateinit var firebaseDb: FirebaseFirestore
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var jios: MutableList<Jio>
-    private lateinit var adapter: JiosAdapter
+    private lateinit var yourCurrentJios: MutableList<Jio>
+    private lateinit var communityJios: MutableList<Jio>
+    private lateinit var allJios: MutableList<Jio>
+    private lateinit var yourCurrentJiosAdapter: JiosAdapter
+    private lateinit var communityJiosAdapter: JiosAdapter
+    private lateinit var allJiosAdapter: JiosAdapter
     private var signedInUser: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +53,7 @@ class FindJio : AppCompatActivity() {
 
         mDrawerLayout = findViewById(R.id.findjio_drawer_layout)
 
-        val navigationView: NavigationView = findViewById(R.id.viewjio_nav_view)
+        val navigationView: NavigationView = findViewById(R.id.findjio_nav_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             // set item as selected to persist highlight
             menuItem.isChecked = true
@@ -84,17 +89,6 @@ class FindJio : AppCompatActivity() {
 
         // [START FindJio things start]
 
-        // clicking on individual jio buttons
-        binding.communityJio1.setOnClickListener {
-            Toast.makeText(this, "community jio 1", Toast.LENGTH_SHORT).show()
-        }
-        binding.communityJio2.setOnClickListener {
-            Toast.makeText(this, "community jio 2", Toast.LENGTH_SHORT).show()
-        }
-        binding.communityJio3.setOnClickListener {
-            Toast.makeText(this, "community jio 3", Toast.LENGTH_SHORT).show()
-        }
-
         // get signed in user as a User object
         firebaseDb = FirebaseFirestore.getInstance()
         firebaseAuth = FirebaseAuth.getInstance()
@@ -107,19 +101,58 @@ class FindJio : AppCompatActivity() {
 
                     // get residence stub
                     binding.residence.text = signedInUser?.residence.toString()
+
+                    // get jios information from firebase
+                    getYourCurrentJiosInformation(yourCurrentJios, yourCurrentJiosAdapter)
+                    getCommunityJiosInformation(communityJios, communityJiosAdapter)
+                    getAllJiosInformation(allJios, allJiosAdapter)
                 }
         }
 
         // data source always updates
-        jios = mutableListOf()
+        yourCurrentJios = mutableListOf()
+        communityJios = mutableListOf()
+        allJios = mutableListOf()
 
         // create adapter for jios
-        adapter = JiosAdapter(this, jios)
+        yourCurrentJiosAdapter = JiosAdapter(this, yourCurrentJios)
+        communityJiosAdapter = JiosAdapter(this, communityJios)
+        allJiosAdapter = JiosAdapter(this, allJios)
 
         // bind the adapter and layout manager to the recyclerView
-        findJiorecyclerviewJios.adapter = adapter
+        yourCurrentJios_recyclerview.adapter = yourCurrentJiosAdapter
+        communityJios_recyclerview.adapter = communityJiosAdapter
+        allJios_recyclerView.adapter = allJiosAdapter
 
         // onclick stuff
+        enableItemClickListener(yourCurrentJios, yourCurrentJiosAdapter)
+        enableItemClickListener(communityJios, communityJiosAdapter)
+        enableItemClickListener(allJios, allJiosAdapter)
+
+        // bind adapter
+        yourCurrentJios_recyclerview.layoutManager =
+            LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        communityJios_recyclerview.layoutManager =
+            LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        allJios_recyclerView.layoutManager =
+            LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+
+        // [END FindJio things]
+    }
+
+    // appbar - toolbar button click
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                mDrawerLayout.openDrawer(GravityCompat.START)
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun enableItemClickListener(jios: MutableList<Jio>, adapter: JiosAdapter) {
         adapter.setItemClickListener(object: JiosAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
                 val jioID = jios[position].jioID
@@ -141,37 +174,64 @@ class FindJio : AppCompatActivity() {
                 }
             }
         })
+    }
 
-        // bind adapter
-        findJiorecyclerviewJios.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-
-        // get jio information from firebase
+    private fun getYourCurrentJiosInformation(yourCurrentJios: MutableList<Jio>, adapter: JiosAdapter) {
         firebaseDb = FirebaseFirestore.getInstance()
         val jiosReference = firebaseDb.collection("JIOS").limit(20)
         jiosReference.addSnapshotListener { snapshot, exception ->
             if (exception != null || snapshot == null) {
                 Toast.makeText(this, "no current jios", Toast.LENGTH_SHORT).show()
             }
+
             val jioList = snapshot?.toObjects(Jio::class.java)
-            jios.clear()
+            yourCurrentJios.clear()
             if (jioList != null) {
-                jios.addAll(jioList)
+                for (i in jioList) {
+                    if (i.creatorEmail == signedInUser?.email) {
+                        yourCurrentJios.add(i)
+                    }
+                }
             }
             adapter.notifyDataSetChanged()
         }
-
-        // [END FindJio things]
     }
 
-    // appbar - toolbar button click
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                mDrawerLayout.openDrawer(GravityCompat.START)
-                true
+    private fun getCommunityJiosInformation(communityJios: MutableList<Jio>, adapter: JiosAdapter) {
+        firebaseDb = FirebaseFirestore.getInstance()
+        val jiosReference = firebaseDb.collection("JIOS").limit(20)
+        jiosReference.addSnapshotListener { snapshot, exception ->
+            if (exception != null || snapshot == null) {
+                Toast.makeText(this, "no current jios", Toast.LENGTH_SHORT).show()
             }
 
-            else -> super.onOptionsItemSelected(item)
+            val jioList = snapshot?.toObjects(Jio::class.java)
+            communityJios.clear()
+            if (jioList != null) {
+                for (i in jioList) {
+                    if (i.location == signedInUser?.residence) {
+                        communityJios.add(i)
+                    }
+                }
+            }
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun getAllJiosInformation(allJios: MutableList<Jio>, adapter: JiosAdapter) {
+        firebaseDb = FirebaseFirestore.getInstance()
+        val jiosReference = firebaseDb.collection("JIOS").limit(20)
+        jiosReference.addSnapshotListener { snapshot, exception ->
+            if (exception != null || snapshot == null) {
+                Toast.makeText(this, "no current jios", Toast.LENGTH_SHORT).show()
+            }
+
+            val jioList = snapshot?.toObjects(Jio::class.java)
+            allJios.clear()
+            if (jioList != null) {
+                allJios.addAll(jioList)
+            }
+            adapter.notifyDataSetChanged()
         }
     }
 }

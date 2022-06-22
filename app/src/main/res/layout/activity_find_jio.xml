@@ -41,142 +41,181 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/findjio_toolbar" />
 
-            <TextView
-                android:id="@+id/your_current_jios"
-                style="@style/heading3_text"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="33dp"
-                android:text="@string/your_current_jios"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/jioOwnerStub"/>
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/jioOwnerStub">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraint1"
-                android:background="@drawable/light_grey_rectangle_750_300"
-                android:layout_height="wrap_content"
-                android:layout_width="390dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/your_current_jios">
-
-                <FrameLayout
+                <ScrollView
+                    android:id="@+id/scroll_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent">
+                    android:layout_height="0dp"
+                    android:fillViewport="true"
+                    android:layout_weight="1">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/findJiorecyclerviewJios"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                        android:orientation="vertical"
+                        android:paddingBottom="160dp">
 
-                </FrameLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/community_jios"
-                style="@style/heading3_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="33dp"
-                android:text="@string/community_jios"
-                app:layout_constraintEnd_toStartOf="@id/residence"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/constraint1" />
-
-            <TextView
-                android:id="@+id/residence"
-                style="@style/heading3_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="0dp"
-                android:text="@string/residence_stub"
-                app:layout_constraintStart_toEndOf="@id/community_jios"
-                app:layout_constraintTop_toBottomOf="@id/constraint1" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraint2"
-                android:background="@drawable/light_grey_rectangle_750_300"
-                android:layout_height="wrap_content"
-                android:layout_width="390dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/community_jios">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent">
-
-                    <HorizontalScrollView
-                    android:id="@+id/horizontalScrollView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp">
-
-                        <ImageButton
-                            android:id="@+id/community_jio1"
-                            android:layout_width="140dp"
-                            android:layout_height="200dp"
+                        <TextView
+                            android:id="@+id/your_current_jios"
+                            style="@style/heading3_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="33dp"
+                            android:text="@string/your_current_jios"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/grey_rectangle_750_300" />
+                            app:layout_constraintTop_toBottomOf="@id/jioOwnerStub"/>
 
-                        <ImageButton
-                            android:id="@+id/community_jio2"
-                            android:layout_width="140dp"
-                            android:layout_height="200dp"
-                            android:layout_marginStart="20dp"
-                            app:layout_constraintStart_toEndOf="@id/community_jio1"
-                            app:layout_constraintTop_toTopOf="@id/community_jio1"
-                            app:srcCompat="@drawable/grey_rectangle_750_300" />
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/constraint1"
+                            android:background="@drawable/light_grey_rectangle_750_300"
+                            android:layout_height="wrap_content"
+                            android:layout_width="390dp"
+                            android:layout_gravity="center"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/your_current_jios">
 
-                        <ImageButton
-                            android:id="@+id/community_jio3"
-                            android:layout_width="140dp"
-                            android:layout_height="200dp"
-                            android:layout_marginStart="20dp"
-                            app:layout_constraintStart_toEndOf="@id/community_jio2"
-                            app:layout_constraintTop_toTopOf="@id/community_jio2"
-                            app:srcCompat="@drawable/grey_rectangle_750_300" />
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="15dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent">
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/yourCurrentJios_recyclerview"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-                </HorizontalScrollView>
+                            </FrameLayout>
 
-                </FrameLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
+                            <TextView
+                                android:id="@+id/community_jios"
+                                style="@style/heading3_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="32dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="33dp"
+                                android:text="community Jios:"
+                                app:layout_constraintEnd_toStartOf="@id/residence"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
+                            <TextView
+                                android:id="@+id/residence"
+                                style="@style/heading3_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:layout_marginTop="10dp"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="0dp"
+                                android:text="@string/residence_stub"
+                                app:layout_constraintStart_toEndOf="@id/community_jios"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/constraint2"
+                            android:background="@drawable/light_grey_rectangle_750_300"
+                            android:layout_height="wrap_content"
+                            android:layout_width="390dp"
+                            android:layout_gravity="center"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/community_jios">
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="15dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent">
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/communityJios_recyclerview"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+                            </FrameLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <TextView
+                            android:id="@+id/all_jios"
+                            style="@style/heading3_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="33dp"
+                            android:text="all Jios"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/constraint2"/>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/constraint3"
+                            android:background="@drawable/light_grey_rectangle_750_300"
+                            android:layout_height="wrap_content"
+                            android:layout_width="390dp"
+                            android:layout_gravity="center"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/your_current_jios">
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="15dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent">
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/allJios_recyclerView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+                            </FrameLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -184,7 +223,7 @@
 
     <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/viewjio_nav_view"
+        android:id="@+id/findjio_nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
