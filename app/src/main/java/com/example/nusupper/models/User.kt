@@ -8,4 +8,7 @@ data class User(
     var name: String = "",
     var password: String = "",
     var residence: String = "",
-    var username: String = "")
+    var username: String = "",
+    var paylah: Boolean = false,
+    var paynow: Boolean = false,
+    var grabpay: Boolean = false)

@@ -17,7 +17,7 @@
         android:id="@+id/regTitle"
         android:layout_width="340dp"
         android:layout_height="68dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="84dp"
         android:fontFamily="@font/roboto_slab"
         android:text="@string/reg_heading"
         android:textColor="@color/brown"
@@ -28,11 +28,153 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/registerWithData"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="72dp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:fontFamily="@font/roboto"
+        android:text="@string/register"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout9"
+        app:layout_constraintVertical_bias="0.077" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout9"
+        android:layout_width="208dp"
+        android:layout_height="142dp"
+        app:layout_constraintEnd_toStartOf="@+id/constraintLayout7"
+        app:layout_constraintHorizontal_bias="0.846"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout6"
+            android:layout_width="201dp"
+            android:layout_height="61dp"
+            android:layout_marginTop="4dp"
+            android:background="@android:drawable/editbox_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="145dp"
+                android:layout_height="46dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.466"
+                app:srcCompat="@drawable/paynow_logo" />
+
+            <CheckBox
+                android:id="@+id/paynowCheck"
+                android:layout_width="28dp"
+                android:layout_height="46dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageView4"
+                app:layout_constraintHorizontal_bias="0.304"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.466" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout8"
+            android:layout_width="201dp"
+            android:layout_height="61dp"
+            android:layout_marginTop="9dp"
+            android:background="@android:drawable/editbox_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.533"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
+            app:layout_constraintVertical_bias="0.0">
+
+            <CheckBox
+                android:id="@+id/grabpayCheck"
+                android:layout_width="27dp"
+                android:layout_height="48dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                app:layout_constraintHorizontal_bias="0.437"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.461" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="153dp"
+                android:layout_height="55dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/grabpay_horizontal" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout7"
+        android:layout_width="120dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="36dp"
+        android:background="@android:drawable/editbox_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <CheckBox
+            android:id="@+id/paylahCheck"
+            android:layout_width="24dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="69dp"
+            android:layout_height="69dp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/paylahCheck"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.526"
+            app:srcCompat="@drawable/paylah" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="335dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/roboto_slab"
+        android:text="@string/pref_payment"
+        android:textColor="@color/brown"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/residence_spinner" />
+
     <EditText
         android:id="@+id/registerName"
         android:layout_width="340dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
         android:autofillHints="name"
         android:background="@android:drawable/editbox_background_normal"
         android:ems="10"
@@ -49,11 +191,60 @@
         app:layout_constraintTop_toBottomOf="@+id/regTitle"
         tools:ignore="TextContrastCheck" />
 
+    <Spinner
+        android:id="@+id/residence_spinner"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:clickable="true"
+        android:entries="@array/residences_array"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerPhone" />
+
+    <EditText
+        android:id="@+id/registerPassword"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:autofillHints="password"
+        android:background="@android:drawable/editbox_background_normal"
+        android:ems="10"
+        android:hint="@string/reg_pw"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerEmail"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/registerEmail"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:autofillHints="emailAddress"
+        android:background="@android:drawable/editbox_background_normal"
+        android:ems="10"
+        android:hint="@string/reg_email"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerUsername"
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
     <EditText
         android:id="@+id/registerUsername"
         android:layout_width="340dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
         android:autofillHints="username"
         android:background="@android:drawable/editbox_background_normal"
         android:ems="10"
@@ -69,46 +260,10 @@
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/registerEmail"
-        android:layout_width="340dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="12dp"
-        android:autofillHints="emailAddress"
-        android:background="@android:drawable/editbox_background_normal"
-        android:ems="10"
-        android:hint="@string/reg_email"
-        android:inputType="textEmailAddress"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerUsername"
-        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
-
-    <EditText
-        android:id="@+id/registerPassword"
-        android:layout_width="340dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="12dp"
-        android:autofillHints="password"
-        android:background="@android:drawable/editbox_background_normal"
-        android:ems="10"
-        android:hint="@string/reg_pw"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerEmail"
-        tools:ignore="TextContrastCheck" />
-
-    <EditText
         android:id="@+id/registerPhone"
         android:layout_width="340dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
         android:autofillHints="mobile number"
         android:background="@android:drawable/editbox_background_normal"
         android:ems="10"
@@ -117,38 +272,10 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerPassword"
         tools:ignore="TextContrastCheck" />
-
-    <Spinner
-        android:id="@+id/residence_spinner"
-        android:layout_width="340dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="16dp"
-        android:clickable="true"
-        android:entries="@array/residences_array"
-        android:focusable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerPhone" />
-
-    <Button
-        android:id="@+id/registerWithData"
-        android:layout_width="340dp"
-        android:layout_height="55dp"
-        android:background="@android:drawable/editbox_background_normal"
-        android:fontFamily="@font/roboto"
-        android:text="@string/register"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/residence_spinner"
-        app:layout_constraintVertical_bias="0.033" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
