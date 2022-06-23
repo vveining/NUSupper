@@ -3,14 +3,17 @@ package com.example.nusupper.authentication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 //import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.CheckBox
 import android.widget.Spinner
 import android.widget.Toast
 import com.example.nusupper.R
 import com.example.nusupper.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_register.*
 
 class Register : AppCompatActivity() {
 
@@ -18,6 +21,10 @@ class Register : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseDb: FirebaseFirestore
+    //checkbox click listener
+    private var paylah = false
+    private var paynow = false
+    private var grabpay = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +47,18 @@ class Register : AppCompatActivity() {
             resSpinner.adapter = adapter
         }
 
+
+        //onclick listeners for payment checkbox
+        binding.paylahCheck.setOnClickListener{
+            onCheckboxClicked(it)
+        }
+        binding.grabpayCheck.setOnClickListener{
+            onCheckboxClicked(it)
+        }
+        binding.paynowCheck.setOnClickListener{
+            onCheckboxClicked(it)
+        }
+
         //firebase data binding
         binding.registerWithData.setOnClickListener {
             if (checkFields()) {
@@ -49,13 +68,19 @@ class Register : AppCompatActivity() {
                 val password = binding.registerPassword.text.toString()
                 val mobilenumber = binding.registerPhone.text.toString()
                 val residence = binding.residenceSpinner.selectedItem.toString()
+                // val paylah =
+                // val paynow =
+                // val grabpay =
                 val user = hashMapOf(
                     "name" to name,
                     "username" to username,
                     "email" to email,
                     "password" to password,
                     "mobile number" to mobilenumber,
-                    "residence" to residence
+                    "residence" to residence,
+                    "paylah" to paylah,
+                    "paynow" to paynow,
+                    "grabpay" to grabpay
                 )
 
                 //creating user with firebase & validity check of user fields
@@ -82,11 +107,34 @@ class Register : AppCompatActivity() {
         }
     }
 
+    private fun onCheckboxClicked(view: View) {
+        if (view is CheckBox) {
+            val checked: Boolean = view.isChecked
+
+            when (view.id) {
+                R.id.paylahCheck -> {
+                    if (checked) {
+                        paylah = true
+                    }
+                }
+                R.id.paynowCheck -> {
+                    if (checked) {
+                        paynow = true
+                    }
+                }
+                R.id.grabpayCheck -> {
+                    grabpay = true
+                }
+            }
+        }
+    }
+
     // helper method for text field validation
     private fun checkFields(): Boolean {
         return (binding.registerName.text.toString().trim{it<=' '}.isNotEmpty()
                 && binding.registerUsername.text.toString().trim{it<=' '}.isNotEmpty()
                 && binding.registerEmail.text.toString().trim{it<=' '}.isNotEmpty()
-                && binding.registerPassword.text.toString().trim{it<=' '}.isNotEmpty())
+                && binding.registerPassword.text.toString().trim{it<=' '}.isNotEmpty() &&
+                (paylah || paynow || grabpay))
     }
 }
