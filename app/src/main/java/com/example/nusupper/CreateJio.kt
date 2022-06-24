@@ -152,15 +152,12 @@ class CreateJio : AppCompatActivity() {
             timeString,
             signedInUser,
             signedInUser!!.email,
+            signedInUser!!.username,
             binding.locationAutocomplete.text.toString(),
             true,
             binding.restaurantAutocomplete.text.toString(),
-            uniqueID, mutableListOf()) //food list
-
-        // for testing my jio methods -------------- food array edit logic
-        jio = jio.addFood(Food("naan",2, 2.50,5.0,"nil","test"))
-        jio = jio.addFood(Food("fries",8,1.20,9.6,"yum","test"))
-        // jio = jio.removeFood(0)
+            uniqueID,
+            mutableListOf(), hashMapOf())
 
         // add the Jio object into firebase database
         firebaseDb.collection("JIOS").document(uniqueID).set(jio).addOnCompleteListener { creation ->
