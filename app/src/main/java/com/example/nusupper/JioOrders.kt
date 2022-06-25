@@ -74,6 +74,15 @@ class JioOrders : AppCompatActivity(), ModifyFood {
             startActivity(intent);
         }
 
+        // onclick for updateYourOrder button
+        binding.updateOrderButton.setOnClickListener {
+            Intent(this, ViewFriendsJio::class.java).also {
+                // send JIO ID info to viewJio activity to source for data
+                it.putExtra("EXTRA_JIOID", jioID)
+                startActivity(it)
+            }
+        }
+
         // get signed in user as a User object
         firebaseDb = FirebaseFirestore.getInstance()
         firebaseAuth = FirebaseAuth.getInstance()
@@ -163,7 +172,7 @@ class JioOrders : AppCompatActivity(), ModifyFood {
             alertDialog.show()
         }
 
-        // [START expandableListView listeners]
+/*      // [START expandableListView listeners]
 
         everyonesOrders_expandablelistview!!.setOnGroupExpandListener { groupPosition ->
             Toast.makeText(this, (usernameList as ArrayList<String>)[groupPosition] + " list expanded", Toast.LENGTH_SHORT).show()
@@ -183,7 +192,7 @@ class JioOrders : AppCompatActivity(), ModifyFood {
             false
         }
 
-        // [END expandableListView listeners]
+        // [END expandableListView listeners]*/
 
         // [END JioOrders things]
     }
@@ -225,14 +234,6 @@ class JioOrders : AppCompatActivity(), ModifyFood {
         ordersAdapter.notifyDataSetChanged()
     }
 
-    override fun addFoodQty(foodName: String): Food {
-        var thisFood = thisJio.getFood(foodName)
-        thisFood = thisFood.addQty()
-        updateFirebase(thisFood)
-
-        return thisFood
-    }
-
     override fun addFoodQtyToMap(foodName: String): Food? {
         var thisFood = thisJio.getFoodFromMap(foodName, signedInUser!!.username)
         var foodFromFoodArr = thisJio.getFood(foodName)
@@ -254,6 +255,36 @@ class JioOrders : AppCompatActivity(), ModifyFood {
         return thisFood
     }
 
+    override fun removeFoodQtyToMap(foodName: String): Food? {
+        var thisFood = thisJio.getFoodFromMap(foodName, signedInUser!!.username)
+        var foodFromFoodArr = thisJio.getFood(foodName)
+
+        // if food is in user's array --> user has the right to remove qty;
+        // else if food is NOT in user's array --> user cannot remove qty.
+        if (thisFood != null) {
+            thisFood = thisFood.removeQty()
+            // when removing qty from userFoodMap, must also remove from compiled foodArr list
+            foodFromFoodArr = foodFromFoodArr.removeQty()
+        }
+
+        if (thisFood != null) {
+            updateFirebaseForMap(thisFood)
+        }
+        updateFirebase(foodFromFoodArr)
+
+        return thisFood
+    }
+
+    override fun checkIfFoodPresent(foodName: String): Boolean {
+        val thisFood = thisJio.getFoodFromMap(foodName, signedInUser!!.username)
+        return if (thisFood == null) {
+            Toast.makeText(this, "you do not have this order", Toast.LENGTH_SHORT).show()
+            false
+        } else {
+            true
+        }
+    }
+
     private fun updateFirebase(food: Food) {
         val updatedFoodArr = thisJio.updateFoodArr(food)
         firebaseDb.collection("JIOS").document(jioID).update(
@@ -262,7 +293,7 @@ class JioOrders : AppCompatActivity(), ModifyFood {
     }
 
     private fun updateFirebaseForMap(food: Food) {
-        val updatedUserFoodMap = thisJio.updateUserFoodMap(food)
+        val updatedUserFoodMap = thisJio.updateUserFoodMap(food, signedInUser!!.username)
         firebaseDb.collection("JIOS").document(jioID).update(
             "userFoodMap", updatedUserFoodMap
         )
