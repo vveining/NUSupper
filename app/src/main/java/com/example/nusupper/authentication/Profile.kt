@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -14,9 +15,12 @@ import com.example.nusupper.CreateJio
 import com.example.nusupper.FindJio
 import com.example.nusupper.R
 import com.example.nusupper.databinding.ActivityProfileBinding
+import com.example.nusupper.models.User
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
+import kotlinx.android.synthetic.main.activity_profile.*
 
 class Profile : AppCompatActivity() {
 
@@ -127,10 +131,37 @@ class Profile : AppCompatActivity() {
         if (email != null) {
             firebaseDb.collection("USERS").document(email).get()
                 .addOnSuccessListener {
+                    var user = it.toObject<User>()
                     binding.name.text = it.get("name").toString()
                     binding.username.text = it.get("username").toString()
                     binding.mobileNumber.text = it.get("mobile number").toString()
                     binding.residenceName.text = it.get("residence").toString()
+
+                    if (user != null) {
+                        val paylah: Boolean = user.paylah
+                        val paynow = user.paynow
+                        val grabpay = user.grabpay
+
+                        if (paylah) {
+                            binding.payment1.setImageResource(R.drawable.paylah)
+                            if (paynow) {
+                                binding.payment2.setImageResource(R.drawable.square_pn)
+                                if (grabpay) {
+                                    binding.payment3.setImageResource(R.drawable.grabpay)
+                                }
+                            } else if (grabpay) {
+                                binding.payment2.setImageResource(R.drawable.grabpay)
+                            }
+                        } else if (paynow) { // no paylah
+                            binding.payment1.setImageResource(R.drawable.square_pn)
+                            if (grabpay) {
+                                binding.payment2.setImageResource(R.drawable.grabpay)
+                            }
+                        } else if (grabpay) { // no paylah and no paynow
+                            binding.payment1.setImageResource(R.drawable.grabpay)
+                        }
+                    }
+
                 }
         }
     }

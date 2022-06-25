@@ -25,7 +25,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="879dp">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/name"
@@ -69,20 +69,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/username" />
 
 
-            <TextView
-                android:id="@+id/residenceName"
-                android:layout_width="335dp"
-                android:layout_height="27dp"
-                android:layout_margin="16dp"
-                android:drawablePadding="16dp"
-                android:fontFamily="@font/roboto_slab"
-                android:text="@string/residence_stub"
-                android:textSize="20sp"
-                app:drawableLeftCompat="@drawable/home_icon_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mobileNumber" />
-
             <Button
                 android:id="@+id/logout_button"
                 android:layout_width="335dp"
@@ -91,8 +77,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/residenceName"
-                app:layout_constraintVertical_bias="0.598"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout12"
+                app:layout_constraintVertical_bias="0.32"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <LinearLayout
@@ -116,6 +102,107 @@
                     android:src="@drawable/photo_1544717305_2782549b5136" />
 
             </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout12"
+                android:layout_width="334dp"
+                android:layout_height="151dp"
+                android:background="@drawable/grey_rectangle_750_300"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/residenceName">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="331dp"
+                    android:layout_height="99dp"
+                    android:layout_marginTop="1dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.666"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/username2"
+                    app:layout_constraintVertical_bias="1.0">
+
+                    <ImageButton
+                        android:id="@+id/payment1"
+                        android:layout_width="92dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:adjustViewBounds="true"
+                        android:background="#0000"
+                        android:maxWidth="92dp"
+                        android:maxHeight="83dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                    <ImageButton
+                        android:id="@+id/payment2"
+                        android:layout_width="92dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:adjustViewBounds="true"
+                        android:background="#0000"
+                        android:maxWidth="92dp"
+                        android:maxHeight="83dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/payment1"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                    <ImageButton
+                        android:id="@+id/payment3"
+                        android:layout_width="92dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:adjustViewBounds="true"
+                        android:background="#0000"
+                        android:maxWidth="92dp"
+                        android:maxHeight="83dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.532"
+                        app:layout_constraintStart_toEndOf="@id/payment2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/username2"
+                    android:layout_width="307dp"
+                    android:layout_height="26dp"
+                    android:layout_margin="16dp"
+                    android:drawablePadding="16dp"
+                    android:fontFamily="@font/roboto_slab"
+                    android:text="@string/pay_by"
+                    android:textSize="20sp"
+                    app:drawableLeftCompat="@drawable/coin_icon_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/residenceName"
+                android:layout_width="335dp"
+                android:layout_height="29dp"
+                android:layout_margin="16dp"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/roboto_slab"
+                android:text="@string/residence_stub"
+                android:textSize="20sp"
+                app:drawableLeftCompat="@drawable/home_icon_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mobileNumber" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
