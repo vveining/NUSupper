@@ -68,103 +68,136 @@
                     app:layout_constraintStart_toEndOf="@id/jioOwnerStub"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/compiledOrders"
-                    style="@style/heading3_text"
-                    android:layout_width="346dp"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="4dp"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-                    android:paddingBottom="0dp"
-                    android:text="compiled orders"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.446"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/jioOwnerStub" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout"
-                    android:layout_width="350dp"
+                <LinearLayout
+                    android:id="@+id/innerLinearLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:background="@drawable/light_grey_rectangle_750_300"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.491"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/jioOwnerStub"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/compiledOrders">
+                    app:layout_constraintBottom_toTopOf="@+id/newOrderButton">
 
-                    <ListView
-                        android:id="@+id/compiledorders_listview"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <TextView
-                    android:id="@+id/addOrders"
-                    style="@style/heading3_text"
-                    android:layout_width="346dp"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="8dp"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-                    android:paddingBottom="0dp"
-                    android:text="everyone's orders"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@id/constraintLayout"
-                    app:layout_constraintTop_toBottomOf="@id/constraintLayout" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout2"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:background="@drawable/light_grey_rectangle_750_300"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.491"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/addOrders">
-
-                    <ListView
-                        android:id="@+id/addyourorders_listview"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        android:id="@+id/constraint10">
 
-                    <Button
-                        android:id="@+id/newOrderButton"
+                        <TextView
+                            android:id="@+id/compiledOrders"
+                            style="@style/heading3_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="4dp"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
+                            android:paddingBottom="0dp"
+                            android:text="compiled orders"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.14"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageButton
+                            android:id="@+id/refresh_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="152dp"
+                            android:background="@drawable/ic_baseline_refresh_24"
+                            app:layout_constraintStart_toEndOf="@id/compiledOrders"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout"
+                        android:layout_width="350dp"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/light_grey_rectangle_750_300"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.491"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraint10">
+
+                        <ListView
+                            android:id="@+id/compiledorders_listview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/everyonesOrders"
+                        style="@style/heading3_text"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="112dp"
-                        android:text="new order"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/addyourorders_listview"
-                        app:layout_constraintVertical_bias="1.0" />
+                        android:layout_height="35dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="8dp"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:paddingBottom="0dp"
+                        android:text="everyone's orders"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.14"
+                        app:layout_constraintStart_toStartOf="@id/constraint10"
+                        app:layout_constraintTop_toBottomOf="@id/constraintLayout" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout2"
+                        android:layout_width="350dp"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:background="@drawable/light_grey_rectangle_750_300"
+                        android:layout_gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.491"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/addOrders">
+
+                        <ExpandableListView
+                            android:id="@+id/everyonesOrders_expandablelistview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:divider="@color/dark_grey"
+                            android:dividerHeight="1dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/newOrderButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="112dp"
+                    android:layout_marginTop="10dp"
+                    android:text="add new order"
+                    app:layout_constraintBottom_toTopOf="@id/updateOrderButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
 
                 <Button
                     android:id="@+id/updateOrderButton"
                     android:layout_width="350dp"
                     android:layout_height="53dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="5dp"
                     android:text="update your order"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.475"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+                    app:layout_constraintTop_toBottomOf="@+id/newOrderButton"
                     app:layout_goneMarginTop="50dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

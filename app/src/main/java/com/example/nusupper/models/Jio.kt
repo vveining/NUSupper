@@ -1,5 +1,7 @@
 package com.example.nusupper.models
 
+import android.util.ArrayMap
+import android.util.Log
 import com.example.nusupper.R
 import com.google.firebase.firestore.PropertyName
 
@@ -8,11 +10,13 @@ data class Jio(
     @get:PropertyName("close time") @set:PropertyName("close time") var closeTime: String = "",
     var creator: User? = null,
     var creatorEmail: String = "",
+    var creatorUsername: String = "",
     var location: String = "",
     var open: Boolean = true,
     var restaurant: String = "",
     var jioID: String = "",
-    var foodArr: MutableList<Food> = mutableListOf()) {
+    var foodArr: MutableList<Food> = mutableListOf(),
+    var userFoodMap : HashMap<String, MutableList<Food>> = hashMapOf()) {
 
     companion object {
         fun getLogo(name: String): Int {
@@ -27,20 +31,53 @@ data class Jio(
         }
     }
 
-    fun addFood(food: Food): Jio { //add new food item
+    fun addFood(food: Food, username: String): Jio { // add new food item
         val newArr = foodArr
         newArr.add(food)
+
+        val newUserFoodMap = userFoodMap
+        val usernameList = ArrayList(newUserFoodMap.keys)
+        if (usernameList.contains(username)) {
+            newUserFoodMap[username]?.add(food)
+        } else {
+            newUserFoodMap[username] = mutableListOf(food)
+        }
+
         return Jio(this.closeDate, this.closeTime, this.creator,
-            this.creatorEmail,this.location,this.open,this.restaurant,
-            this.jioID, newArr)
+            this.creatorEmail,this.creatorUsername,this.location,this.open,this.restaurant,
+            this.jioID, newArr, newUserFoodMap)
+    }
+
+    fun addNewFoodToMap(food: Food, username: String): Jio { // add new food item
+        val newMap = userFoodMap
+        var newArr = userFoodMap[username]
+        val foodData = Food(
+            food.foodName,
+            1,
+            food.price,
+            food.price,
+            food.remarks,
+            food.username
+        )
+        if (newArr != null) { // if user already has a list
+            newArr.add(foodData)
+            newMap[username] = newArr
+        } else { // if new user (no list)
+            newArr = mutableListOf(foodData)
+            newMap[username] = newArr
+        }
+
+        return Jio(this.closeDate, this.closeTime, this.creator,
+            this.creatorEmail,this.creatorUsername,this.location,this.open,this.restaurant,
+            this.jioID, newArr, newMap)
     }
 
     fun removeFood(idx: Int): Jio { //remove food item by index, can utilise for recycler view
         val newArr = foodArr
         newArr.removeAt(idx)
         return Jio(this.closeDate, this.closeTime, this.creator,
-            this.creatorEmail,this.location,this.open,this.restaurant,
-            this.jioID, newArr)
+            this.creatorEmail,this.creatorUsername,this.location,this.open,this.restaurant,
+            this.jioID, newArr, this.userFoodMap)
     }
 
     fun getFood(foodName: String): Food { // used to get the food object so that food obj can be modified
@@ -53,6 +90,23 @@ data class Jio(
         return foodArr[idx]
     }
 
+    fun getFoodFromMap(foodName: String, username: String): Food? { // used to get the food object so that food obj can be modified
+        var idx = -1
+        val foodList = userFoodMap[username]
+        if (foodList != null) {
+            for (i in foodList.indices) {
+                if (foodList[i].foodName == foodName) {
+                    idx = i
+                }
+            }
+        }
+        return if (idx == -1) {
+            null
+        } else {
+            foodList?.get(idx)
+        }
+    }
+
     fun updateFoodArr(food: Food): MutableList<Food> {
         for (i in foodArr.indices) {
             if (foodArr[i].foodName == food.foodName) {
@@ -61,6 +115,20 @@ data class Jio(
             }
         }
         return foodArr
+    }
+
+    fun updateUserFoodMap(food: Food): HashMap<String, MutableList<Food>> {
+        val list = userFoodMap[creatorUsername]
+        if (list != null) {
+            for (i in list.indices) {
+                if (list[i].foodName == food.foodName) {
+                    list[i] = food
+                    userFoodMap.replace(creatorUsername, list)
+                    break
+                }
+            }
+        }
+        return userFoodMap
     }
 
     //other functions to make

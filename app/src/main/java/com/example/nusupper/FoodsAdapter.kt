@@ -52,9 +52,10 @@ class FoodsAdapter(val context: Context, var foodList: MutableList<Food>) : Base
         viewHolder.remarksLabel.text = thisFood.remarks
 
         viewHolder.addQtyButton.setOnClickListener {
-            thisFood = modifyFood.addFoodQty(thisFood.foodName)
+            thisFood = modifyFood.addFoodQtyToMap(thisFood.foodName)!!
             viewHolder.totalPriceLabel.text = df.format(thisFood.totalPrice).toString()
             viewHolder.quantityLabel.text = thisFood.qty.toString()
+            modifyFood.refreshPage()
         }
 
         return view

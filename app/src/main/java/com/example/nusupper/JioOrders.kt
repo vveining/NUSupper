@@ -2,6 +2,7 @@ package com.example.nusupper
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -16,6 +17,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.activity_jio_orders.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.add_order_alertdialog.*
 import kotlinx.android.synthetic.main.add_order_alertdialog.view.*
 
@@ -29,6 +31,9 @@ class JioOrders : AppCompatActivity(), ModifyFood {
     private lateinit var adapter: FoodsAdapter
     private lateinit var thisJio: Jio
     private var signedInUser: User? = null
+    private lateinit var ordersAdapter: OrdersAdapter
+    private lateinit var usernameList: List<String>
+    private lateinit var userFoods: HashMap<String, MutableList<Food>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,12 +47,16 @@ class JioOrders : AppCompatActivity(), ModifyFood {
 
         // data source always updates
         foods = mutableListOf()
+        userFoods = hashMapOf()
 
-        // create adapter for foods
+        // create adapter for foods and userFoods
         adapter = FoodsAdapter(this, foods)
+        usernameList = ArrayList(userFoods.keys)
+        ordersAdapter = OrdersAdapter(this, usernameList, userFoods)
 
         // bind adapter to listviews
         compiledorders_listview.adapter = adapter
+        everyonesOrders_expandablelistview!!.setAdapter(ordersAdapter)
 
         // onclick for return to back page
         binding.backButton.setOnClickListener {
@@ -56,6 +65,13 @@ class JioOrders : AppCompatActivity(), ModifyFood {
                 it.putExtra("EXTRA_JIOID", jioID)
                 startActivity(it)
             }
+        }
+
+        // onclick for refresh page
+        binding.refreshButton.setOnClickListener {
+            // refresh activity
+            finish();
+            startActivity(intent);
         }
 
         // get signed in user as a User object
@@ -78,8 +94,23 @@ class JioOrders : AppCompatActivity(), ModifyFood {
                 // display jio owner's username
                 binding.jioOwnerStub.text = thisJio.creator?.username
 
+                // update foods from firebase
                 foods.clear()
                 addFoodToList(it)
+
+                // update userFoods from firebase
+                userFoods.clear()
+                addUserFoodsToMap(it)
+
+                // bind ordersAdapter to expandableListView
+                usernameList = ArrayList(userFoods.keys)
+                ordersAdapter = OrdersAdapter(this, usernameList, userFoods)
+                everyonesOrders_expandablelistview!!.setAdapter(ordersAdapter)
+
+                // expand all groups by default
+                for (i in 0 until ordersAdapter.groupCount) {
+                    everyonesOrders_expandablelistview.expandGroup(i)
+                }
             }
 
         // create an alertDialog for user to input food details
@@ -115,10 +146,11 @@ class JioOrders : AppCompatActivity(), ModifyFood {
                 // dismiss popup
                 alertDialog.dismiss()
 
-                // add Food object to thisJio
-                thisJio = thisJio.addFood(newFood)
+                // add Food object to thisJio (in both foodArr and userFoodArr)
+                thisJio = thisJio.addFood(newFood, signedInUser!!.username)
                 firebaseDb.collection("JIOS").document(jioID).update(
-                    "foodArr", thisJio.foodArr
+                    "foodArr", thisJio.foodArr,
+                    "userFoodMap", thisJio.userFoodMap
                 )
                 Toast.makeText(this, "new order added", Toast.LENGTH_SHORT).show()
 
@@ -131,11 +163,32 @@ class JioOrders : AppCompatActivity(), ModifyFood {
             alertDialog.show()
         }
 
+        // [START expandableListView listeners]
+
+        everyonesOrders_expandablelistview!!.setOnGroupExpandListener { groupPosition ->
+            Toast.makeText(this, (usernameList as ArrayList<String>)[groupPosition] + " list expanded", Toast.LENGTH_SHORT).show()
+        }
+
+        everyonesOrders_expandablelistview!!.setOnGroupCollapseListener { groupPosition ->
+            Toast.makeText(this, (usernameList as ArrayList<String>)[groupPosition] + " list collapsed", Toast.LENGTH_SHORT).show()
+        }
+
+        everyonesOrders_expandablelistview!!.setOnChildClickListener { _, _, groupPosition, childPosition, _ ->
+            Toast.makeText(
+                this,
+                "clicked: " + (usernameList as ArrayList<String>)[groupPosition]
+                        + " -> " + (usernameList as ArrayList<String>)[groupPosition][childPosition],
+                Toast.LENGTH_SHORT
+            ).show()
+            false
+        }
+
+        // [END expandableListView listeners]
+
         // [END JioOrders things]
     }
 
     private fun addFoodToList(snapshot: DocumentSnapshot?) {
-
         for (i in thisJio.foodArr.listIterator()) {
             val foodData = Food(
                 i.foodName,
@@ -148,12 +201,56 @@ class JioOrders : AppCompatActivity(), ModifyFood {
             foods.add(foodData)
         }
         adapter.notifyDataSetChanged()
+        ordersAdapter.notifyDataSetChanged()
+    }
+
+    private fun addUserFoodsToMap(snapshot: DocumentSnapshot?) {
+        val hashMap = thisJio.userFoodMap
+        for (key in hashMap.keys) {
+            val mutableList = mutableListOf<Food>()
+            for (i in hashMap[key]!!.listIterator()) {
+                val foodData = Food(
+                    i.foodName,
+                    i.qty,
+                    i.price,
+                    i.totalPrice,
+                    i.remarks,
+                    i.username
+                )
+                mutableList.add(foodData)
+            }
+            userFoods[key] = mutableList
+        }
+        adapter.notifyDataSetChanged()
+        ordersAdapter.notifyDataSetChanged()
     }
 
     override fun addFoodQty(foodName: String): Food {
         var thisFood = thisJio.getFood(foodName)
         thisFood = thisFood.addQty()
         updateFirebase(thisFood)
+
+        return thisFood
+    }
+
+    override fun addFoodQtyToMap(foodName: String): Food? {
+        var thisFood = thisJio.getFoodFromMap(foodName, signedInUser!!.username)
+        var foodFromFoodArr = thisJio.getFood(foodName)
+
+        if (thisFood != null) { // food is already in user's array
+            thisFood = thisFood.addQty()
+            foodFromFoodArr = foodFromFoodArr.addQty()  // when adding to userFoodMap must also add to compiled foodArr list
+        } else { // food is not in user's array yet
+            signedInUser?.username?.let { thisJio.addNewFoodToMap(foodFromFoodArr, it) }
+            thisFood = thisJio.getFoodFromMap(foodName, signedInUser!!.username)
+            foodFromFoodArr = foodFromFoodArr.addQty()
+        }
+
+        if (thisFood != null) {
+            updateFirebaseForMap(thisFood)
+        }
+        updateFirebase(foodFromFoodArr)
+
         return thisFood
     }
 
@@ -162,5 +259,18 @@ class JioOrders : AppCompatActivity(), ModifyFood {
         firebaseDb.collection("JIOS").document(jioID).update(
             "foodArr", updatedFoodArr
         )
+    }
+
+    private fun updateFirebaseForMap(food: Food) {
+        val updatedUserFoodMap = thisJio.updateUserFoodMap(food)
+        firebaseDb.collection("JIOS").document(jioID).update(
+            "userFoodMap", updatedUserFoodMap
+        )
+    }
+
+    override fun refreshPage() {
+        // refresh activity
+        finish();
+        startActivity(intent);
     }
 }
