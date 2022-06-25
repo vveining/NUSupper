@@ -58,15 +58,6 @@ class JioOrders : AppCompatActivity(), ModifyFood {
         compiledorders_listview.adapter = adapter
         everyonesOrders_expandablelistview!!.setAdapter(ordersAdapter)
 
-        // onclick for return to back page
-        binding.backButton.setOnClickListener {
-            Intent(this, ViewFriendsJio::class.java).also {
-                // send JIO ID info to viewJio activity to source for data
-                it.putExtra("EXTRA_JIOID", jioID)
-                startActivity(it)
-            }
-        }
-
         // onclick for refresh page
         binding.refreshButton.setOnClickListener {
             // refresh activity
@@ -74,12 +65,37 @@ class JioOrders : AppCompatActivity(), ModifyFood {
             startActivity(intent);
         }
 
+        // onclick for back button
+        binding.backButton.setOnClickListener {
+            if (thisJio.creatorEmail == signedInUser?.email) {
+                Intent(this, ViewJio::class.java).also {
+                    // send JIO ID info to viewJio activity to source for data
+                    it.putExtra("EXTRA_JIOID", jioID)
+                    startActivity(it)
+                }
+            } else {
+                Intent(this, ViewFriendsJio::class.java).also {
+                    // send JIO ID info to viewJio activity to source for data
+                    it.putExtra("EXTRA_JIOID", jioID)
+                    startActivity(it)
+                }
+            }
+        }
+
         // onclick for updateYourOrder button
         binding.updateOrderButton.setOnClickListener {
-            Intent(this, ViewFriendsJio::class.java).also {
-                // send JIO ID info to viewJio activity to source for data
-                it.putExtra("EXTRA_JIOID", jioID)
-                startActivity(it)
+            if (thisJio.creatorEmail == signedInUser?.email) {
+                Intent(this, ViewJio::class.java).also {
+                    // send JIO ID info to viewJio activity to source for data
+                    it.putExtra("EXTRA_JIOID", jioID)
+                    startActivity(it)
+                }
+            } else {
+                Intent(this, ViewFriendsJio::class.java).also {
+                    // send JIO ID info to viewJio activity to source for data
+                    it.putExtra("EXTRA_JIOID", jioID)
+                    startActivity(it)
+                }
             }
         }
 
@@ -171,28 +187,6 @@ class JioOrders : AppCompatActivity(), ModifyFood {
 
             alertDialog.show()
         }
-
-/*      // [START expandableListView listeners]
-
-        everyonesOrders_expandablelistview!!.setOnGroupExpandListener { groupPosition ->
-            Toast.makeText(this, (usernameList as ArrayList<String>)[groupPosition] + " list expanded", Toast.LENGTH_SHORT).show()
-        }
-
-        everyonesOrders_expandablelistview!!.setOnGroupCollapseListener { groupPosition ->
-            Toast.makeText(this, (usernameList as ArrayList<String>)[groupPosition] + " list collapsed", Toast.LENGTH_SHORT).show()
-        }
-
-        everyonesOrders_expandablelistview!!.setOnChildClickListener { _, _, groupPosition, childPosition, _ ->
-            Toast.makeText(
-                this,
-                "clicked: " + (usernameList as ArrayList<String>)[groupPosition]
-                        + " -> " + (usernameList as ArrayList<String>)[groupPosition][childPosition],
-                Toast.LENGTH_SHORT
-            ).show()
-            false
-        }
-
-        // [END expandableListView listeners]*/
 
         // [END JioOrders things]
     }
