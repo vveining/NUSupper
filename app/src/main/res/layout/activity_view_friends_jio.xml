@@ -42,12 +42,16 @@
 
                 <TextView
                     android:id="@+id/jioOwnerStub"
-                    style="@style/heading2_text"
                     android:layout_width="wrap_content"
-                    android:layout_height="56dp"
+                    android:layout_height="54dp"
+                    android:clickable="true"
+                    android:fontFamily="@font/roboto_slab"
+                    android:maxWidth="262dp"
+                    android:maxHeight="51dp"
                     android:text="@string/name_stub"
+                    style="@style/heading2onclick_text"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.126"
+                    app:layout_constraintHorizontal_bias="0.193"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
