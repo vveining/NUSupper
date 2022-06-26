@@ -133,9 +133,11 @@ class Profile : AppCompatActivity() {
                 .addOnSuccessListener {
                     var user = it.toObject<User>()
                     binding.name.text = it.get("name").toString()
-                    binding.username.text = it.get("username").toString()
+                    binding.username.text = "@" + it.get("username").toString()
                     binding.mobileNumber.text = it.get("mobile number").toString()
-                    binding.residenceName.text = it.get("residence").toString()
+                    val residence = it.get("residence").toString()
+                    binding.residenceName.text = residence
+                    binding.residenceImg.setImageResource(User.getResImg(residence))
 
                     if (user != null) {
                         val paylah: Boolean = user.paylah
