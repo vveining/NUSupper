@@ -106,6 +106,7 @@ class ViewFriendsJio : AppCompatActivity() {
         binding.jioOwnerStub.setOnClickListener {
             Intent(this,ViewFriendsProfile::class.java).also {
                 it.putExtra("friend's email",email)
+                it.putExtra("EXTRA_JIOID", jioID)
                 startActivity(it)
             }
         }
@@ -139,8 +140,7 @@ class ViewFriendsJio : AppCompatActivity() {
                     val closeDate = it.get("close date").toString()
                     binding.viewJioDetailsStub.text = "$closeTime, $closeDate"
                     binding.restaurantImage.setImageResource(Jio.getLogo(restaurant))
-                    val userData = it.get("creator") as Map<*, *>
-                    binding.jioOwnerStub.text = userData["username"].toString()
+                    binding.jioOwnerStub.text = it.get("creatorUsername").toString()
                 }
         }
     }

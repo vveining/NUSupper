@@ -17,6 +17,9 @@
             android:name=".ViewFriendsProfile"
             android:exported="true" />
         <activity
+            android:name=".Payment"
+            android:exported="false" />
+        <activity
             android:name=".JioOrders"
             android:exported="false" />
         <activity
