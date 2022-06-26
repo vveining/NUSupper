@@ -22,7 +22,7 @@ class ViewFriendsJio : AppCompatActivity() {
     private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var binding: ActivityViewFriendsJioBinding
     private lateinit var jioID: String
-    private var mobileNum = "0"
+    private var email = "0"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,25 +91,27 @@ class ViewFriendsJio : AppCompatActivity() {
             }
         }
 
-
-        // [END ViewJio things]
-
-        //DB TEST START ---------------------------------------------------
-            //example of how to get nested values (Jio --> creator --> mobile number)
+        //retrive Jio Owner's email
         val db = FirebaseFirestore.getInstance()
         db.collection("JIOS").document(jioID).get()
             .addOnSuccessListener {
                 val getJio = it.toObject<Jio>()       //convert jio to object
                 if (getJio != null) {                // once done, treat jio object normally, use kotlin functions
-//                    Toast.makeText(this@ViewFriendsJio, "ran", Toast.LENGTH_SHORT).show()
-                    mobileNum = getJio.creator?.mobileNumber.toString()
+                    email = getJio.creator?.email.toString()
 //                    Toast.makeText(this,mobileNum,Toast.LENGTH_SHORT).show()
                 }
             }
 
-        //DB TEST END ------------------------------------
+        //click on username
+        binding.jioOwnerStub.setOnClickListener {
+            Intent(this,ViewFriendsProfile::class.java).also {
+                it.putExtra("friend's email",email)
+                startActivity(it)
+            }
+        }
 
 
+        // [END ViewJio things]
 
     }
 

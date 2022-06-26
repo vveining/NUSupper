@@ -30,12 +30,14 @@ class Register : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //firebase instance
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseDb = FirebaseFirestore.getInstance()
 
         //residence spinner in layout
         val resSpinner: Spinner = findViewById(R.id.residence_spinner)
-        // create arrray adapter from residence array resources with simple spinner layout
+        // create array adapter from residence array resources with simple spinner layout
         ArrayAdapter.createFromResource(
             this,
             R.array.residences_array,

@@ -21,7 +21,7 @@ data class Jio(
     companion object {
         fun getLogo(name: String): Int {
             when (name) {
-                "Super Snacks" -> return R.drawable.supersnacks
+                "SuperSnacks" -> return R.drawable.supersnacks
                 "Starbucks" -> return R.drawable.starbucks
                 "Fong Seng" -> return R.drawable.fongseng
                 "McDonalds" -> return R.drawable.macs
