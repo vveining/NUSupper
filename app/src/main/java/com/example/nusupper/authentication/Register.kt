@@ -113,17 +113,13 @@ class Register : AppCompatActivity() {
 
             when (view.id) {
                 R.id.paylahCheck -> {
-                    if (checked) {
-                        paylah = true
-                    }
+                    paylah = checked
                 }
                 R.id.paynowCheck -> {
-                    if (checked) {
-                        paynow = true
-                    }
+                    paynow = checked
                 }
                 R.id.grabpayCheck -> {
-                    grabpay = true
+                    grabpay = checked
                 }
             }
         }
