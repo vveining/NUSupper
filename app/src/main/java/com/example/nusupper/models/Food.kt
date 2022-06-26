@@ -28,6 +28,14 @@ data class Food(
         return this
     }
 
+    fun removeQty(): Food {
+        val updatedQty = this.qty - 1
+        val updatedTotalPrice = this.price * updatedQty
+        this.qty = updatedQty // mutable list
+        this.totalPrice = updatedTotalPrice // mutable list
+        return this
+    }
+
     fun chg(newPrice: Double): Food {
         return Food(this.foodName,this.qty,newPrice,this.totalPrice,this.remarks,this.username)
     }

@@ -94,6 +94,15 @@ class OrdersAdapter(val context: Context,
             modifyFood.refreshPage()
         }
 
+        viewHolder.removeQtyButton.setOnClickListener {
+            if (modifyFood.checkIfFoodPresent(thisFood.foodName)) {
+                thisFood = modifyFood.removeFoodQtyToMap(thisFood.foodName)!!
+                viewHolder.totalPriceLabel.text = df.format(thisFood.totalPrice).toString()
+                viewHolder.quantityLabel.text = thisFood.qty.toString()
+                modifyFood.refreshPage()
+            }
+        }
+
         return view
     }
 
@@ -107,5 +116,6 @@ class OrdersAdapter(val context: Context,
         val quantityLabel = row!!.findViewById(R.id.number_stub) as TextView
         val remarksLabel = row!!.findViewById(R.id.remarks_stub) as TextView
         val addQtyButton = row!!.findViewById(R.id.add_an_order_button) as ImageButton
+        val removeQtyButton = row!!.findViewById(R.id.remove_an_order_button) as ImageButton
     }
 }

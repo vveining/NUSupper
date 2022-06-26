@@ -72,14 +72,6 @@ data class Jio(
             this.jioID, newArr, newMap)
     }
 
-    fun removeFood(idx: Int): Jio { //remove food item by index, can utilise for recycler view
-        val newArr = foodArr
-        newArr.removeAt(idx)
-        return Jio(this.closeDate, this.closeTime, this.creator,
-            this.creatorEmail,this.creatorUsername,this.location,this.open,this.restaurant,
-            this.jioID, newArr, this.userFoodMap)
-    }
-
     fun getFood(foodName: String): Food { // used to get the food object so that food obj can be modified
         var idx = 0
         for (i in foodArr.indices) {
@@ -110,20 +102,28 @@ data class Jio(
     fun updateFoodArr(food: Food): MutableList<Food> {
         for (i in foodArr.indices) {
             if (foodArr[i].foodName == food.foodName) {
-                foodArr[i] = food
+                if (food.qty == 0) {
+                    foodArr.removeAt(i)
+                } else {
+                    foodArr[i] = food
+                }
                 break
             }
         }
         return foodArr
     }
 
-    fun updateUserFoodMap(food: Food): HashMap<String, MutableList<Food>> {
-        val list = userFoodMap[creatorUsername]
+    fun updateUserFoodMap(food: Food, username: String): HashMap<String, MutableList<Food>> {
+        val list = userFoodMap[username]
         if (list != null) {
             for (i in list.indices) {
                 if (list[i].foodName == food.foodName) {
-                    list[i] = food
-                    userFoodMap.replace(creatorUsername, list)
+                    if (food.qty == 0) {
+                        list.removeAt(i)
+                    } else {
+                        list[i] = food
+                    }
+                    userFoodMap.replace(username, list)
                     break
                 }
             }
