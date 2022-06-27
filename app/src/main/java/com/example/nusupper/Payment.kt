@@ -199,7 +199,11 @@ class Payment : AppCompatActivity(), PaymentHelpers {
     }
 
     override fun getUsersTotalBill(username: String, userFoodList: HashMap<String, MutableList<Food>>): Double {
-        var totalBill = 0.0
+        var totalBill: Double
+
+        val numOfPeople = userFoodList.keys.size
+        totalBill = thisJio.deliveryFee / numOfPeople
+
         val list = userFoodList[username]
         if (list != null) {
             for (i in list.indices) {
