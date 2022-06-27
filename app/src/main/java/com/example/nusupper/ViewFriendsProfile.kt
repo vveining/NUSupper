@@ -2,19 +2,10 @@ package com.example.nusupper
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import com.example.nusupper.authentication.Profile
 import com.example.nusupper.databinding.ActivityViewFriendsProfileBinding
-import com.example.nusupper.models.Jio
 import com.example.nusupper.models.User
-import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 
@@ -62,7 +53,7 @@ class ViewFriendsProfile: AppCompatActivity() {
         if (email != null) {
             firebaseDb.collection("USERS").document(email).get()
                 .addOnSuccessListener {
-                    var user = it.toObject<User>()
+                    val user = it.toObject<User>()
                     binding.name.text = it.get("name").toString()
                     binding.username.text = "@" + it.get("username").toString()
                     binding.mobileNumber.text = it.get("mobile number").toString()

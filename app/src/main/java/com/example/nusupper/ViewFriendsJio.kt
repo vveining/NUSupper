@@ -91,6 +91,15 @@ class ViewFriendsJio : AppCompatActivity() {
             }
         }
 
+        // onclick for view payment
+        binding.paymentButton.setOnClickListener {
+            Intent(this,Payment::class.java).also {
+                //send JIO ID info to viewJio activity to source for data
+                it.putExtra("EXTRA_JIOID",jioID)
+                startActivity(it)
+            }
+        }
+
         //retrive Jio Owner's email
         val db = FirebaseFirestore.getInstance()
         db.collection("JIOS").document(jioID).get()

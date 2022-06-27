@@ -2,7 +2,6 @@ package com.example.nusupper
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -12,6 +11,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nusupper.adapters.JiosAdapter
 import com.example.nusupper.authentication.Profile
 import com.example.nusupper.databinding.ActivityFindJioBinding
 import com.example.nusupper.models.Jio
@@ -20,7 +20,6 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_find_jio.*
-import java.lang.reflect.Method
 
 class FindJio : AppCompatActivity() {
 
@@ -109,6 +108,18 @@ class FindJio : AppCompatActivity() {
                 }
         }
 
+        // initialise lists and adapter(s)
+        initialiseListsAndAdapters()
+
+        // onclick stuff
+        enableItemClickListener(yourCurrentJios, yourCurrentJiosAdapter)
+        enableItemClickListener(communityJios, communityJiosAdapter)
+        enableItemClickListener(allJios, allJiosAdapter)
+
+        // [END FindJio things]
+    }
+
+    private fun initialiseListsAndAdapters() {
         // data source always updates
         yourCurrentJios = mutableListOf()
         communityJios = mutableListOf()
@@ -124,11 +135,6 @@ class FindJio : AppCompatActivity() {
         communityJios_recyclerview.adapter = communityJiosAdapter
         allJios_recyclerView.adapter = allJiosAdapter
 
-        // onclick stuff
-        enableItemClickListener(yourCurrentJios, yourCurrentJiosAdapter)
-        enableItemClickListener(communityJios, communityJiosAdapter)
-        enableItemClickListener(allJios, allJiosAdapter)
-
         // bind adapter
         yourCurrentJios_recyclerview.layoutManager =
             LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
@@ -136,8 +142,6 @@ class FindJio : AppCompatActivity() {
             LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         allJios_recyclerView.layoutManager =
             LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-
-        // [END FindJio things]
     }
 
     // appbar - toolbar button click

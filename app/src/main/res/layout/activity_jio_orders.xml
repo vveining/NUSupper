@@ -134,6 +134,44 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/heading3_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="55dp"
+                            android:layout_marginTop="8dp"
+                            android:text="delivery fee:"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:id="@+id/deliveryfee_edittext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/heading3_text"
+                            android:textSize="15sp"
+                            android:layout_marginEnd="50dp"
+                            android:hint="update delivery fee"
+                            android:inputType="numberDecimal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <ImageButton
+                            android:id="@+id/updateDeliveryFeeButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/ic_baseline_done_24"
+                            app:layout_constraintStart_toEndOf="@id/deliveryfee_edittext"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <TextView
                         android:id="@+id/everyonesOrders"
                         style="@style/heading3_text"

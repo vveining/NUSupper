@@ -2,11 +2,12 @@ package com.example.nusupper
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.nusupper.adapters.FoodsAdapter
+import com.example.nusupper.adapters.OrdersAdapter
 import com.example.nusupper.databinding.ActivityJioOrdersBinding
 import com.example.nusupper.helpers.ModifyFood
 import com.example.nusupper.models.Food
@@ -17,7 +18,6 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.activity_jio_orders.*
-import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.add_order_alertdialog.*
 import kotlinx.android.synthetic.main.add_order_alertdialog.view.*
 
@@ -45,100 +45,34 @@ class JioOrders : AppCompatActivity(), ModifyFood {
 
         // [START JioOrders things]
 
-        // data source always updates
-        foods = mutableListOf()
-        userFoods = hashMapOf()
+        // initialise lists and adapter(s)
+        initialiseListsAndAdapters()
 
-        // create adapter for foods and userFoods
-        adapter = FoodsAdapter(this, foods)
-        usernameList = ArrayList(userFoods.keys)
-        ordersAdapter = OrdersAdapter(this, usernameList, userFoods)
-
-        // bind adapter to listviews
-        compiledorders_listview.adapter = adapter
-        everyonesOrders_expandablelistview!!.setAdapter(ordersAdapter)
-
-        // onclick for refresh page
-        binding.refreshButton.setOnClickListener {
-            // refresh activity
-            finish();
-            startActivity(intent);
-        }
-
-        // onclick for back button
-        binding.backButton.setOnClickListener {
-            if (thisJio.creatorEmail == signedInUser?.email) {
-                Intent(this, ViewJio::class.java).also {
-                    // send JIO ID info to viewJio activity to source for data
-                    it.putExtra("EXTRA_JIOID", jioID)
-                    startActivity(it)
-                }
-            } else {
-                Intent(this, ViewFriendsJio::class.java).also {
-                    // send JIO ID info to viewJio activity to source for data
-                    it.putExtra("EXTRA_JIOID", jioID)
-                    startActivity(it)
-                }
-            }
-        }
-
-        // onclick for updateYourOrder button
-        binding.updateOrderButton.setOnClickListener {
-            if (thisJio.creatorEmail == signedInUser?.email) {
-                Intent(this, ViewJio::class.java).also {
-                    // send JIO ID info to viewJio activity to source for data
-                    it.putExtra("EXTRA_JIOID", jioID)
-                    startActivity(it)
-                }
-            } else {
-                Intent(this, ViewFriendsJio::class.java).also {
-                    // send JIO ID info to viewJio activity to source for data
-                    it.putExtra("EXTRA_JIOID", jioID)
-                    startActivity(it)
-                }
-            }
-        }
+        // set onclick functions for button(s)
+        setButtons()
 
         // get signed in user as a User object
-        firebaseDb = FirebaseFirestore.getInstance()
-        firebaseAuth = FirebaseAuth.getInstance()
-        firebaseAuth.currentUser?.email?.let {
-            firebaseDb.collection("USERS")
-                .document(it)
-                .get()
-                .addOnSuccessListener { userSnapshot ->
-                    signedInUser = userSnapshot.toObject(User::class.java)
-                }
-        }
+        getSignedInUser()
 
         // get Jio object from firebaseDb
         firebaseDb.collection("JIOS").document(jioID).get()
             .addOnSuccessListener {
                 thisJio = it.toObject<Jio>()!!
 
-                // display jio owner's username
-                binding.jioOwnerStub.text = thisJio.creator?.username
+                // display the relevant texts in the layout
+                setText(thisJio)
 
-                // update foods from firebase
-                foods.clear()
-                addFoodToList(it)
-
-                // update userFoods from firebase
-                userFoods.clear()
-                addUserFoodsToMap(it)
-
-                // bind ordersAdapter to expandableListView
-                usernameList = ArrayList(userFoods.keys)
-                ordersAdapter = OrdersAdapter(this, usernameList, userFoods)
-                everyonesOrders_expandablelistview!!.setAdapter(ordersAdapter)
-
-                // expand all groups by default
-                for (i in 0 until ordersAdapter.groupCount) {
-                    everyonesOrders_expandablelistview.expandGroup(i)
-                }
+                // update lists with most recent data and update adapter(s)
+                updateAdapters(it)
             }
 
         // create an alertDialog for user to input food details
+        alertDialogHelper()
+
+        // [END JioOrders things]
+    }
+
+    private fun alertDialogHelper() {
         binding.newOrderButton.setOnClickListener {
 
             // build and show alertdialog popup
@@ -187,8 +121,119 @@ class JioOrders : AppCompatActivity(), ModifyFood {
 
             alertDialog.show()
         }
+    }
 
-        // [END JioOrders things]
+    private fun updateAdapters(it: DocumentSnapshot?) {
+        // update foods from firebase
+        foods.clear()
+        addFoodToList(it)
+
+        // update userFoods from firebase
+        userFoods.clear()
+        addUserFoodsToMap(it)
+
+        // bind ordersAdapter to expandableListView
+        usernameList = ArrayList(userFoods.keys)
+        ordersAdapter = OrdersAdapter(this, usernameList, userFoods)
+        everyonesOrders_expandablelistview!!.setAdapter(ordersAdapter)
+
+        // expand all groups by default
+        for (i in 0 until ordersAdapter.groupCount) {
+            everyonesOrders_expandablelistview.expandGroup(i)
+        }
+    }
+
+    private fun setText(thisJio: Jio) {
+        // display jio owner's username
+        binding.jioOwnerStub.text = thisJio.creator?.username
+    }
+
+    private fun getSignedInUser() {
+        // get signed in user as a User object
+        firebaseDb = FirebaseFirestore.getInstance()
+        firebaseAuth = FirebaseAuth.getInstance()
+        firebaseAuth.currentUser?.email?.let {
+            firebaseDb.collection("USERS")
+                .document(it)
+                .get()
+                .addOnSuccessListener { userSnapshot ->
+                    signedInUser = userSnapshot.toObject(User::class.java)
+                }
+        }
+    }
+
+    private fun setButtons() {
+        // onclick for refresh page
+        binding.refreshButton.setOnClickListener {
+            // refresh activity
+            finish();
+            startActivity(intent);
+        }
+
+        // onclick for back button
+        binding.backButton.setOnClickListener {
+            if (thisJio.creatorEmail == signedInUser?.email) {
+                Intent(this, ViewJio::class.java).also {
+                    // send JIO ID info to viewJio activity to source for data
+                    it.putExtra("EXTRA_JIOID", jioID)
+                    startActivity(it)
+                }
+            } else {
+                Intent(this, ViewFriendsJio::class.java).also {
+                    // send JIO ID info to viewJio activity to source for data
+                    it.putExtra("EXTRA_JIOID", jioID)
+                    startActivity(it)
+                }
+            }
+        }
+
+        // onclick for updateYourOrder button
+        binding.updateOrderButton.setOnClickListener {
+            if (thisJio.creatorEmail == signedInUser?.email) {
+                Intent(this, ViewJio::class.java).also {
+                    // send JIO ID info to viewJio activity to source for data
+                    it.putExtra("EXTRA_JIOID", jioID)
+                    startActivity(it)
+                }
+            } else {
+                Intent(this, ViewFriendsJio::class.java).also {
+                    // send JIO ID info to viewJio activity to source for data
+                    it.putExtra("EXTRA_JIOID", jioID)
+                    startActivity(it)
+                }
+            }
+        }
+
+        // update firebaseDb with delivery fee
+        binding.updateDeliveryFeeButton.setOnClickListener {
+            val deliveryFee: Double
+            val text = binding.deliveryfeeEdittext.text.toString()
+            if (text.isEmpty()) {
+                deliveryFee = 0.0
+            } else {
+                deliveryFee = text.toDouble()
+            }
+            firebaseDb.collection("JIOS").document(jioID).update(
+                "deliveryFee", deliveryFee
+            )
+            Toast.makeText(this, "delivery fee updated", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun initialiseListsAndAdapters() {
+        // data source always updates
+        foods = mutableListOf()
+        userFoods = hashMapOf()
+
+        // create adapter for foods and userFoods
+        adapter = FoodsAdapter(this, foods)
+        usernameList = ArrayList(userFoods.keys)
+        ordersAdapter = OrdersAdapter(this, usernameList, userFoods)
+
+        // bind adapter to listviews
+        compiledorders_listview.adapter = adapter
+        everyonesOrders_expandablelistview!!.setAdapter(ordersAdapter)
+
     }
 
     private fun addFoodToList(snapshot: DocumentSnapshot?) {

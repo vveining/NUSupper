@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="335dp"
+    android:layout_height="33dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/name_stub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="@string/name_stub"
+        android:textAppearance="@style/jio_card_sub" />
+
+    <TextView
+        android:id="@+id/dollar_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/price_stub"
+        android:paddingStart="5dp"
+        android:paddingEnd="2dp"
+        android:text="$"
+        android:textAppearance="@style/jio_card_sub" />
+
+    <TextView
+        android:id="@+id/price_stub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="5dp"
+        android:text="price stub"
+        android:textStyle="bold"
+        android:textAppearance="@style/jio_card_sub" />
+
+</RelativeLayout>
