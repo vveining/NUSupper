@@ -91,6 +91,15 @@ class ViewFriendsJio : AppCompatActivity() {
             }
         }
 
+        // onclick for view payment
+        binding.paymentButton.setOnClickListener {
+            Intent(this,Payment::class.java).also {
+                //send JIO ID info to viewJio activity to source for data
+                it.putExtra("EXTRA_JIOID",jioID)
+                startActivity(it)
+            }
+        }
+
         //retrive Jio Owner's email
         val db = FirebaseFirestore.getInstance()
         db.collection("JIOS").document(jioID).get()
@@ -106,6 +115,7 @@ class ViewFriendsJio : AppCompatActivity() {
         binding.jioOwnerStub.setOnClickListener {
             Intent(this,ViewFriendsProfile::class.java).also {
                 it.putExtra("friend's email",email)
+                it.putExtra("EXTRA_JIOID", jioID)
                 startActivity(it)
             }
         }
@@ -139,8 +149,7 @@ class ViewFriendsJio : AppCompatActivity() {
                     val closeDate = it.get("close date").toString()
                     binding.viewJioDetailsStub.text = "$closeTime, $closeDate"
                     binding.restaurantImage.setImageResource(Jio.getLogo(restaurant))
-                    val userData = it.get("creator") as Map<*, *>
-                    binding.jioOwnerStub.text = userData["username"].toString()
+                    binding.jioOwnerStub.text = it.get("creatorUsername").toString()
                 }
         }
     }

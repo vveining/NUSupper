@@ -11,7 +11,6 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.nusupper.authentication.Profile
 import com.example.nusupper.databinding.ActivityCreateJioBinding
-import com.example.nusupper.models.Food
 import com.example.nusupper.models.Jio
 import com.example.nusupper.models.User
 import com.google.android.material.navigation.NavigationView
@@ -148,7 +147,7 @@ class CreateJio : AppCompatActivity() {
         val uniqueID = UUID.randomUUID().toString()
 
         // create a Jio object
-        var jio = Jio(dateString,
+        val jio = Jio(dateString,
             timeString,
             signedInUser,
             signedInUser!!.email,
@@ -157,6 +156,7 @@ class CreateJio : AppCompatActivity() {
             true,
             binding.restaurantAutocomplete.text.toString(),
             uniqueID,
+            0.0,
             mutableListOf(), hashMapOf())
 
         // add the Jio object into firebase database

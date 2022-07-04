@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="335dp"
+    android:layout_height="43dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/numberBox"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:background="@drawable/dark_grey_rectangle_small">
+
+        <TextView
+            android:id="@+id/number_stub"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="00"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/food_stub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/numberBox"
+        android:layout_marginStart="25dp"
+        android:layout_toEndOf="@id/numberBox"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="food stub"
+        android:textAppearance="@style/jio_card_sub" />
+
+    <TextView
+        android:id="@+id/remarks_stub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/numberBox"
+        android:layout_marginStart="25dp"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="remarks stub"
+        android:textAppearance="@style/jio_card_sub"
+        android:textSize="11sp"/>
+
+    <TextView
+        android:id="@+id/dollar_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/price_stub"
+        android:paddingStart="5dp"
+        android:paddingEnd="2dp"
+        android:text="$"
+        android:textAppearance="@style/jio_card_sub" />
+
+    <TextView
+        android:id="@+id/price_stub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="5dp"
+        android:text="price stub"
+        android:textAppearance="@style/jio_card_sub" />
+
+</RelativeLayout>

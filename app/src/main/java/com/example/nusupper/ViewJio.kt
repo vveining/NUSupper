@@ -81,8 +81,16 @@ class ViewJio : AppCompatActivity() {
         TooltipCompat.setTooltipText(binding.editjioButton, "edit Jio")
         TooltipCompat.setTooltipText(binding.copyjiolinkButton, "copy link")
 
+        // display texts in layout
         setViewJio(jioID)
 
+        // set onclick functions for button(s)
+        setButtons()
+
+        // [END ViewJio things]
+    }
+
+    private fun setButtons() {
         // onclick for view current orders
         binding.viewcurrentordersButton.setOnClickListener {
             Intent(this,JioOrders::class.java).also {
@@ -92,6 +100,14 @@ class ViewJio : AppCompatActivity() {
             }
         }
 
+        // onclick for view payment
+        binding.paymentButton.setOnClickListener {
+            Intent(this,Payment::class.java).also {
+                //send JIO ID info to viewJio activity to source for data
+                it.putExtra("EXTRA_JIOID",jioID)
+                startActivity(it)
+            }
+        }
 
         // edit jio
         binding.editjioButton.setOnClickListener {
@@ -101,8 +117,6 @@ class ViewJio : AppCompatActivity() {
                 startActivity(it)
             }
         }
-
-        // [END ViewJio things]
     }
 
     //appbar - toolbar button click

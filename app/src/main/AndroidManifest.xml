@@ -17,6 +17,9 @@
             android:name=".ViewFriendsProfile"
             android:exported="true" />
         <activity
+            android:name=".Payment"
+            android:exported="false" />
+        <activity
             android:name=".JioOrders"
             android:exported="false" />
         <activity
@@ -30,16 +33,17 @@
             android:exported="false" />
         <activity
             android:name=".authentication.LaunchLogo"
-            android:exported="true">
+            android:exported="true"/>
+
+        <activity
+            android:name=".FindJio"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".FindJio"
-            android:exported="true" />
         <activity
             android:name=".Template"
             android:exported="false" />

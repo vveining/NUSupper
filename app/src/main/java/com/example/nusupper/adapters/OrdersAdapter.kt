@@ -1,46 +1,80 @@
-package com.example.nusupper
+package com.example.nusupper.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.BaseExpandableListAdapter
+import android.widget.ImageButton
+import android.widget.TextView
+import com.example.nusupper.R
 import com.example.nusupper.helpers.ModifyFood
 import com.example.nusupper.models.Food
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
-class FoodsAdapter(val context: Context, var foodList: MutableList<Food>) : BaseAdapter() {
+class OrdersAdapter(val context: Context,
+                    private val usernameList: List<String>,
+                    private val userFoodList: HashMap<String, MutableList<Food>>): BaseExpandableListAdapter() {
 
     private val inflater = LayoutInflater.from(context)
-    private var modifyFood: ModifyFood = context as ModifyFood
     private val df = DecimalFormat("#.##")
+    private var modifyFood: ModifyFood = context as ModifyFood
 
-    override fun getCount(): Int {
-        return foodList.size
+    override fun getGroupCount(): Int {
+        return usernameList.size
     }
 
-    override fun getItem(p0: Int): Any {
-        return foodList[p0]
+    override fun getChildrenCount(p0: Int): Int {
+        return userFoodList[usernameList[p0]]!!.size
     }
 
-    override fun getItemId(p0: Int): Long {
+    override fun getGroup(p0: Int): Any {
+        return usernameList[p0]
+    }
+
+    override fun getChild(p0: Int, p1: Int): Any {
+        return userFoodList[usernameList[p0]]!![p1]
+    }
+
+    override fun getGroupId(p0: Int): Long {
         return p0.toLong()
     }
 
-    override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
-        var thisFood = foodList[p0]
+    override fun getChildId(p0: Int, p1: Int): Long {
+        return p1.toLong()
+    }
 
+    override fun hasStableIds(): Boolean {
+        return false
+    }
+
+    override fun getGroupView(p0: Int, p1: Boolean, p2: View?, p3: ViewGroup?): View {
+        val view: View
+        val listTitle = getGroup(p0) as String
+        if (p2 == null) {
+            view = inflater.inflate(R.layout.item_orders_username, p3, false)
+        } else {
+            view = p2
+        }
+        val listTitleTextView = view.findViewById<TextView>(R.id.usernameStub)
+        listTitleTextView.text = listTitle
+
+        return view
+    }
+
+    override fun getChildView(p0: Int, p1: Int, p2: Boolean, p3: View?, p4: ViewGroup?): View {
         val view: View
         val viewHolder: ListViewHolder
 
-        if (p1 == null) {
-            view = inflater.inflate(R.layout.item_food, p2, false)
+        var thisFood = getChild(p0, p1) as Food
+
+        if (p3 == null) {
+            view = inflater.inflate(R.layout.item_food, p4, false)
             viewHolder = ListViewHolder(view)
             view.tag = viewHolder
         } else {
-            view = p1
+            view = p3
             viewHolder = view.tag as ListViewHolder
         }
 
@@ -70,6 +104,10 @@ class FoodsAdapter(val context: Context, var foodList: MutableList<Food>) : Base
         return view
     }
 
+    override fun isChildSelectable(p0: Int, p1: Int): Boolean {
+        return true
+    }
+
     private class ListViewHolder(row: View?) {
         val nameLabel = row!!.findViewById(R.id.food_stub) as TextView
         val totalPriceLabel = row!!.findViewById(R.id.price_stub) as TextView
@@ -78,5 +116,4 @@ class FoodsAdapter(val context: Context, var foodList: MutableList<Food>) : Base
         val addQtyButton = row!!.findViewById(R.id.add_an_order_button) as ImageButton
         val removeQtyButton = row!!.findViewById(R.id.remove_an_order_button) as ImageButton
     }
-
 }

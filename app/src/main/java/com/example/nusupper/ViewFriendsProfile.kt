@@ -2,77 +2,28 @@ package com.example.nusupper
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import com.example.nusupper.authentication.Profile
 import com.example.nusupper.databinding.ActivityViewFriendsProfileBinding
 import com.example.nusupper.models.User
-import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 
 class ViewFriendsProfile: AppCompatActivity() {
 
-    private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var binding: ActivityViewFriendsProfileBinding
     private lateinit var firebaseDb: FirebaseFirestore
+    private lateinit var jioID: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityViewFriendsProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // navigation drawer things <start>
+        // initialise variables
+        jioID = intent.getStringExtra("EXTRA_JIOID").toString()
 
-        val toolbar: Toolbar = findViewById(R.id.fprofile_toolbar)
-        setSupportActionBar(toolbar)
-        val actionbar: ActionBar? = supportActionBar
-        actionbar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-        }
-
-        mDrawerLayout = findViewById(R.id.fprofile_drawer_layout)
-
-        val navigationView: NavigationView = findViewById(R.id.fprofile_nav_view)
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            // set item as selected to persist highlight
-            menuItem.isChecked = true
-            // close drawer when item is tapped
-            mDrawerLayout.closeDrawers()
-
-            // handle navigation view item clicks here
-            when (menuItem.itemId) {
-
-                R.id.profile -> {
-                    Toast.makeText(this, "profile", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, Profile::class.java)
-                    startActivity(intent)
-                }
-                R.id.createjio -> {
-                    Toast.makeText(this, "create a Jio", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, CreateJio::class.java)
-                    startActivity(intent)
-                }
-                R.id.findjio -> {
-                    Toast.makeText(this, "find a Jio", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, FindJio::class.java)
-                    startActivity(intent)
-                }
-                R.id.orderhistory -> {
-                    Toast.makeText(this, "order history", Toast.LENGTH_SHORT).show()
-                }
-            }
-            true
-        }
-
-        // navigation drawer things <end>
-
-        // friend's Profile things <start>
+        // [START] friend's Profile things
         //retrieve profile info
         val email = intent.getStringExtra("friend's email")
         Toast.makeText(this,email,Toast.LENGTH_SHORT).show()
@@ -85,19 +36,16 @@ class ViewFriendsProfile: AppCompatActivity() {
             finish()
         }
 
-        // friend's Profile things <end>
-    }
-
-    // appbar - toolbar button click
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                mDrawerLayout.openDrawer(GravityCompat.START)
-                true
+        // onclick for back button
+        binding.backButton.setOnClickListener {
+                Intent(this, ViewFriendsJio::class.java).also {
+                    // send JIO ID info to viewJio activity to source for data
+                    it.putExtra("EXTRA_JIOID", jioID)
+                    startActivity(it)
+                }
             }
 
-            else -> super.onOptionsItemSelected(item)
-        }
+        // [END] friend's Profile things
     }
 
     private fun setText(email: String?) {
@@ -105,7 +53,7 @@ class ViewFriendsProfile: AppCompatActivity() {
         if (email != null) {
             firebaseDb.collection("USERS").document(email).get()
                 .addOnSuccessListener {
-                    var user = it.toObject<User>()
+                    val user = it.toObject<User>()
                     binding.name.text = it.get("name").toString()
                     binding.username.text = "@" + it.get("username").toString()
                     binding.mobileNumber.text = it.get("mobile number").toString()
