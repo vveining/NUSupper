@@ -12,6 +12,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.nusupper.CreateJio
 import com.example.nusupper.FindJio
+import com.example.nusupper.OrderHistory
 import com.example.nusupper.R
 import com.example.nusupper.databinding.ActivityProfileBinding
 import com.example.nusupper.models.User
@@ -70,6 +71,8 @@ class Profile : AppCompatActivity() {
                 }
                 R.id.orderhistory -> {
                     Toast.makeText(this, "order history", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, OrderHistory::class.java)
+                    startActivity(intent)
                 }
             }
             true

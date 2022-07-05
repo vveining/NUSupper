@@ -71,6 +71,8 @@ class CreateJio : AppCompatActivity() {
                 }
                 R.id.orderhistory -> {
                     Toast.makeText(this, "order history", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this,OrderHistory::class.java)
+                    startActivity(intent)
                 }
             }
             true
