@@ -26,6 +26,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.523"
             tools:srcCompat="@drawable/food_icon" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +37,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/histLogo"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.529">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout11"
@@ -120,6 +122,7 @@
                     android:layout_height="match_parent"
                     android:text="user stub"
                     android:textColor="@color/yellow"
+                    android:clickable="true"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -132,17 +135,17 @@
                 android:layout_height="32dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout13"
                 app:layout_constraintVertical_bias="0.0">
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/view_your_order"
                     style="@style/jio_card_title"
-                    android:layout_width="156dp"
-                    android:layout_height="26dp"
-                    android:background="@drawable/grey_rectangle_750_300"
+                    android:layout_width="221dp"
+                    android:layout_height="29dp"
+                    android:background="@drawable/dark_grey_rectangle_small"
                     android:text="view your order"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

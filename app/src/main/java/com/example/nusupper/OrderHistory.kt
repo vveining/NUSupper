@@ -12,7 +12,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nusupper.adapters.HistoryAdapter
-import com.example.nusupper.adapters.JiosAdapter
 import com.example.nusupper.authentication.Profile
 import com.example.nusupper.databinding.ActivityOrderHistoryBinding
 import com.example.nusupper.models.Jio
@@ -20,7 +19,6 @@ import com.example.nusupper.models.User
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_find_jio.*
 import kotlinx.android.synthetic.main.activity_order_history.*
 
 class OrderHistory : AppCompatActivity() {
@@ -91,15 +89,19 @@ class OrderHistory : AppCompatActivity() {
                 .addOnSuccessListener { userSnapshot ->
                     signedInUser = userSnapshot.toObject(User::class.java)
 
+                    // initialise lists and adapter(s)
+                    initialiseListsAndAdapters()
+
                     // get jios information from firebase
                     getJioOrderHist(hist, histAdapter)
+
+                    //onclick stuff
+                    enableItemClickListener(hist,histAdapter)
+
                 }
         }
-        // initialise lists and adapter(s)
-        initialiseListsAndAdapters()
 
-        //onclick stuff
-        enableItemClickListener(hist,histAdapter)
+
     }
 
     //appbar - toolbar button click
@@ -147,7 +149,7 @@ class OrderHistory : AppCompatActivity() {
         hist = mutableListOf()
 
         // create adapter for jios
-        histAdapter = HistoryAdapter(this, hist)
+        histAdapter = HistoryAdapter(this, hist,signedInUser)
 
         // bind the adapter and layout manager to the recyclerView
         orderHist_recycler.adapter = histAdapter
@@ -160,7 +162,7 @@ class OrderHistory : AppCompatActivity() {
     private fun enableItemClickListener(jios: MutableList<Jio>, adapter: HistoryAdapter) {
         adapter.setItemClickListener(object: HistoryAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
-
+                Toast.makeText(this@OrderHistory,"you clicked order $position",Toast.LENGTH_SHORT).show()
             }
         })
     }
