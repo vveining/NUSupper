@@ -36,14 +36,14 @@ class OrderHistory : AppCompatActivity() {
         binding = ActivityOrderHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val toolbar: Toolbar = findViewById(R.id.orderhist_toolbar)
+        val toolbar: Toolbar = findViewById(R.id.view_orderhist_toolbar)
         setSupportActionBar(toolbar)
         val actionbar: ActionBar? = supportActionBar
         actionbar?.apply {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        mDrawerLayout = findViewById(R.id.orderhist_drawer_layout)
+        mDrawerLayout = findViewById(R.id.view_orderhist_drawer_layout)
 
         val navigationView: NavigationView = findViewById(R.id.orderhist_nav_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
@@ -152,10 +152,10 @@ class OrderHistory : AppCompatActivity() {
         histAdapter = HistoryAdapter(this, hist,signedInUser)
 
         // bind the adapter and layout manager to the recyclerView
-        orderHist_recycler.adapter = histAdapter
+        viewHist_recycler.adapter = histAdapter
 
         // bind adapter
-        orderHist_recycler.layoutManager =
+        viewHist_recycler.layoutManager =
             LinearLayoutManager(this, RecyclerView.VERTICAL, false)
     }
 
@@ -163,6 +163,8 @@ class OrderHistory : AppCompatActivity() {
         adapter.setItemClickListener(object: HistoryAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
                 Toast.makeText(this@OrderHistory,"you clicked order $position",Toast.LENGTH_SHORT).show()
+                var newIntent = Intent(this@OrderHistory,Payment::class.java)
+                startActivity(newIntent.putExtra("jioID",jios[position].jioID))
             }
         })
     }

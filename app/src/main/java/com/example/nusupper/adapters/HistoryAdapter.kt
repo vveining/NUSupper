@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nusupper.Payment
 import com.example.nusupper.R
 import com.example.nusupper.ViewFriendsJio
 import com.example.nusupper.ViewFriendsProfile
@@ -62,7 +63,9 @@ class HistoryAdapter(val context: Context, var jios: List<Jio>, val currentUser:
         //click on view your order
         holder.itemView.view_your_order.setOnClickListener {
             Toast.makeText(context,"clicked view order",Toast.LENGTH_SHORT).show()
-            var jioID = jios[position].jioID
+            var newIntent = Intent(context, Payment::class.java)
+                .putExtra("EXTRA_JIOID",jios[position].jioID)
+            it.context.startActivity(newIntent)
         }
     }
 

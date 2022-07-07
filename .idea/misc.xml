@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/drawable-v24/ic_baseline_remove_24.xml" value="0.1" />
         <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1145" />
         <entry key="..\:/Users/elysi/github projects/NUSupper/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1" />
@@ -51,9 +52,14 @@
         <entry key="app/src/main/res/layout/activity_template.xml" value="0.1243209360635186" />
         <entry key="app/src/main/res/layout/activity_view_friends_jio.xml" value="0.44014124856351866" />
         <entry key="app/src/main/res/layout/activity_view_jio.xml" value="0.19204711914062494" />
-        <entry key="app/src/main/res/layout/item_food.xml" value="0.2384406165004533" />
-        <entry key="app/src/main/res/layout/item_history.xml" value="0.9923217558524978" />
+        <entry key="app/src/main/res/layout/activity_view_order_history.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_food.xml" value="0.7377005652309221" />
+        <entry key="app/src/main/res/layout/item_history.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_jio.xml" value="0.7878356933593751" />
+        <entry key="app/src/main/res/layout/item_orders_username.xml" value="0.25339981867633726" />
+        <entry key="app/src/main/res/layout/item_payment_bill.xml" value="0.25339981867633726" />
+        <entry key="app/src/main/res/layout/item_payment_food.xml" value="0.25339981867633726" />
+        <entry key="app/src/main/res/layout/item_view_history.xml" value="0.6223727991762718" />
       </map>
     </option>
   </component>

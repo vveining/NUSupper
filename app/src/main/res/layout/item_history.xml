@@ -147,6 +147,7 @@
                     android:layout_height="29dp"
                     android:background="@drawable/dark_grey_rectangle_small"
                     android:text="view your order"
+                    android:clickable="true"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
