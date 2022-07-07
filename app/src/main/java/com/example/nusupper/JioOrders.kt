@@ -48,9 +48,6 @@ class JioOrders : AppCompatActivity(), ModifyFood {
         // initialise lists and adapter(s)
         initialiseListsAndAdapters()
 
-        // set onclick functions for button(s)
-        setButtons()
-
         // get signed in user as a User object
         getSignedInUser()
 
@@ -61,6 +58,9 @@ class JioOrders : AppCompatActivity(), ModifyFood {
 
                 // display the relevant texts in the layout
                 setText(thisJio)
+
+                // set onclick functions for button(s)
+                setButtons()
 
                 // update lists with most recent data and update adapter(s)
                 updateAdapters(it)

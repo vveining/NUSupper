@@ -31,21 +31,36 @@
         <activity
             android:name=".ViewFriendsJio"
             android:exported="false" />
+
         <activity
             android:name=".ViewJio"
-            android:exported="false" />
+            android:exported="true">
+        </activity>
+
         <activity
             android:name=".authentication.LaunchLogo"
-            android:exported="true" />
-        <activity
-            android:name=".FindJio"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".FindJio"
+            android:exported="true">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://www.nusupper.com/viewjio” -->
+                <data android:scheme="http"/>
+                <data android:host="www.nusupper.com" />
+                <data android:pathPrefix="/viewjio" />
+                <!-- note that the leading "/" is required for pathPrefix-->
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".Template"
             android:exported="false" />
