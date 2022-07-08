@@ -13,7 +13,6 @@ import com.example.nusupper.R
 import com.example.nusupper.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_register.*
 
 class Register : AppCompatActivity() {
 

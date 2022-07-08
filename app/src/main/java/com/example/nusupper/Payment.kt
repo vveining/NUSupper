@@ -82,8 +82,8 @@ class Payment : AppCompatActivity(), PaymentHelpers {
         // onclick for refresh page
         binding.refreshButton.setOnClickListener {
             // refresh activity
-            finish();
-            startActivity(intent);
+            finish()
+            startActivity(intent)
         }
 
         // onclick for back button

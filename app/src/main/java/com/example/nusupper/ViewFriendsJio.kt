@@ -97,7 +97,7 @@ class ViewFriendsJio : AppCompatActivity() {
         // set onclick functions for button(s)
         setButtons()
 
-        //retrive Jio Owner's email
+        //retrieve Jio Owner's email
         val db = FirebaseFirestore.getInstance()
         db.collection("JIOS").document(jioID).get()
             .addOnSuccessListener {

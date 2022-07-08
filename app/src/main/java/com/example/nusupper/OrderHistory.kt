@@ -129,15 +129,14 @@ class OrderHistory : AppCompatActivity() {
             hist.clear()
             if (jioList != null) {
                 for (i in jioList) { //check each jio
-                    var foodList = i.foodArr
-                    if (foodList != null) {
-                        for (j in foodList) { //check each food item in the jio until there is at least one item belonging to user
-                            if (j.username == signedInUser?.username) {
-                                hist.add(i)
-                                break
-                            }
+                    val foodList = i.foodArr
+                    for (j in foodList) { //check each food item in the jio until there is at least one item belonging to user
+                        if (j.username == signedInUser?.username) {
+                            hist.add(i)
+                            break
                         }
                     }
+
                 }
             }
             adapter.notifyDataSetChanged()
@@ -163,7 +162,7 @@ class OrderHistory : AppCompatActivity() {
         adapter.setItemClickListener(object: HistoryAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
                 Toast.makeText(this@OrderHistory,"you clicked order $position",Toast.LENGTH_SHORT).show()
-                var newIntent = Intent(this@OrderHistory,Payment::class.java)
+                val newIntent = Intent(this@OrderHistory,Payment::class.java)
                 startActivity(newIntent.putExtra("jioID",jios[position].jioID))
             }
         })

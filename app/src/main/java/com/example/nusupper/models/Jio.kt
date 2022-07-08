@@ -1,7 +1,5 @@
 package com.example.nusupper.models
 
-import android.util.ArrayMap
-import android.util.Log
 import com.example.nusupper.R
 import com.google.firebase.firestore.PropertyName
 

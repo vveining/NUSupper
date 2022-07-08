@@ -120,8 +120,8 @@ class JioOrders : AppCompatActivity(), ModifyFood {
                     Toast.makeText(this, "new order added", Toast.LENGTH_SHORT).show()
 
                     // refresh activity
-                    finish();
-                    startActivity(intent);
+                    finish()
+                    startActivity(intent)
 
                 }
 
@@ -172,8 +172,8 @@ class JioOrders : AppCompatActivity(), ModifyFood {
         // onclick for refresh page
         binding.refreshButton.setOnClickListener {
             // refresh activity
-            finish();
-            startActivity(intent);
+            finish()
+            startActivity(intent)
         }
 
         // onclick for back button
@@ -346,7 +346,7 @@ class JioOrders : AppCompatActivity(), ModifyFood {
 
     override fun refreshPage() {
         // refresh activity
-        finish();
-        startActivity(intent);
+        finish()
+        startActivity(intent)
     }
 }
