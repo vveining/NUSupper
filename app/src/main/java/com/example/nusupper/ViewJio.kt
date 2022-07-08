@@ -27,7 +27,9 @@ import com.example.nusupper.models.User
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.add_order_alertdialog.*
+import kotlinx.android.synthetic.main.close_order_dialog.*
 import kotlinx.android.synthetic.main.settings_alertdialog.*
 
 
@@ -38,6 +40,7 @@ class ViewJio : AppCompatActivity() {
     private lateinit var jioID: String
     private var firebaseInst = FirebaseFirestore.getInstance()
     private lateinit var jioLink: String
+    private lateinit var jio: Jio
     private var signedInUser: User? = null
     private lateinit var firebaseAuth: FirebaseAuth
 
@@ -104,12 +107,9 @@ class ViewJio : AppCompatActivity() {
                 .get()
                 .addOnSuccessListener { userSnapshot ->
                     signedInUser = userSnapshot.toObject(User::class.java)
+                    //get current jio
+                    getJio(jioID)
 
-                    // display texts in layout
-                    setViewJio(jioID)
-
-                    // set onclick functions for button(s)
-                    setButtons()
                 }
         }
 
@@ -145,6 +145,28 @@ class ViewJio : AppCompatActivity() {
                 //send JIO ID info to viewJio activity to source for data
                 it.putExtra("EXTRA_JIOID",jioID)
                 startActivity(it)
+            }
+        }
+
+        //onclick for close order
+        binding.closeorderButton.setOnClickListener{
+            if (jio.open) {
+                // ask if user wants to close order
+                // build and show alertdialog popup
+                val closeDialogView = LayoutInflater.from(this).inflate(R.layout.close_order_dialog, null) //CHANGE R.id
+                val closeDialogBuilder = AlertDialog.Builder(this)
+                    .setView(closeDialogView)
+                    .setTitle("Close your Jio?")
+                val alertDialog = closeDialogBuilder.show()
+                alertDialog.closeJio.setOnClickListener{
+                    Toast.makeText(this@ViewJio,"close Jio clicked", Toast.LENGTH_SHORT).show()
+                }
+                alertDialog.closeBack.setOnClickListener {
+                    alertDialog.dismiss()
+                }
+            } else { // close order button is hidden if order is closed, this is a safety gate
+                // alert that order is already closed
+                Toast.makeText(this@ViewJio,"Jio is already closed!", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -192,20 +214,38 @@ class ViewJio : AppCompatActivity() {
         }
     }
 
-    private fun setViewJio(jioID: String?) {
+    private fun setViewJio() {
+        if (jio != null) {
+                    binding.viewJioDelStub.text = jio.location
+                    val restaurant: String = jio.restaurant
+                    binding.viewJioRestaurantStub.text = restaurant
+                    val closeTime = jio.closeTime
+                    val closeDate = jio.closeDate
+                    binding.viewJioDetailsStub.text = "$closeTime, $closeDate"
+                    binding.restaurantImage.setImageResource(Jio.getLogo(restaurant))
+                    val jioId = jio.jioID
+                    jioLink = "http://www.nusupper.com/viewjio/$jioId"
+                    binding.linkStub.text = jioLink
+
+        }
+    }
+
+    private fun getJio(jioID: String?) {
         if (jioID != null) {
             firebaseInst.collection("JIOS").document(jioID).get()
                 .addOnSuccessListener {
-                    binding.viewJioDelStub.text = it.get("location").toString()
-                    val restaurant: String = it.get("restaurant").toString()
-                    binding.viewJioRestaurantStub.text = restaurant
-                    val closeTime = it.get("close time").toString()
-                    val closeDate = it.get("close date").toString()
-                    binding.viewJioDetailsStub.text = "$closeTime, $closeDate"
-                    binding.restaurantImage.setImageResource(Jio.getLogo(restaurant))
-                    val jioId = it.get("jioID").toString()
-                    jioLink = "http://www.nusupper.com/viewjio/$jioId"
-                    binding.linkStub.text = jioLink
+                    jio = it.toObject<Jio>()!!
+                    // display texts in layout
+                    setViewJio()
+
+                    if (!jio.open) {
+                    //if jio closed, make alert visible and Current Orders gone
+                        binding.closeorderButton.visibility = View.GONE
+                        binding.closedAlert.visibility = View.VISIBLE
+                    }
+
+                    // set onclick functions for button(s)
+                    setButtons()
                 }
         }
     }

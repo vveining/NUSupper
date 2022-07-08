@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
@@ -103,6 +104,10 @@ class ViewFriendsJio : AppCompatActivity() {
                 val getJio = it.toObject<Jio>()       //convert jio to object
                 if (getJio != null) {                // once done, treat jio object normally, use kotlin functions
                     email = getJio.creator?.email.toString()
+
+                    if (!getJio.open) {
+                        binding.viewFriendsJioClosedAlert.visibility = View.VISIBLE
+                    }
                 }
             }
 

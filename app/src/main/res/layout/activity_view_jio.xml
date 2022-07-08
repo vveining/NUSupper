@@ -261,7 +261,6 @@
                 android:layout_width="350dp"
                 android:layout_height="53dp"
                 android:text="view payment"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.475"
                 app:layout_constraintStart_toStartOf="parent"
@@ -273,12 +272,29 @@
                 android:layout_width="350dp"
                 android:layout_height="53dp"
                 android:text="close order"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.475"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/paymentButton"
                 app:layout_constraintVertical_bias="0.017" />
+
+            <TextView
+                android:id="@+id/closed_alert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/roboto_slab"
+                android:gravity="center"
+                android:text="JIO IS CLOSED!"
+                android:textColor="#DC3333"
+                android:textSize="20dp"
+                android:visibility="invisible"
+                app:drawableLeftCompat="@drawable/error_icon_32"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/closeorderButton"
+                app:layout_constraintVertical_bias="0.054" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
