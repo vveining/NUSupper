@@ -132,7 +132,7 @@ class Profile : AppCompatActivity() {
         if (email != null) {
             firebaseDb.collection("USERS").document(email).get()
                 .addOnSuccessListener {
-                    var user = it.toObject<User>()
+                    val user = it.toObject<User>()
                     binding.name.text = it.get("name").toString()
                     binding.username.text = "@" + it.get("username").toString()
                     binding.mobileNumber.text = it.get("mobile number").toString()

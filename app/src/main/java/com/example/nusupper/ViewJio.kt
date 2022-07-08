@@ -5,10 +5,8 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -215,19 +213,16 @@ class ViewJio : AppCompatActivity() {
     }
 
     private fun setViewJio() {
-        if (jio != null) {
-                    binding.viewJioDelStub.text = jio.location
-                    val restaurant: String = jio.restaurant
-                    binding.viewJioRestaurantStub.text = restaurant
-                    val closeTime = jio.closeTime
-                    val closeDate = jio.closeDate
-                    binding.viewJioDetailsStub.text = "$closeTime, $closeDate"
-                    binding.restaurantImage.setImageResource(Jio.getLogo(restaurant))
-                    val jioId = jio.jioID
-                    jioLink = "http://www.nusupper.com/viewjio/$jioId"
-                    binding.linkStub.text = jioLink
-
-        }
+        binding.viewJioDelStub.text = jio.location
+        val restaurant: String = jio.restaurant
+        binding.viewJioRestaurantStub.text = restaurant
+        val closeTime = jio.closeTime
+        val closeDate = jio.closeDate
+        binding.viewJioDetailsStub.text = "$closeTime, $closeDate"
+        binding.restaurantImage.setImageResource(Jio.getLogo(restaurant))
+        val jioId = jio.jioID
+        jioLink = "http://www.nusupper.com/viewjio/$jioId"
+        binding.linkStub.text = jioLink
     }
 
     private fun getJio(jioID: String?) {
