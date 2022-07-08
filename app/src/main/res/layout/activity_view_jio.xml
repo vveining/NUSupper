@@ -220,7 +220,8 @@
             <TextView
                 android:id="@+id/link_stub"
                 style="@style/view_jio_subtitle2"
-                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="https://jio_link_stub.com"

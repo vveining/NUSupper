@@ -1,10 +1,17 @@
 package com.example.nusupper
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.widget.TooltipCompat
@@ -16,6 +23,7 @@ import com.example.nusupper.models.Jio
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
+import kotlinx.android.synthetic.main.settings_alertdialog.*
 
 class ViewFriendsJio : AppCompatActivity() {
 
@@ -23,6 +31,7 @@ class ViewFriendsJio : AppCompatActivity() {
     private lateinit var binding: ActivityViewFriendsJioBinding
     private lateinit var jioID: String
     private var email = "0"
+    private lateinit var jioLink: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,6 +93,24 @@ class ViewFriendsJio : AppCompatActivity() {
         // button tooltips
         TooltipCompat.setTooltipText(binding.copyjiolinkButton, "copy link")
 
+        // set onclick functions for button(s)
+        setButtons()
+
+        //retrive Jio Owner's email
+        val db = FirebaseFirestore.getInstance()
+        db.collection("JIOS").document(jioID).get()
+            .addOnSuccessListener {
+                val getJio = it.toObject<Jio>()       //convert jio to object
+                if (getJio != null) {                // once done, treat jio object normally, use kotlin functions
+                    email = getJio.creator?.email.toString()
+                }
+            }
+
+        // [END ViewJio things]
+
+    }
+
+    private fun setButtons() {
         // onclick for view current orders
         binding.viewcurrentordersButton.setOnClickListener {
             Intent(this,JioOrders::class.java).also {
@@ -102,17 +129,6 @@ class ViewFriendsJio : AppCompatActivity() {
             }
         }
 
-        //retrive Jio Owner's email
-        val db = FirebaseFirestore.getInstance()
-        db.collection("JIOS").document(jioID).get()
-            .addOnSuccessListener {
-                val getJio = it.toObject<Jio>()       //convert jio to object
-                if (getJio != null) {                // once done, treat jio object normally, use kotlin functions
-                    email = getJio.creator?.email.toString()
-//                    Toast.makeText(this,mobileNum,Toast.LENGTH_SHORT).show()
-                }
-            }
-
         //click on username
         binding.jioOwnerStub.setOnClickListener {
             Intent(this,ViewFriendsProfile::class.java).also {
@@ -122,9 +138,36 @@ class ViewFriendsJio : AppCompatActivity() {
             }
         }
 
+        // copy jio link to clipboard
+        binding.copyjiolinkButton.setOnClickListener {
+            val clipboard : ClipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip : ClipData = ClipData.newPlainText("copy link", jioLink)
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(this, "copied Jio link", Toast.LENGTH_SHORT).show()
 
-        // [END ViewJio things]
+            // build and show alertdialog popup
+            val dialogView = LayoutInflater.from(this).inflate(R.layout.settings_alertdialog, null)
+            val dialogBuilder = AlertDialog.Builder(this)
+                .setView(dialogView)
+                .setTitle("to open Jio links")
+            val alertDialog = dialogBuilder.show()
 
+            // dismiss alertDialog
+            alertDialog.dismissButton.setOnClickListener {
+                alertDialog.dismiss()
+            }
+
+            // redirect user to app settings
+            alertDialog.gotoSettingsButton.setOnClickListener {
+                val myAppSettings = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + "com.example.nusupper"))
+                myAppSettings.addCategory(Intent.CATEGORY_DEFAULT)
+                myAppSettings.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(myAppSettings)
+                alertDialog.dismiss()
+            }
+
+            alertDialog.show()
+        }
     }
 
     //appbar - toolbar button click
@@ -152,6 +195,9 @@ class ViewFriendsJio : AppCompatActivity() {
                     binding.viewJioDetailsStub.text = "$closeTime, $closeDate"
                     binding.restaurantImage.setImageResource(Jio.getLogo(restaurant))
                     binding.jioOwnerStub.text = it.get("creatorUsername").toString()
+                    val jioId = it.get("jioID").toString()
+                    jioLink = "http://www.nusupper.com/viewjio/$jioId"
+                    binding.linkStub.text = jioLink
                 }
         }
     }

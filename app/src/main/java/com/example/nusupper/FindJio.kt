@@ -1,7 +1,9 @@
 package com.example.nusupper
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -117,6 +119,43 @@ class FindJio : AppCompatActivity() {
         enableItemClickListener(yourCurrentJios, yourCurrentJiosAdapter)
         enableItemClickListener(communityJios, communityJiosAdapter)
         enableItemClickListener(allJios, allJiosAdapter)
+
+
+/////////
+
+
+        // accept deep link
+        val data: Uri? = intent?.data
+
+        if (data != null) {
+            val parameters = data.pathSegments
+            val intentJioId = parameters[parameters.size - 1]
+
+            firebaseDb.collection("JIOS").document(intentJioId).get()
+                .addOnSuccessListener { it ->
+                    val creatorEmail = it.get("creatorEmail").toString()
+                    if (signedInUser?.email == creatorEmail) { // if user clicks on his own Jio
+                        Intent(this, ViewJio::class.java).also {
+                            //send JIO ID info to viewJio activity to source for data
+                            it.putExtra("EXTRA_JIOID", intentJioId)
+                            startActivity(it)
+                            finish()
+                        }
+                    } else { // if user clicks on other's Jio
+                        Intent(this, ViewFriendsJio::class.java).also {
+                            //send JIO ID info to viewJio activity to source for data
+                            it.putExtra("EXTRA_JIOID", intentJioId)
+                            startActivity(it)
+                            finish()
+                        }
+                    }
+
+                }
+
+        }
+
+
+        /////
 
         // [END FindJio things]
     }
