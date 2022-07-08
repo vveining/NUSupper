@@ -38,8 +38,8 @@
                 app:layout_constraintTop_toBottomOf="@id/addorder_toolbar" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="406dp"
+                android:layout_height="794dp"
                 android:layout_marginTop="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,14 +73,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@id/jioOwnerStub"
+                    app:layout_constraintBottom_toTopOf="@+id/newOrderButton"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/newOrderButton">
+                    app:layout_constraintTop_toBottomOf="@id/jioOwnerStub">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraint10"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/constraint10">
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:id="@+id/compiledOrders"
@@ -113,9 +113,9 @@
                         android:id="@+id/constraintLayout"
                         android:layout_width="350dp"
                         android:layout_height="wrap_content"
-                        android:padding="5dp"
                         android:layout_gravity="center"
                         android:background="@drawable/light_grey_rectangle_750_300"
+                        android:padding="5dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.491"
                         app:layout_constraintStart_toStartOf="parent"
@@ -125,12 +125,12 @@
                             android:id="@+id/compiledorders_listview"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
                             android:layout_weight="1"
+                            android:orientation="vertical"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -151,15 +151,15 @@
 
                         <EditText
                             android:id="@+id/deliveryfee_edittext"
+                            style="@style/heading3_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/heading3_text"
-                            android:textSize="15sp"
                             android:layout_marginEnd="50dp"
                             android:hint="update delivery fee"
                             android:inputType="numberDecimal"
+                            android:textSize="15sp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageButton
                             android:id="@+id/updateDeliveryFeeButton"
@@ -168,7 +168,7 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/ic_baseline_done_24"
                             app:layout_constraintStart_toEndOf="@id/deliveryfee_edittext"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -192,9 +192,9 @@
                         android:id="@+id/constraintLayout2"
                         android:layout_width="350dp"
                         android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:background="@drawable/light_grey_rectangle_750_300"
                         android:layout_gravity="center"
+                        android:background="@drawable/light_grey_rectangle_750_300"
+                        android:padding="5dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.491"
                         app:layout_constraintStart_toStartOf="parent"
@@ -204,12 +204,12 @@
                             android:id="@+id/everyonesOrders_expandablelistview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
                             android:divider="@color/dark_grey"
                             android:dividerHeight="1dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -237,6 +237,26 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/newOrderButton"
                     app:layout_goneMarginTop="50dp" />
+
+                <TextView
+                    android:id="@+id/viewOrderCloseAlert"
+                    android:layout_width="231dp"
+                    android:layout_height="67dp"
+                    android:layout_marginTop="9dp"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/roboto_slab"
+                    android:gravity="center"
+                    android:text="Jio is closed, orders cannot be edited."
+                    android:textColor="#DC3333"
+                    android:visibility="invisible"
+                    android:textSize="20dp"
+                    app:drawableLeftCompat="@drawable/error_icon_32"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.502"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/updateOrderButton"
+                    app:layout_constraintVertical_bias="0.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

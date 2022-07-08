@@ -3,6 +3,7 @@ package com.example.nusupper
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -64,62 +65,67 @@ class JioOrders : AppCompatActivity(), ModifyFood {
 
                 // update lists with most recent data and update adapter(s)
                 updateAdapters(it)
+
+                if (!thisJio.open) { //
+                    binding.viewOrderCloseAlert.visibility = View.VISIBLE
+                    binding.newOrderButton.visibility = View.INVISIBLE
+                    binding.updateOrderButton.visibility = View.INVISIBLE
+                }
             }
-
-        // create an alertDialog for user to input food details
-        alertDialogHelper()
-
+            // create an alertDialog for user to input food details
+            alertDialogHelper()
         // [END JioOrders things]
     }
 
     private fun alertDialogHelper() {
         binding.newOrderButton.setOnClickListener {
+                // build and show alertdialog popup
+                val dialogView =
+                    LayoutInflater.from(this).inflate(R.layout.add_order_alertdialog, null)
+                val dialogBuilder = AlertDialog.Builder(this)
+                    .setView(dialogView)
+                    .setTitle("New Order")
+                val alertDialog = dialogBuilder.show()
 
-            // build and show alertdialog popup
-            val dialogView = LayoutInflater.from(this).inflate(R.layout.add_order_alertdialog, null)
-            val dialogBuilder = AlertDialog.Builder(this)
-                .setView(dialogView)
-                .setTitle("New Order")
-            val alertDialog = dialogBuilder.show()
+                alertDialog.addButton.setOnClickListener {
 
-            alertDialog.addButton.setOnClickListener {
+                    // get user input from editText boxes
+                    val foodName = dialogView.food_name.text.toString()
+                    val quantityText = dialogView.quantity.text.toString()
+                    val quantity = quantityText.toInt() // assume type is correct for now
+                    val priceText = dialogView.price.text.toString()
+                    val price = priceText.toDouble() // assume type is correct for now
+                    val totalPrice = price * quantity
+                    val remarks = dialogView.remarks.text.toString()
 
-                // get user input from editText boxes
-                val foodName = dialogView.food_name.text.toString()
-                val quantityText = dialogView.quantity.text.toString()
-                val quantity = quantityText.toInt() // assume type is correct for now
-                val priceText = dialogView.price.text.toString()
-                val price = priceText.toDouble() // assume type is correct for now
-                val totalPrice = price * quantity
-                val remarks = dialogView.remarks.text.toString()
+                    // create a new Food object
+                    val newFood = Food(
+                        foodName,
+                        quantity,
+                        price,
+                        totalPrice,
+                        remarks,
+                        signedInUser!!.username
+                    )
 
-                // create a new Food object
-                val newFood = Food(
-                    foodName,
-                    quantity,
-                    price,
-                    totalPrice,
-                    remarks,
-                    signedInUser!!.username)
+                    // dismiss popup
+                    alertDialog.dismiss()
 
-                // dismiss popup
-                alertDialog.dismiss()
+                    // add Food object to thisJio (in both foodArr and userFoodArr)
+                    thisJio = thisJio.addFood(newFood, signedInUser!!.username)
+                    firebaseDb.collection("JIOS").document(jioID).update(
+                        "foodArr", thisJio.foodArr,
+                        "userFoodMap", thisJio.userFoodMap
+                    )
+                    Toast.makeText(this, "new order added", Toast.LENGTH_SHORT).show()
 
-                // add Food object to thisJio (in both foodArr and userFoodArr)
-                thisJio = thisJio.addFood(newFood, signedInUser!!.username)
-                firebaseDb.collection("JIOS").document(jioID).update(
-                    "foodArr", thisJio.foodArr,
-                    "userFoodMap", thisJio.userFoodMap
-                )
-                Toast.makeText(this, "new order added", Toast.LENGTH_SHORT).show()
+                    // refresh activity
+                    finish();
+                    startActivity(intent);
 
-                // refresh activity
-                finish();
-                startActivity(intent);
+                }
 
-            }
-
-            alertDialog.show()
+                alertDialog.show()
         }
     }
 

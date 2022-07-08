@@ -42,6 +42,7 @@
 
                 <TextView
                     android:id="@+id/jioOwnerStub"
+                    style="@style/heading2onclick_text"
                     android:layout_width="wrap_content"
                     android:layout_height="54dp"
                     android:clickable="true"
@@ -49,7 +50,6 @@
                     android:maxWidth="262dp"
                     android:maxHeight="51dp"
                     android:text="@string/name_stub"
-                    style="@style/heading2onclick_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.193"
                     app:layout_constraintStart_toStartOf="parent"
@@ -226,11 +226,11 @@
                 <TextView
                     android:id="@+id/link_stub"
                     style="@style/view_jio_subtitle2"
-                    android:textSize="14sp"
                     android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:text="https://jio_link_stub.com"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -255,7 +255,6 @@
                 android:layout_width="350dp"
                 android:layout_height="53dp"
                 android:text="view current orders"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.475"
                 app:layout_constraintStart_toStartOf="parent"
@@ -267,12 +266,30 @@
                 android:layout_width="350dp"
                 android:layout_height="53dp"
                 android:text="view payment"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.475"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/viewcurrentordersButton"
                 app:layout_constraintVertical_bias="0.017" />
+
+            <TextView
+                android:id="@+id/viewFriendsJioClosedAlert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/roboto_slab"
+                android:gravity="center"
+                android:text="JIO IS CLOSED!"
+                android:textColor="#DC3333"
+                android:textSize="20dp"
+                android:visibility="invisible"
+                app:drawableLeftCompat="@drawable/error_icon_32"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.504"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/paymentButton"
+                app:layout_constraintVertical_bias="0.037" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
