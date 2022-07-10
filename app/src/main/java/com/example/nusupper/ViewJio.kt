@@ -29,6 +29,10 @@ import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.add_order_alertdialog.*
 import kotlinx.android.synthetic.main.close_order_dialog.*
 import kotlinx.android.synthetic.main.settings_alertdialog.*
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 
 class ViewJio : AppCompatActivity() {
@@ -41,6 +45,9 @@ class ViewJio : AppCompatActivity() {
     private lateinit var jio: Jio
     private var signedInUser: User? = null
     private lateinit var firebaseAuth: FirebaseAuth
+    private var dtNow: LocalDateTime = LocalDateTime.now()
+    private val df = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+    private val tf = DateTimeFormatter.ofPattern("HH:mm")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +57,20 @@ class ViewJio : AppCompatActivity() {
 
         //INTENT
         jioID = intent.getStringExtra("EXTRA_JIOID").toString()
+
+        // get signed in user as a User object -> i moved this chunk up because laggy
+        firebaseAuth = FirebaseAuth.getInstance()
+        firebaseAuth.currentUser?.email?.let {
+            firebaseInst.collection("USERS")
+                .document(it)
+                .get()
+                .addOnSuccessListener { userSnapshot ->
+                    signedInUser = userSnapshot.toObject(User::class.java)
+                    //get current jio
+                    getJio(jioID)
+
+                }
+        }
 
         // [START navigation drawer things]
         val toolbar: Toolbar = findViewById(R.id.viewjio_toolbar)
@@ -97,23 +118,12 @@ class ViewJio : AppCompatActivity() {
 
         // [START ViewJio things]
 
-        // get signed in user as a User object
-        firebaseAuth = FirebaseAuth.getInstance()
-        firebaseAuth.currentUser?.email?.let {
-            firebaseInst.collection("USERS")
-                .document(it)
-                .get()
-                .addOnSuccessListener { userSnapshot ->
-                    signedInUser = userSnapshot.toObject(User::class.java)
-                    //get current jio
-                    getJio(jioID)
-
-                }
-        }
-
         // button tooltips
         TooltipCompat.setTooltipText(binding.editjioButton, "edit Jio")
         TooltipCompat.setTooltipText(binding.copyjiolinkButton, "copy link")
+
+        //date and time toast
+        //Toast.makeText(this,dtNow.toString(),Toast.LENGTH_SHORT).show()
 
         // [END ViewJio things]
     }
@@ -158,6 +168,12 @@ class ViewJio : AppCompatActivity() {
                 val alertDialog = closeDialogBuilder.show()
                 alertDialog.closeJio.setOnClickListener{
                     Toast.makeText(this@ViewJio,"close Jio clicked", Toast.LENGTH_SHORT).show()
+                    firebaseInst.collection("JIOS").document(jioID)
+                        .update("open", false) // update firebase database
+                    Intent(this@ViewJio,ViewJio::class.java).also {
+                        it.putExtra("EXTRA_JIOID",jioID)
+                        startActivity(it)
+                    }
                 }
                 alertDialog.closeBack.setOnClickListener {
                     alertDialog.dismiss()
@@ -225,22 +241,31 @@ class ViewJio : AppCompatActivity() {
         binding.linkStub.text = jioLink
     }
 
-    private fun getJio(jioID: String?) {
+    private fun getJio(jioID: String?) { //handle jio info & open/close
         if (jioID != null) {
             firebaseInst.collection("JIOS").document(jioID).get()
                 .addOnSuccessListener {
                     jio = it.toObject<Jio>()!!
-                    // display texts in layout
-                    setViewJio()
+                    setViewJio() // display texts in layout
 
-                    if (!jio.open) {
-                    //if jio closed, make alert visible and Current Orders gone
+                    // format localdate & localtime
+                    var dateLD = LocalDate.parse(jio.closeDate,df)
+                    var timeLT = LocalTime.parse(jio.closeTime,tf)
+                    var closeLDT = LocalDateTime.of(dateLD,timeLT) //format localDT
+                    var shouldClose = dtNow.isAfter(closeLDT) // if current time is AFTER close time
+
+                    if (shouldClose && jio.open) { // currently open but needs to close
+                        jio = jio.closeJio() //update local jio
+                        firebaseInst.collection("JIOS").document(jioID)
+                            .update("open", false) // update firebase database
+                    }
+
+                    if (!jio.open) { //if jio closed, make alert visible and Current Orders gone
                         binding.closeorderButton.visibility = View.GONE
                         binding.closedAlert.visibility = View.VISIBLE
                     }
 
-                    // set onclick functions for button(s)
-                    setButtons()
+                    setButtons() // set onclick functions for button(s)
                 }
         }
     }

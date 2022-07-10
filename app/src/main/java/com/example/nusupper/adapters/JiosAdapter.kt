@@ -39,10 +39,16 @@ class JiosAdapter (val context: Context, var jios: List<Jio>) :
 
             itemView.textView_restaurant.text = jio.restaurant
             itemView.textView_location.text = jio.location
-            itemView.textView_closeTime.text = "closes " + jio.closeTime
             itemView.textView_creator.text = jio.creator?.username
-            itemView.textView_closeDate.text = jio.closeDate
             itemView.restaurant_logo_stub.setImageResource(Jio.getLogo(jio.restaurant))
+            if (!jio.open) {
+                itemView.textView_closeDate.visibility = View.GONE
+                itemView.textView_closeTime.text = "JIO CLOSED"
+            } else {
+                itemView.textView_closeDate.text = jio.closeDate
+                itemView.textView_closeTime.text = "closes " + jio.closeTime
+            }
+
         }
 
         //onclick listener for recycler view
