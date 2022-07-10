@@ -138,6 +138,12 @@ data class Jio(
         return totalPrice
     }
 
+    fun closeJio(): Jio {
+        return Jio(closeDate, closeTime, creator, creatorEmail,
+            creatorUsername, location, false, restaurant, jioID,
+            deliveryFee, foodArr, userFoodMap)
+    }
+
     //other functions to make
     // - counts total to be paid per person?
 

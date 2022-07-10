@@ -25,6 +25,10 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.settings_alertdialog.*
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 class ViewFriendsJio : AppCompatActivity() {
 
@@ -33,6 +37,10 @@ class ViewFriendsJio : AppCompatActivity() {
     private lateinit var jioID: String
     private var email = "0"
     private lateinit var jioLink: String
+    private lateinit var jio: Jio
+    private var dtNow: LocalDateTime = LocalDateTime.now()
+    private val df = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+    private val tf = DateTimeFormatter.ofPattern("HH:mm")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,7 +111,8 @@ class ViewFriendsJio : AppCompatActivity() {
             .addOnSuccessListener {
                 val getJio = it.toObject<Jio>()       //convert jio to object
                 if (getJio != null) {                // once done, treat jio object normally, use kotlin functions
-                    email = getJio.creator?.email.toString()
+                    jio = getJio
+                    email = jio.creator?.email.toString()
 
                     if (!getJio.open) {
                         binding.viewFriendsJioClosedAlert.visibility = View.VISIBLE
@@ -192,17 +201,34 @@ class ViewFriendsJio : AppCompatActivity() {
         if (jioID != null) {
             firebaseDb.collection("JIOS").document(jioID).get()
                 .addOnSuccessListener {
-                    binding.viewJioDelStub.text = it.get("location").toString()
-                    val restaurant: String = it.get("restaurant").toString()
+                    jio = it.toObject<Jio>()!!
+                    binding.viewJioDelStub.text = jio.location
+                    val restaurant: String = jio.restaurant
                     binding.viewJioRestaurantStub.text = restaurant
-                    val closeTime = it.get("close time").toString()
-                    val closeDate = it.get("close date").toString()
+                    val closeTime = jio.closeTime
+                    val closeDate = jio.closeDate
                     binding.viewJioDetailsStub.text = "$closeTime, $closeDate"
                     binding.restaurantImage.setImageResource(Jio.getLogo(restaurant))
-                    binding.jioOwnerStub.text = it.get("creatorUsername").toString()
-                    val jioId = it.get("jioID").toString()
+                    binding.jioOwnerStub.text = jio.creatorUsername
+                    val jioId = jio.jioID
                     jioLink = "http://www.nusupper.com/viewjio/$jioId"
                     binding.linkStub.text = jioLink
+
+                    // format localdate & localtime
+                    var dateLD = LocalDate.parse(jio.closeDate,df)
+                    var timeLT = LocalTime.parse(jio.closeTime,tf)
+                    var closeLDT = LocalDateTime.of(dateLD,timeLT) //format localDT
+                    var shouldClose = dtNow.isAfter(closeLDT) // if current time is AFTER close time
+
+                    if (shouldClose && jio.open) { // currently open but needs to close
+                        jio = jio.closeJio() //update local jio
+                        firebaseDb.collection("JIOS").document(jioID)
+                            .update("open", false) // update firebase database
+                    }
+
+                    if (!jio.open) { //if jio closed, make alert visible and Current Orders gone
+                        binding.viewFriendsJioClosedAlert.visibility = View.VISIBLE
+                    }
                 }
         }
     }

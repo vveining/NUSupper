@@ -136,8 +136,21 @@ class CreateJio : AppCompatActivity() {
 
         // to get closeDate from spinner
         val datePicker = findViewById<DatePicker>(R.id.datePicker)
-        val dateString = datePicker.dayOfMonth.toString() + "." + datePicker.month.toString() +
-                "." + datePicker.year.toString()
+
+        //settle datepicker -----------
+        var dom = datePicker.dayOfMonth.toString()
+        var monthInt: Int = datePicker.month
+        var month = (monthInt + 1).toString() //idk why but spinner takes the month before
+        //format 0s
+        if (dom.length == 1) {
+            dom = "0$dom"
+        }
+        if (month.length == 1) {
+            month = "0$month"
+        }
+
+        //date string
+        val dateString = "$dom.$month." + datePicker.year.toString()
 
         // to get closeTime from spinner
         val timePicker = findViewById<TimePicker>(R.id.timePicker1)

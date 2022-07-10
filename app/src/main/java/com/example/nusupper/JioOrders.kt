@@ -68,8 +68,8 @@ class JioOrders : AppCompatActivity(), ModifyFood {
 
                 if (!thisJio.open) { //
                     binding.viewOrderCloseAlert.visibility = View.VISIBLE
-                    binding.newOrderButton.visibility = View.INVISIBLE
-                    binding.updateOrderButton.visibility = View.INVISIBLE
+                    binding.newOrderButton.visibility = View.GONE
+                    binding.updateOrderButton.visibility = View.GONE
                 }
             }
             // create an alertDialog for user to input food details
