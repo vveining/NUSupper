@@ -172,6 +172,7 @@ class CreateJio : AppCompatActivity() {
             binding.restaurantAutocomplete.text.toString(),
             uniqueID,
             0.0,
+            0.0,
             mutableListOf(), hashMapOf())
 
         // add the Jio object into firebase database

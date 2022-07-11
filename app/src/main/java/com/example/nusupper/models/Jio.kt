@@ -14,6 +14,7 @@ data class Jio(
     var restaurant: String = "",
     var jioID: String = "",
     var deliveryFee: Double = 0.0,
+    var totalPrice: Double = 0.0,
     var foodArr: MutableList<Food> = mutableListOf(),
     var userFoodMap : HashMap<String, MutableList<Food>> = hashMapOf()) {
 
@@ -44,7 +45,7 @@ data class Jio(
 
         return Jio(this.closeDate, this.closeTime, this.creator,
             this.creatorEmail,this.creatorUsername,this.location,this.open,this.restaurant,
-            this.jioID, this.deliveryFee, newArr, newUserFoodMap)
+            this.jioID, this.deliveryFee, this.totalPrice, newArr, newUserFoodMap)
     }
 
     fun addNewFoodToMap(food: Food, username: String): Jio { // add new food item
@@ -68,7 +69,7 @@ data class Jio(
 
         return Jio(this.closeDate, this.closeTime, this.creator,
             this.creatorEmail,this.creatorUsername,this.location,this.open,this.restaurant,
-            this.jioID, this.deliveryFee, newArr, newMap)
+            this.jioID, this.deliveryFee, this.totalPrice, newArr, newMap)
     }
 
     fun getFood(foodName: String): Food { // used to get the food object so that food obj can be modified
@@ -130,18 +131,20 @@ data class Jio(
         return userFoodMap
     }
 
-    fun getTotalPrice(): Double {
-        var totalPrice = this.deliveryFee
+    fun updateTotalPrice(): Jio {
+        var newTotalPrice = this.deliveryFee
         for (i in foodArr.indices) {
-            totalPrice += foodArr[i].totalPrice
+            newTotalPrice += foodArr[i].totalPrice
         }
-        return totalPrice
+        return Jio(this.closeDate, this.closeTime, this.creator,
+            this.creatorEmail,this.creatorUsername,this.location,this.open,this.restaurant,
+            this.jioID, this.deliveryFee, newTotalPrice, this.foodArr, this.userFoodMap)
     }
 
     fun closeJio(): Jio {
         return Jio(closeDate, closeTime, creator, creatorEmail,
             creatorUsername, location, false, restaurant, jioID,
-            deliveryFee, foodArr, userFoodMap)
+            deliveryFee, totalPrice, foodArr, userFoodMap)
     }
 
     //other functions to make
