@@ -139,7 +139,7 @@ class CreateJio : AppCompatActivity() {
 
         //settle datepicker -----------
         var dom = datePicker.dayOfMonth.toString()
-        var monthInt: Int = datePicker.month
+        val monthInt: Int = datePicker.month
         var month = (monthInt + 1).toString() //idk why but spinner takes the month before
         //format 0s
         if (dom.length == 1) {
