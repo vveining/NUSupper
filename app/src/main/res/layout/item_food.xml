@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="335dp"
-    android:layout_height="43dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:padding="5dp">
@@ -25,7 +25,7 @@
 
     <TextView
         android:id="@+id/food_stub"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/numberBox"
         android:layout_marginStart="25dp"
@@ -37,11 +37,11 @@
 
     <TextView
         android:id="@+id/remarks_stub"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/numberBox"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="25dp"
+        android:layout_below="@+id/food_stub"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:text="remarks stub"
