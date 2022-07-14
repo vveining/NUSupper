@@ -6,21 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nusupper.Payment
 import com.example.nusupper.R
-import com.example.nusupper.ViewFriendsJio
 import com.example.nusupper.ViewFriendsProfile
 import com.example.nusupper.authentication.Profile
 import com.example.nusupper.models.Jio
-import com.example.nusupper.models.User
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import com.example.nusupper.models.UserAcc
 import kotlinx.android.synthetic.main.item_history.view.*
-import kotlinx.android.synthetic.main.item_jio.view.*
 
-class HistoryAdapter(val context: Context, var jios: List<Jio>, val currentUser: User?) :
+class HistoryAdapter(val context: Context, var jios: List<Jio>, val currentUser: UserAcc?) :
 
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 

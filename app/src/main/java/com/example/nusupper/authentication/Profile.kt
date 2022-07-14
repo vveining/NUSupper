@@ -15,7 +15,7 @@ import com.example.nusupper.FindJio
 import com.example.nusupper.OrderHistory
 import com.example.nusupper.R
 import com.example.nusupper.databinding.ActivityProfileBinding
-import com.example.nusupper.models.User
+import com.example.nusupper.models.UserAcc
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -132,13 +132,13 @@ class Profile : AppCompatActivity() {
         if (email != null) {
             firebaseDb.collection("USERS").document(email).get()
                 .addOnSuccessListener {
-                    val user = it.toObject<User>()
+                    val user = it.toObject<UserAcc>()
                     binding.name.text = it.get("name").toString()
                     binding.username.text = "@" + it.get("username").toString()
                     binding.mobileNumber.text = it.get("mobile number").toString()
                     val residence = it.get("residence").toString()
                     binding.residenceName.text = residence
-                    binding.residenceImg.setImageResource(User.getResImg(residence))
+                    binding.residenceImg.setImageResource(UserAcc.getResImg(residence))
 
                     if (user != null) {
                         val paylah: Boolean = user.paylah

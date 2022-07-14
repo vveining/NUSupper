@@ -16,7 +16,7 @@ import com.example.nusupper.adapters.JiosAdapter
 import com.example.nusupper.authentication.Profile
 import com.example.nusupper.databinding.ActivityFindJioBinding
 import com.example.nusupper.models.Jio
-import com.example.nusupper.models.User
+import com.example.nusupper.models.UserAcc
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -34,7 +34,7 @@ class FindJio : AppCompatActivity() {
     private lateinit var yourCurrentJiosAdapter: JiosAdapter
     private lateinit var communityJiosAdapter: JiosAdapter
     private lateinit var allJiosAdapter: JiosAdapter
-    private var signedInUser: User? = null
+    private var signedInUser: UserAcc? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -99,7 +99,7 @@ class FindJio : AppCompatActivity() {
                 .document(it)
                 .get()
                 .addOnSuccessListener { userSnapshot ->
-                    signedInUser = userSnapshot.toObject(User::class.java)
+                    signedInUser = userSnapshot.toObject(UserAcc::class.java)
 
                     // get residence stub
                     binding.residence.text = signedInUser?.residence.toString()

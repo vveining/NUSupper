@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nusupper.R
 import com.example.nusupper.databinding.ActivityRegisterBinding
+import com.example.nusupper.models.Jio
+import com.example.nusupper.models.UserAcc
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
@@ -30,6 +32,8 @@ class Register : AppCompatActivity() {
     private var paylah = false
     private var paynow = false
     private var grabpay = false
+    private var hpList = mutableListOf<String>()
+    private var unList = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +43,22 @@ class Register : AppCompatActivity() {
         //firebase instance
         firebaseAuth = FirebaseAuth.getInstance()
         firebaseDb = FirebaseFirestore.getInstance()
+
+        //get list of EXISTING usernames and phone numbers
+        val accsReference = firebaseDb.collection("USERS").limit(100)
+        accsReference.addSnapshotListener { snapshot, exception ->
+            if (exception != null || snapshot == null) {
+                Toast.makeText(this, "retrieval exception", Toast.LENGTH_SHORT).show()
+            }
+
+            val accList = snapshot?.toObjects(UserAcc::class.java)
+            if (accList != null) {
+                for(i in accList) {
+                    hpList.add(i.mobileNumber)
+                    unList.add(i.username)
+                }
+            }
+        }
 
         //residence spinner in layout
         val resSpinner: Spinner = findViewById(R.id.residence_spinner)
@@ -68,7 +88,7 @@ class Register : AppCompatActivity() {
 
         //firebase data binding
         binding.registerWithData.setOnClickListener {
-            if (checkFields()) {
+            if (checkFields() && !hpExists() && !unExists()) {
                 val name = binding.registerName.text.toString()
                 val username = binding.registerUsername.text.toString()
                 val email = binding.registerEmail.text.toString()
@@ -138,8 +158,18 @@ class Register : AppCompatActivity() {
                         }
                 }
             } else {
-                Toast.makeText(this, "empty fields are not allowed",
-                    Toast.LENGTH_SHORT).show()
+                if(!checkFields()) {
+                    Toast.makeText(this, "empty fields are not allowed",
+                        Toast.LENGTH_SHORT).show()
+                }
+                if(hpExists()) {
+                    Toast.makeText(this, "mobile number is already in use",
+                        Toast.LENGTH_SHORT).show()
+                }
+                if(unExists()) {
+                    Toast.makeText(this, "username is already in use",
+                        Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
@@ -169,5 +199,23 @@ class Register : AppCompatActivity() {
                 && binding.registerEmail.text.toString().trim{it<=' '}.isNotEmpty()
                 && binding.registerPassword.text.toString().trim{it<=' '}.isNotEmpty() &&
                 (paylah || paynow || grabpay))
+    }
+
+    private fun hpExists(): Boolean {
+        for (i in hpList) {
+            if (i == binding.registerPhone.text.toString().trim{it<=' '}) { //if phone is found
+                return true
+            }
+        }
+        return false
+    }
+
+    private fun unExists(): Boolean {
+        for (i in unList) {
+            if (i == binding.registerUsername.text.toString().trim{it<=' '}) { //if phone is found
+                return true
+            }
+        }
+        return false
     }
 }

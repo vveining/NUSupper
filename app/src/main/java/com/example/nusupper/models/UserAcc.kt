@@ -3,7 +3,7 @@ package com.example.nusupper.models
 import com.example.nusupper.R
 import com.google.firebase.firestore.PropertyName
 
-data class User(
+data class UserAcc(
     var email: String = "",
     @get:PropertyName("mobile number") @set:PropertyName("mobile number") var mobileNumber: String = "",
     var name: String = "",

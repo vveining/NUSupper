@@ -9,7 +9,7 @@ import com.example.nusupper.databinding.ActivityPaymentBinding
 import com.example.nusupper.helpers.PaymentHelpers
 import com.example.nusupper.models.Food
 import com.example.nusupper.models.Jio
-import com.example.nusupper.models.User
+import com.example.nusupper.models.UserAcc
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,7 +21,7 @@ class Payment : AppCompatActivity(), PaymentHelpers {
     private lateinit var binding: ActivityPaymentBinding
     private lateinit var jioID: String
     private lateinit var thisJio: Jio
-    private var signedInUser: User? = null
+    private var signedInUser: UserAcc? = null
     private var firebaseDb = FirebaseFirestore.getInstance()
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var foods: MutableList<Food>
@@ -73,7 +73,7 @@ class Payment : AppCompatActivity(), PaymentHelpers {
                 .document(it)
                 .get()
                 .addOnSuccessListener { userSnapshot ->
-                    signedInUser = userSnapshot.toObject(User::class.java)
+                    signedInUser = userSnapshot.toObject(UserAcc::class.java)
                 }
         }
     }

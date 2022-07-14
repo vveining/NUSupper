@@ -21,12 +21,11 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.nusupper.authentication.Profile
 import com.example.nusupper.databinding.ActivityViewJioBinding
 import com.example.nusupper.models.Jio
-import com.example.nusupper.models.User
+import com.example.nusupper.models.UserAcc
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
-import kotlinx.android.synthetic.main.add_order_alertdialog.*
 import kotlinx.android.synthetic.main.close_order_dialog.*
 import kotlinx.android.synthetic.main.settings_alertdialog.*
 import java.time.LocalDate
@@ -43,7 +42,7 @@ class ViewJio : AppCompatActivity() {
     private var firebaseInst = FirebaseFirestore.getInstance()
     private lateinit var jioLink: String
     private lateinit var jio: Jio
-    private var signedInUser: User? = null
+    private var signedInUser: UserAcc? = null
     private lateinit var firebaseAuth: FirebaseAuth
     private var dtNow: LocalDateTime = LocalDateTime.now()
     private val df = DateTimeFormatter.ofPattern("dd.MM.yyyy")
@@ -65,7 +64,7 @@ class ViewJio : AppCompatActivity() {
                 .document(it)
                 .get()
                 .addOnSuccessListener { userSnapshot ->
-                    signedInUser = userSnapshot.toObject(User::class.java)
+                    signedInUser = userSnapshot.toObject(UserAcc::class.java)
                     //get current jio
                     getJio(jioID)
 

@@ -15,7 +15,7 @@ import com.example.nusupper.adapters.HistoryAdapter
 import com.example.nusupper.authentication.Profile
 import com.example.nusupper.databinding.ActivityOrderHistoryBinding
 import com.example.nusupper.models.Jio
-import com.example.nusupper.models.User
+import com.example.nusupper.models.UserAcc
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -29,7 +29,7 @@ class OrderHistory : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var hist: MutableList<Jio>
     private lateinit var histAdapter: HistoryAdapter
-    private var signedInUser: User? = null
+    private var signedInUser: UserAcc? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +87,7 @@ class OrderHistory : AppCompatActivity() {
                 .document(it)
                 .get()
                 .addOnSuccessListener { userSnapshot ->
-                    signedInUser = userSnapshot.toObject(User::class.java)
+                    signedInUser = userSnapshot.toObject(UserAcc::class.java)
 
                     // initialise lists and adapter(s)
                     initialiseListsAndAdapters()

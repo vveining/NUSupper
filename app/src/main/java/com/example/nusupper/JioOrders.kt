@@ -13,7 +13,7 @@ import com.example.nusupper.databinding.ActivityJioOrdersBinding
 import com.example.nusupper.helpers.ModifyFood
 import com.example.nusupper.models.Food
 import com.example.nusupper.models.Jio
-import com.example.nusupper.models.User
+import com.example.nusupper.models.UserAcc
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -31,7 +31,7 @@ class JioOrders : AppCompatActivity(), ModifyFood {
     private lateinit var foods: MutableList<Food>
     private lateinit var adapter: FoodsAdapter
     private lateinit var thisJio: Jio
-    private var signedInUser: User? = null
+    private var signedInUser: UserAcc? = null
     private lateinit var ordersAdapter: OrdersAdapter
     private lateinit var usernameList: List<String>
     private lateinit var userFoods: HashMap<String, MutableList<Food>>
@@ -163,7 +163,7 @@ class JioOrders : AppCompatActivity(), ModifyFood {
                 .document(it)
                 .get()
                 .addOnSuccessListener { userSnapshot ->
-                    signedInUser = userSnapshot.toObject(User::class.java)
+                    signedInUser = userSnapshot.toObject(UserAcc::class.java)
                 }
         }
     }

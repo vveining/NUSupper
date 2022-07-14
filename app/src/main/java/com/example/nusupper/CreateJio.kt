@@ -12,7 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.nusupper.authentication.Profile
 import com.example.nusupper.databinding.ActivityCreateJioBinding
 import com.example.nusupper.models.Jio
-import com.example.nusupper.models.User
+import com.example.nusupper.models.UserAcc
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -25,7 +25,7 @@ class CreateJio : AppCompatActivity() {
     private lateinit var binding: ActivityCreateJioBinding
     private lateinit var firebaseDb: FirebaseFirestore
     private lateinit var firebaseAuth: FirebaseAuth
-    private var signedInUser: User? = null
+    private var signedInUser: UserAcc? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -103,7 +103,7 @@ class CreateJio : AppCompatActivity() {
                 .document(it)
                 .get()
                 .addOnSuccessListener { userSnapshot ->
-                    signedInUser = userSnapshot.toObject(User::class.java)
+                    signedInUser = userSnapshot.toObject(UserAcc::class.java)
                 }
         }
 

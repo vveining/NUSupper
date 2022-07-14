@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nusupper.databinding.ActivityViewFriendsProfileBinding
-import com.example.nusupper.models.User
+import com.example.nusupper.models.UserAcc
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 
@@ -53,13 +53,13 @@ class ViewFriendsProfile: AppCompatActivity() {
         if (email != null) {
             firebaseDb.collection("USERS").document(email).get()
                 .addOnSuccessListener {
-                    val user = it.toObject<User>()
+                    val user = it.toObject<UserAcc>()
                     binding.name.text = it.get("name").toString()
                     binding.username.text = "@" + it.get("username").toString()
                     binding.mobileNumber.text = it.get("mobile number").toString()
                     val residence = it.get("residence").toString()
                     binding.residenceName.text = residence
-                    binding.residenceImg.setImageResource(User.getResImg(residence))
+                    binding.residenceImg.setImageResource(UserAcc.getResImg(residence))
 
                     if (user != null) {
                         val paylah: Boolean = user.paylah
