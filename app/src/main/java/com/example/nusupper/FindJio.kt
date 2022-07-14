@@ -119,10 +119,6 @@ class FindJio : AppCompatActivity() {
         enableItemClickListener(communityJios, communityJiosAdapter)
         enableItemClickListener(allJios, allJiosAdapter)
 
-
-/////////
-
-
         // accept deep link
         val data: Uri? = intent?.data
 
@@ -152,9 +148,6 @@ class FindJio : AppCompatActivity() {
                 }
 
         }
-
-
-        /////
 
         // [END FindJio things]
     }

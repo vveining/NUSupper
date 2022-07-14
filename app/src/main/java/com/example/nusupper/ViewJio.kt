@@ -187,7 +187,9 @@ class ViewJio : AppCompatActivity() {
         // copy jio link to clipboard
         binding.copyjiolinkButton.setOnClickListener {
             val clipboard : ClipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clip : ClipData = ClipData.newPlainText("copy link", jioLink)
+            val clip : ClipData = ClipData.newPlainText("copy link",
+                "Click to Join my Jio: $jioLink Remember to GO TO Settings --> " +
+                        "Open by Default --> ADD 'www.nusupper.com' TO OPEN JIO LINKS.")
             clipboard.setPrimaryClip(clip)
             Toast.makeText(this, "copied Jio link", Toast.LENGTH_SHORT).show()
 

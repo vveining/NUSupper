@@ -1,18 +1,24 @@
 package com.example.nusupper.authentication
 
+//import android.view.View
+
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-//import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.CheckBox
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.nusupper.R
 import com.example.nusupper.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.auth.User
+
 
 class Register : AppCompatActivity() {
 
@@ -91,13 +97,43 @@ class Register : AppCompatActivity() {
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
                                 users.document(email).set(user)
+                                Toast.makeText(
+                                    this,
+                                    "successfully created account",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                                 val intent = Intent(this, Profile::class.java)
                                 intent.putExtra("email", email)
                                 startActivity(intent)
                                 finish()
                             } else {
-                                Toast.makeText(this, it.exception.toString(),
-                                    Toast.LENGTH_SHORT).show()
+                                try {
+                                    throw it.exception!!
+                                } catch (e: FirebaseAuthWeakPasswordException) {
+                                    Toast.makeText(
+                                        this,
+                                        "chosen password is too short (min 6 characters)",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                } catch (e: FirebaseAuthInvalidCredentialsException) {
+                                    Toast.makeText(
+                                        this,
+                                        "invalid email",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                } catch (e: FirebaseAuthUserCollisionException) {
+                                    Toast.makeText(
+                                        this,
+                                        "you already have an account with this email",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                } catch (e: Exception) {
+                                    Toast.makeText(
+                                        this,
+                                        it.exception.toString(),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             }
                         }
                 }

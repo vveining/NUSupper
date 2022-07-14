@@ -143,7 +143,7 @@ class Payment : AppCompatActivity(), PaymentHelpers {
         binding.deliverypriceStub.text = thisJio.deliveryFee.toString()
 
         // display total price
-        binding.totalPriceStub.text = thisJio.getTotalPrice().toString()
+        binding.totalPriceStub.text = thisJio.updateTotalPrice().totalPrice.toString()
 
         // display creator's preferred payment methods
         binding.billsInfo1.text = thisJio.creator?.username
