@@ -161,9 +161,6 @@ class OrderHistory : AppCompatActivity() {
     private fun enableItemClickListener(jios: MutableList<Jio>, adapter: HistoryAdapter) {
         adapter.setItemClickListener(object: HistoryAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
-                Toast.makeText(this@OrderHistory,"you clicked order $position",Toast.LENGTH_SHORT).show()
-                val newIntent = Intent(this@OrderHistory,Payment::class.java)
-                startActivity(newIntent.putExtra("jioID",jios[position].jioID))
             }
         })
     }
