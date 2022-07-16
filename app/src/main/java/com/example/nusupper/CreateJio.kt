@@ -134,29 +134,13 @@ class CreateJio : AppCompatActivity() {
 
         binding.createJioButton.isEnabled = false // to make asynchronous calls & enable it later
 
-        // to get closeDate from spinner
-        val datePicker = findViewById<DatePicker>(R.id.datePicker)
-
-        //settle datepicker -----------
-        var dom = datePicker.dayOfMonth.toString()
-        val monthInt: Int = datePicker.month
-        var month = (monthInt + 1).toString() //idk why but spinner takes the month before
-        //format 0s
-        if (dom.length == 1) {
-            dom = "0$dom"
-        }
-        if (month.length == 1) {
-            month = "0$month"
-        }
-
-        //date string
-        val dateString = "$dom.$month." + datePicker.year.toString()
+        // format date string
+        val dP = findViewById<DatePicker>(R.id.datePicker)
+        val dateString = dateParse(dP.dayOfMonth,dP.month,dP.year)
 
         // to get closeTime from spinner
-        val timePicker = findViewById<TimePicker>(R.id.timePicker1)
-        val hour = timePicker.hour
-        val min = timePicker.minute
-        val timeString = LocalTime.of(hour,min).toString()
+        val tP = findViewById<TimePicker>(R.id.timePicker1)
+        val timeString = timeParse(tP.hour,tP.minute)
 
         //generate unique jio id
         val uniqueID = UUID.randomUUID().toString()
@@ -201,6 +185,28 @@ class CreateJio : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    companion object { // for testing purposes
+        fun dateParse(dom: Int, monthInt: Int, year: Int): String {
+            //settle datepicker -----------
+            var month = (monthInt + 1).toString() //idk why but spinner takes the month before
+            var domStr = dom.toString()
+
+            //format 0s
+            if (domStr.length == 1) {
+                domStr = "0$domStr"
+            }
+            if (month.length == 1) {
+                month = "0$month"
+            }
+
+            return "$domStr.$month.$year"
+        }
+
+        fun timeParse(hour: Int, min: Int): String {
+            return LocalTime.of(hour, min).toString()
         }
     }
 }
