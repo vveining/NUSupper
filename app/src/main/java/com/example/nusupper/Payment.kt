@@ -15,6 +15,8 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.activity_payment.*
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class Payment : AppCompatActivity(), PaymentHelpers {
 
@@ -29,6 +31,7 @@ class Payment : AppCompatActivity(), PaymentHelpers {
     private lateinit var billsAdapter: PaymentBillAdapter
     private lateinit var usernameList: List<String>
     private lateinit var userFoods: HashMap<String, MutableList<Food>>
+    private val df = DecimalFormat("#.##")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -143,7 +146,8 @@ class Payment : AppCompatActivity(), PaymentHelpers {
         binding.deliverypriceStub.text = thisJio.deliveryFee.toString()
 
         // display total price
-        binding.totalPriceStub.text = thisJio.updateTotalPrice().totalPrice.toString()
+        df.roundingMode = RoundingMode.UP
+        binding.totalPriceStub.text = df.format(thisJio.updateTotalPrice().totalPrice).toString()
 
         // display creator's preferred payment methods
         binding.billsInfo1.text = thisJio.creator?.username
