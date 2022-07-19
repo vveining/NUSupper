@@ -146,7 +146,7 @@ class Payment : AppCompatActivity(), PaymentHelpers {
         binding.deliverypriceStub.text = thisJio.deliveryFee.toString()
 
         // display total price
-        df.roundingMode = RoundingMode.UP
+        // df.roundingMode = RoundingMode.UP
         binding.totalPriceStub.text = df.format(thisJio.updateTotalPrice().totalPrice).toString()
 
         // display creator's preferred payment methods
