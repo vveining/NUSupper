@@ -61,6 +61,8 @@ Students residing in NUS hostels who is interested in ordering supper would be a
 
 ### Relevant Links [Milestone 3]
 
+[README](https://docs.google.com/document/d/1UDAGNPDtMnpRxCkr_Gv-858Cwa3F_PivE7D8hpIuC4g/edit?usp=sharing)
+
 [poster](https://drive.google.com/file/d/1HjWPas87ZhmzT4ItKQk8KtcFdJjxL8_U/view?usp=sharing)
 
 [video](https://drive.google.com/file/d/1L4Slc_3dD3yjukdvM8P4VEhcoWYoGQRT/view?usp=sharing)
