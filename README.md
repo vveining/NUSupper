@@ -34,42 +34,35 @@ After the food arrives, everyone is happy and full… except you. You have to go
 
 Surely, there must be an easier way to organise supper runs.
 
-### User Stories
+### User Stories at a Glance
 
 Students residing in NUS hostels who is interested in ordering supper would be able to:
 - Collate food orders with hostel friends so as to facilitate ease of ordering
 - Gather more people to split the delivery costs
-- Find out more about the supper spots near NUS
+- Consolidate the bill and pay easily
 
-### Current Designs & Plans
+### App Features
 
-- Login Page - Allows users to sign in with their registered email and password. Built with Firebase authentication and database.
-- Register Page - Users can sign up for an account with an email and password, and other relevant information (phone number, place of residence etc.).
+- Authentication - Allows users to sign in with their registered email and password. Built with Firebase authentication and database.
 - Profile Page - Users are able to view their personal information and update them if needed.
-
-### Future Designs & Plans
-
-by Milestone 2:
 - Navigation Drawer
-- Create & Edit Jio Page
+- Find Jio
+- Create Jio
+- View Jio - includes Jio link, Edit Jio, Current Orders, Payment page and Close Order
+- View Others' Jio
+- Order History
 
-by Milestone 3:
-- Payment Page
-- Find Jio Page
-
-### Current Technologies Used
+### Technologies Used
 
 - Android Studio & Android Emulator
 - Kotlin
 - Firebase
 - Version Control System (GitHub)
 
-### Relevant Links
+### Relevant Links [Milestone 3]
 
-[Project poster](https://nusskylab-dev.comp.nus.edu.sg/posters/2022/5183.jpg)
+[poster](https://drive.google.com/file/d/1HjWPas87ZhmzT4ItKQk8KtcFdJjxL8_U/view?usp=sharing)
 
-[Project video](https://youtu.be/5t0IynLmr_I)
+[video](https://drive.google.com/file/d/1L4Slc_3dD3yjukdvM8P4VEhcoWYoGQRT/view?usp=sharing)
 
-[Milestone 1 video](https://drive.google.com/file/d/1sbqtvSDCBuNqJkCjLKLtFcF7kuhPE46S/view?usp=sharing)
-
-[milestone1 apk.zip](https://github.com/vveining/NUSupper/files/8792671/milestone1.apk.zip)
+[apk zip file](https://github.com/elysiaojr/NUSupper/files/9175581/milestone.3.apk.zip.zip)
